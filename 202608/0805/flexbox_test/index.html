@@ -15,135 +15,151 @@
 </head>
 
 <body>
-    <header>
-        <div class="header__inner">
+    <!-- header -->
+    <header class="header">
+        <div class="header__inner flex-row">
             <h1>FLEXBOX LAYOUT</h1>
             <picture>
-                <img src="images/cat_logo.svg" alt="">
+                <img src="images/cat_logo.svg" alt="吾輩は猫">
             </picture>
             <nav>
-                <ul>
-                    <li>MENU</li>
-                    <li>ABOUT</li>
-                    <li>CONTACT</li>
+                <ul class="flex-row">
+                    <li><a href="#">MENU</a></li>
+                    <li><a href="#">ABOUT</a></li>
+                    <li><a href="#">CONTACT</a></li>
                 </ul>
             </nav>
         </div>
     </header>
-    <main>
-        <section id="mainVisual" class="mainVisual">
-            <picture>
-                <img src="images/img_mv.jpg" alt="">
-            </picture>
-            <h2>Flex box勉強してたら、<br>連休が終わった…。</h2>
-        </section>
-        <section id="profile" class="profileSection">
-            <h2>I AM A CAT. I HAVE AS YET NO NAME</h2>
-            <div class="profileSection__box">
-                <section class="profileSection__item">
-                    <picture>
-                        <img src="images/img_prof.png" alt="">
-                    </picture>
-                    <h3>What’s Cat?</h3>
-                    <p>吾輩は猫である。名前はまだ無い。どこで生れたかとんと見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。吾輩はここで始めて人間というものを見た。しかもあとで聞くとそれは書生という人間中で一番獰悪な種族であったそうだ。
-                    </p>
-                </section>
-                <section class="profileSection__item">
-                    <h3>I am a cat</h3>
-                    <p>吾輩は猫である。名前はまだ無い。どこで生れたかとんと見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。吾輩はここで始めて人間というものを見た。しかもあとで聞くとそれは書生という人間中で一番獰悪な種族であったそうだ。
-                    </p>
-                    <p>この書生というのは時々我々を捕えて煮て食うという話である。しかしその当時は何という考もなかったから別段恐しいとも思わなかった。ただ彼の掌に載せられてスーと持ち上げられた時何だかフワフワした感じがあったばかりである。掌の上で少し落ちついて書生の顔を見たのがいわゆる人間というものの見始であろう。この時妙なものだと思った感じが今でも残っている。
-                    </p>
-                    <button>Read More</button>
-                </section>
-            </div>
+    <!-- header -->
 
-        </section>
-        <section class="sec02">
-            <div class="sec02__inner">
-                <aside>
-                    <div class="aside__menu">
-                        <h3>Recent Entry</h3>
-                        <ul>
-                            <li>吾輩は猫である、名前はまだない。</li>
-                            <li>吾輩は猫である、名前はまだない。</li>
-                            <li>吾輩は猫である、名前はまだない。</li>
-                            <li>吾輩は猫である、名前はまだない。</li>
-                            <li>吾輩は猫である、名前はまだない。</li>
-                        </ul>
-                    </div>
-                    <div class="aside__menu">
-                        <h3>Recent Entry</h3>
-                        <ul>
-                            <li>吾輩は猫である、名前はまだない。</li>
-                            <li>吾輩は猫である、名前はまだない。</li>
-                            <li>吾輩は猫である、名前はまだない。</li>
-                            <li>吾輩は猫である、名前はまだない。</li>
-                            <li>吾輩は猫である、名前はまだない。</li>
-                        </ul>
-                    </div>
-                    <picture>
-                        <img src="images/img_04.png" alt="">
-                    </picture>
-                </aside>
-                <aside>
-                    <h3>Cat Garrery</h3>
-                    <div class="aside__img">
-                        <picture>
-                            <img src="images/img_05.png" alt="">
-                        </picture>
-                        <picture>
-                            <img src="images/img_06.png" alt="">
-                        </picture>
-                        <picture>
-                            <img src="images/img_07.png" alt="">
-                        </picture>
-                        <picture>
-                            <img src="images/img_08.png" alt="">
-                        </picture>
-                    </div>
-                </aside>
-            </div>
-            <section class="newsSection">
-                <article>
-                    <div class="news__head">
-                        <h2>吾輩は猫である</h2>
-                        <p class="news__time">Post on; 2125年11月29日</p>
-                    </div>
-                    <div class="news__txt">
-                        <p>吾輩は猫である。名前はまだ無い。どこで生れたかとんと見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。吾輩はここで始めて人間というものを見た。しかもあとで聞くとそれは書生という人間中で一番獰悪な種族であったそうだ。
-                        </p>
-                        <p>この書生というのは時々我々を捕えて煮て食うという話である。しかしその当時は何という考もなかったから別段恐しいとも思わなかった。ただ彼の掌に載せられてスーと持ち上げられた時何だかフワフワした感じがあったばかりである。掌の上で少し落ちついて書生の顔を見たのがいわゆる人間というものの見始であろう。この時妙なものだと思った感じが今でも残っている。
-                        </p>
-                    </div>
-                    <div class="news__img">
-                        <picture><img src="images/img_01.png" alt=""></picture>
-                        <picture><img src="images/img_02.png" alt=""></picture>
-                    </div>
-                    <button>Read More</button>
-                </article>
-                <article>
-                    <div class="news__head">
-                        <h2>吾輩は猫である</h2>
-                        <p class="news__time">Post on; 2125年11月29日</p>
-                    </div>
-                    <div class="news__txt">
-                        <p>吾輩は猫である。名前はまだ無い。どこで生れたかとんと見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。吾輩はここで始めて人間というものを見た。しかもあとで聞くとそれは書生という人間中で一番獰悪な種族であったそうだ。
-                        </p>
-                        <p>この書生というのは時々我々を捕えて煮て食うという話である。しかしその当時は何という考もなかったから別段恐しいとも思わなかった。ただ彼の掌に載せられてスーと持ち上げられた時何だかフワフワした感じがあったばかりである。掌の上で少し落ちついて書生の顔を見たのがいわゆる人間というものの見始であろう。この時妙なものだと思った感じが今でも残っている。
-                        </p>
-                    </div>
-                    <div class="news__img">
-                        <picture><img src="images/img_03.png" alt=""></picture>
-                    </div>
-                    <button>Read More</button>
-                </article>
+    <!-- main -->
+    <main>
+        <div class="wrapper flex-column">
+            <!-- mainVisual -->
+            <section class="mainVisual">
+                <picture>
+                    <img src="images/img_mv.jpg" alt="吾輩は猫">
+                </picture>
+                <h2>Flex box勉強してたら、<br>連休が終わった…。</h2>
             </section>
-        </section>
-        <footer>
-            <p><small>&copy;2025 imai.</small></p>
-        </footer>
+            <!-- mainVisual -->
+
+            <!-- profileSection -->
+            <section class="profileSection flex-column">
+                <h2>I AM A CAT. I HAVE AS YET NO NAME</h2>
+                <div class="profileSection__box flex-row">
+                    <section class="profileSection__item flex-column">
+                        <picture>
+                            <img src="images/img_prof.png" alt="吾輩は猫">
+                        </picture>
+                        <h3>What’s Cat?</h3>
+                        <p>吾輩は猫である。名前はまだ無い。どこで生れたかとんと見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。吾輩はここで始めて人間というものを見た。しかもあとで聞くとそれは書生という人間中で一番獰悪な種族であったそうだ。
+                        </p>
+                    </section>
+                    <section class="profileSection__item flex-column">
+                        <h3>I am a cat</h3>
+                        <p>吾輩は猫である。名前はまだ無い。どこで生れたかとんと見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。吾輩はここで始めて人間というものを見た。しかもあとで聞くとそれは書生という人間中で一番獰悪な種族であったそうだ。
+                        </p>
+                        <p>この書生というのは時々我々を捕えて煮て食うという話である。しかしその当時は何という考もなかったから別段恐しいとも思わなかった。ただ彼の掌に載せられてスーと持ち上げられた時何だかフワフワした感じがあったばかりである。掌の上で少し落ちついて書生の顔を見たのがいわゆる人間というものの見始であろう。この時妙なものだと思った感じが今でも残っている。
+                        </p>
+                        <button><a href="#">Read More</a></button>
+                    </section>
+                </div>
+
+            </section>
+            <!-- profileSection -->
+
+            <!-- blogSection -->
+            <section class="blogSection flex-row">
+                <section class="blogSection__posts flex-column">
+                    <article class="flex-column">
+                        <header class="blogSection__head flex-column">
+                            <h2>吾輩は猫である</h2>
+                            <p class="blogSection__time">Post on; <time datetime="2115-11-29">2125年11月29日</time></p>
+                        </header>
+                        <div class="blogSection__txt flex-column">
+                            <p>吾輩は猫である。名前はまだ無い。どこで生れたかとんと見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。吾輩はここで始めて人間というものを見た。しかもあとで聞くとそれは書生という人間中で一番獰悪な種族であったそうだ。
+                            </p>
+                            <p>この書生というのは時々我々を捕えて煮て食うという話である。しかしその当時は何という考もなかったから別段恐しいとも思わなかった。ただ彼の掌に載せられてスーと持ち上げられた時何だかフワフワした感じがあったばかりである。掌の上で少し落ちついて書生の顔を見たのがいわゆる人間というものの見始であろう。この時妙なものだと思った感じが今でも残っている。
+                            </p>
+                        </div>
+                        <div class="blogSection__img">
+                            <picture class="hover-img"><img src="images/img_01.png" alt="吾輩は猫"></picture>
+                            <picture class="hover-img"><img src="images/img_02.png" alt="吾輩は猫"></picture>
+                        </div>
+                        <button><a href="#">Read More</a></button>
+                    </article>
+                    <article class="flex-column">
+                        <header class="blogSection__head flex-column">
+                            <h2>吾輩は猫である</h2>
+                            <p class="blogSection__time">Post on; <time datetime="2115-11-29">2125年11月29日</time></p>
+                        </header>
+                        <div class="blogSection__txt">
+                            <p>吾輩は猫である。名前はまだ無い。どこで生れたかとんと見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。吾輩はここで始めて人間というものを見た。しかもあとで聞くとそれは書生という人間中で一番獰悪な種族であったそうだ。
+                            </p>
+                            <p>この書生というのは時々我々を捕えて煮て食うという話である。しかしその当時は何という考もなかったから別段恐しいとも思わなかった。ただ彼の掌に載せられてスーと持ち上げられた時何だかフワフワした感じがあったばかりである。掌の上で少し落ちついて書生の顔を見たのがいわゆる人間というものの見始であろう。この時妙なものだと思った感じが今でも残っている。
+                            </p>
+                        </div>
+                        <picture class="blogSection__img hover-img"><img src="images/img_03.png" alt="吾輩は猫"></picture>
+                        <button><a href="#">Read More</a></button>
+                    </article>
+                </section>
+                <div class="blogSection__sidebar flex-column">
+                    <aside class="flex-column">
+                        <div class="blogSection__menu flex-column">
+                            <h3>Recent Entry</h3>
+                            <ul class="flex-column">
+                                <li>吾輩は猫である、名前はまだない。</li>
+                                <li>吾輩は猫である、名前はまだない。</li>
+                                <li>吾輩は猫である、名前はまだない。</li>
+                                <li>吾輩は猫である、名前はまだない。</li>
+                                <li>吾輩は猫である、名前はまだない。</li>
+                            </ul>
+                        </div>
+                        <div class="blogSection__menu flex-column">
+                            <h3>Recent Entry</h3>
+                            <ul class="flex-column">
+                                <li>吾輩は猫である、名前はまだない。</li>
+                                <li>吾輩は猫である、名前はまだない。</li>
+                                <li>吾輩は猫である、名前はまだない。</li>
+                                <li>吾輩は猫である、名前はまだない。</li>
+                                <li>吾輩は猫である、名前はまだない。</li>
+                            </ul>
+                        </div>
+                        <picture class="hover-img">
+                            <img src="images/img_04.png" alt="吾輩は猫">
+                        </picture>
+                    </aside>
+                    <aside class="flex-column">
+                        <h3>Cat Gallery</h3>
+                        <div class="blogSection__img flex-row">
+                            <picture class="hover-img">
+                                <img src="images/img_05.png" alt="吾輩は猫">
+                            </picture>
+                            <picture class="hover-img">
+                                <img src="images/img_06.png" alt="吾輩は猫">
+                            </picture>
+                            <picture class="hover-img">
+                                <img src="images/img_07.png" alt="吾輩は猫">
+                            </picture>
+                            <picture class="hover-img">
+                                <img src="images/img_08.png" alt="吾輩は猫">
+                            </picture>
+                        </div>
+                    </aside>
+                </div>
+            </section>
+            <!-- blogSection -->
+        </div>
     </main>
+    <!-- main -->
+
+    <!-- footer -->
+    <footer>
+        <p><small>&copy;2025 imai.</small></p>
+    </footer>
+    <!-- footer -->
 </body>
 
 </html>

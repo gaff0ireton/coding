@@ -3,39 +3,111 @@
 body {
     font-size: 100%;
     font-family: "M PLUS 1", sans-serif;
+
+    img {
+        width: 100%;
+    }
 }
 
-img {
-    width: 100%;
-}
-
-h2,h3{
+h2,
+h3 {
     font-weight: 700;
 }
 
+h1,
+h3 {
+    font-size: clamp(28px, calc(32 / 1200 * 100vw), 32px);
+}
 
-header {
+p,
+button,
+li {
+    font-size: clamp(14px, calc(16 / 1200 * 100vw), 16px);
+}
+
+button {
+    padding: clamp(16px, calc(18 / 1200 * 100vw), 18px) clamp(65px, calc(74 / 1200 * 100vw), 74px);
+    background-color: #484848;
+    color: #FFFFFF;
+    border-radius: clamp(14px, calc(16 / 1200 * 100vw), 16px);
+    align-self: flex-end;
+    transition: background .3s;
+
+    &:hover{
+        background-color: #73d1db;
+    }
+}
+
+.hover-img {
+    overflow: hidden;
+
+    img {
+        transition: transform .3s ease;
+
+        &:hover {
+            transform: scale(1.25);
+        }
+    }
+}
+
+.flex-row {
+    display: flex;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+
+header.header {
     background-color: #CEE7EA;
-    padding: 1.25rem 0;
+    padding: clamp(18px, calc(20 / 1200 * 100vw), 20px) 0;
 
     .header__inner {
-        display: flex;
         align-items: center;
         justify-content: space-between;
+        gap: clamp(14px, calc(16 / 1200 * 100vw), 16px);
         max-width: 1200px;
         width: 100%;
         margin: 0 auto;
+        padding: 0 clamp(14px, calc(16 / 1200 * 100vw), 16px);
 
-        h1 {
-            font-size: 2rem;
+        picture {
+            flex-basis: clamp(70px, calc(80 / 1200 * 100vw), 80px);
         }
 
         ul {
-            display: flex;
-            gap: 1.5rem;
+            gap: clamp(21px, calc(24 / 1200 * 100vw), 24px);
 
             li {
-                font-size: 1.5rem;
+                font-size: clamp(21px, calc(24 / 1200 * 100vw), 24px);
+
+                a {
+                    /* padding-bottom: 2px; */
+                    position: relative;
+
+                    &:before {
+                        background: #000;
+                        content: '';
+                        width: 100%;
+                        height: 2px;
+                        border-radius: 8px;
+                        position: absolute;
+                        left: 0;
+                        bottom: 0;
+                        transform-origin: right top;
+                        transform: scale(0, 1);
+                        transition: transform .3s;
+                    }
+
+                    &:hover {
+                        &:before {
+                            transform-origin: left top;
+                            transform: scale(1, 1);
+                        }
+                    }
+                }
             }
         }
     }
@@ -48,22 +120,21 @@ main {
     margin: 0 auto;
     background-color: #FAFFFE;
 
+    .wrapper {
+        gap: 8.33333333rem;
+    }
+
     .mainVisual {
         position: relative;
-        margin-bottom: 8.33333333rem;
-
-        picture {
-            position: relative;
-        }
 
         h2 {
             font-family: "Shippori Mincho B1", serif;
             font-weight: 500;
             font-style: normal;
-            font-size: calc(96 / 1200 * 100vw);
+            font-size: min(calc(96 / 1200 * 100vw), 96px);
             color: #FFFFFF;
             position: absolute;
-                        top: calc(64 / 800 * 100%);
+            top: calc(64 / 800 * 100%);
             right: calc(64 / 1200 * 100%);
         }
     }
@@ -71,170 +142,121 @@ main {
     .profileSection {
         background-color: #FFFFFF;
         border: 1px solid #000;
-        border-radius: .5rem;
-        padding: 2rem;
-        margin-bottom: 8.33333333rem;
+        border-radius: clamp(7px, calc(8 / 1200 * 100vw), 8px);
+        padding: clamp(28px, calc(32 / 1200 * 100vw), 32px);
+        gap: min(calc(64 / 1200 * 100vw), 64px);
 
         h2 {
-            font-size: 3.25rem;
+            font-size: min(calc(52 / 1200 * 100vw), 52px);
             text-align: center;
-            margin-bottom: 4rem;
         }
 
         .profileSection__box {
-            display: flex;
             justify-content: space-between;
+            gap: clamp(28px, calc(32 / 1200 * 100vw), 32px);
 
             .profileSection__item {
                 &:first-child {
-                    flex-basis: 384px;
-                    display: flex;
-                    flex-direction: column;
+                    flex-basis: clamp(336px, calc(384 / 1200 * 100vw), 384px);
                     align-items: center;
-                    gap: 1.5rem;
+                    gap: clamp(21px, calc(24 / 1200 * 100vw), 24px);
 
                     picture {
-                        flex-basis: 203px;
-                    }
-
-                    h3 {
-                        font-size: 2rem;
+                        flex-basis: clamp(178px, calc(203 / 1200 * 100vw), 203px);
                     }
                 }
 
                 &:last-child {
-                    flex-basis: 640px;
-                    display: flex;
-                    flex-direction: column;
-                    gap: 1.5rem;
-
-                    h3 {
-                        font-size: 2rem;
-                    }
+                    flex-basis: clamp(560px, calc(640 / 1200 * 100vw), 640px);
+                    gap: clamp(21px, calc(24 / 1200 * 100vw), 24px);
                 }
             }
         }
     }
 
-    .sec02 {
-        display: flex;
+    .blogSection {
         justify-content: space-between;
-        gap: 3.125rem;
+        gap: clamp(44px, calc(50 / 1200 * 100vw), 50px);
         margin-bottom: 47px;
 
-        .sec02__inner {
-            display: flex;
-            flex-direction: column;
-            gap: 3.125rem;
-            flex-basis: 450px;
+        .blogSection__sidebar {
+            gap: clamp(44px, calc(50 / 1200 * 100vw), 50px);
+            flex-basis: clamp(394px, calc(450 / 1200 * 100vw), 450px);
+            order: 1;
         }
 
         aside {
-            
             border: 1px solid #000;
-            border-radius: .5rem;
+            border-radius: clamp(7px, calc(8 / 1200 * 100vw), 8px);
             background-color: #fff;
-            padding: 2rem;
-            display: flex;
-            flex-direction: column;
+            padding: clamp(28px, calc(32 / 1200 * 100vw), 32px);
             gap: 4rem;
 
-            h3 {
-                font-size: 32px;
-            }
-
-            .aside__menu {
-                display: flex;
-                flex-direction: column;
-                gap: 2rem;
+            .blogSection__menu {
+                gap: clamp(28px, calc(32 / 1200 * 100vw), 32px);
 
                 ul {
-                    display: flex;
-                    flex-direction: column;
 
                     li {
-                        padding: 1rem 0;
+                        padding: clamp(14px, calc(16 / 1200 * 100vw), 16px) 0;
                         border-bottom: 1px solid #000;
                     }
                 }
             }
 
-            .aside__img {
-                display: flex;
+            .blogSection__img {
                 flex-wrap: wrap;
-                align-content: flex-start;
-                justify-content: space-between;
+                gap: clamp(14px, calc(16 / 1200 * 100vw), 16px);
 
                 picture {
-                    flex-basis: 185px;
-                    flex-grow: 1;
+                    flex-basis: calc((100% - 16px) / 2);
                 }
             }
 
         }
 
-        section {
-            flex-basis: 700px;
+        .blogSection__posts {
+            flex-basis: clamp(613px, calc(700 / 1200 * 100vw), 700px);
+            align-self: flex-start;
             border: 1px solid #000;
-            border-radius: .5rem;
+            border-radius: clamp(7px, calc(8 / 1200 * 100vw), 8px);
             background-color: #fff;
-            padding: 2rem;
-            display: flex;
-            flex-direction: column;
-            gap: 4rem;
+            padding: clamp(28px, calc(32 / 1200 * 100vw), 32px);
+            gap: min(calc(64 / 1200 * 100vw), 64px);
+            order: 2;
 
             article {
-                display: flex;
-                flex-direction: column;
-                gap: 32px;
+                gap: clamp(28px, calc(32 / 1200 * 100vw), 32px);
 
                 h2 {
-                    font-size: 2rem;
+                    font-size: clamp(28px, calc(32 / 1200 * 100vw), 32px);
                     background-color: #B5B5B5;
-                    border-radius: .5rem;
+                    border-radius: clamp(7px, calc(8 / 1200 * 100vw), 8px);
                     text-align: center;
                     padding: 17px 0;
                 }
 
-                .news__head {
-                    display: flex;
-                    flex-direction: column;
-                    gap: 16px;
+                .blogSection__head {
+                    gap: clamp(14px, calc(16 / 1200 * 100vw), 16px);
                 }
 
-                .news__txt {
-                    display: flex;
-                    flex-direction: column;
-                    gap: 24px;
+                .blogSection__txt {
+                    gap: clamp(21px, clamp(24 / 1200 * 100vw), 24px);
                 }
 
-                .news__time {
+                .blogSection__time {
                     align-self: flex-end;
-                    font-size: 14px;
+                    font-size: clamp(12px, calc(14 / 1200 * 100vw), 14px);
                     font-weight: 700;
                 }
 
-                .news__img {
+                .blogSection__img {
                     display: flex;
                     gap: 56px;
                     justify-content: space-between;
                 }
             }
-
         }
-
-
-        .newsSection {
-            align-self: flex-start;
-        }
-    }
-
-    button {
-        padding: 18px 74px;
-        background-color: #484848;
-        color: #FFFFFF;
-        border-radius: 1rem;
-        align-self: flex-end;
     }
 }
 
@@ -242,7 +264,7 @@ footer {
     p {
         display: flex;
         justify-content: center;
-        padding: 38px 0;
+        padding: clamp(33px, calc(38 / 1200 * 100vw), 38px) 0;
         background-color: #646464;
         color: #FFFFFF;
     }
