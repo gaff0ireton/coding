@@ -1,0 +1,33 @@
+@charset "UTF-8";
+
+/* 全称セレクタ（ユニバーサルセレクタ） */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    background-color: #ccc;
+    display: flex;
+    gap: 16px;
+    padding: 10px 0;
+
+    .box01 {
+        background-color: #7fffd4;
+        width: 300px;
+        padding: 16px 20px;
+        border: solid 5px #333;
+        /* margin-bottom: 32px; */
+    }
+
+    .box02 {
+        background-color: brown;
+        width: 300px;
+        padding: 16px 20px 12px;
+        border: solid 5px #333;
+        /* margin-top: 16px; */
+    }
+}

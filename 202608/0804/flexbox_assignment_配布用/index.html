@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="flexbox練習問題集。初級・中級・上級の3段階でflexboxの使い方を学べます。">
+    <title>flexbox練習</title>
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <header class="site_header">
+        <a class="logo" href="index.html">Flex Practice</a>
+        <nav class="level_links">
+            <ul>
+                <li><a class="level_link" href="01_beginner/index.html">初級編</a></li>
+                <li><a class="level_link" href="02_intermediate/index.html">中級編</a></li>
+                <li><a class="level_link" href="03_advanced/index.html">上級編</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>flexbox 練習問題</h1>
+        <p class="lead">
+            CSSファイルを編集しながらflexboxを学ぶ練習問題集です。初級・中級・上級の3段階に分かれており、
+            それぞれのレベルで <code>/* TODO */</code> と書かれた箇所を埋めていくことで、
+            display: flex の基本から、実践的なUIパーツの組み立て、入れ子のflexboxまで学べます。
+        </p>
+
+        <div class="level_grid">
+            <a class="level_card" href="01_beginner/index.html">
+                <p class="level_card_eyebrow">LEVEL 01</p>
+                <h2>初級編</h2>
+                <p>
+                    display: flex、justify-content、align-itemsなど、
+                    flexboxの基礎プロパティを1問1テーマで練習します。
+                </p>
+                <p class="level_card_cta">問題を見る →</p>
+            </a>
+            <a class="level_card" href="02_intermediate/index.html">
+                <p class="level_card_eyebrow">LEVEL 02</p>
+                <h2>中級編</h2>
+                <p>
+                    ヘッダーやカードなど実践的なUIパーツを、
+                    コンテナ側とアイテム側の両方から組み立てます。
+                </p>
+                <p class="level_card_cta">問題を見る →</p>
+            </a>
+            <a class="level_card" href="03_advanced/index.html">
+                <p class="level_card_eyebrow">LEVEL 03</p>
+                <h2>上級編</h2>
+                <p>
+                    1つのUIコンポーネントの中で、
+                    flexboxを何重にも入れ子にして組み立てます。
+                </p>
+                <p class="level_card_cta">問題を見る →</p>
+            </a>
+        </div>
+    </main>
+
+    <footer class="site_footer">
+        <p><small>&copy; 2026 edu-ktmr</small></p>
+    </footer>
+
+</body>
+</html>

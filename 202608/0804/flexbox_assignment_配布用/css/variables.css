@@ -1,0 +1,27 @@
+/* ==========================================
+   共通カラー変数（編集不要）
+   全ページ（初級・中級・上級）で共有します
+   ========================================== */
+:root {
+    --color-bg: #fafafa;
+    --color-text: #333;
+    --color-text-muted: #666;
+    --color-white: #fff;
+
+    --color-border: #ddd;
+    --color-border-dashed: #aaa;
+
+    --color-header-bg: #263238;
+    --color-header-link: #cfd8dc;
+
+    --color-accent: #4f83cc;
+    --color-accent-hover: #3d6bb0;
+
+    --color-lead-bg: #fff8e1;
+    --color-lead-border: #ffe082;
+    --color-code-bg: #e8eaed;
+
+    --color-icon-bg: #eceff1;
+    --color-demo-brown: #6d4c41;
+    --color-demo-green: #388e3c;
+}

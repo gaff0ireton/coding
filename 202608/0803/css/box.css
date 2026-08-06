@@ -1,0 +1,52 @@
+@charset "UTF-8";
+
+/* ?CSSの優先順位
+!CSSは上の行（一行目）から順番に下に向かって読まれていく。
+そのため、下の行に書かれている内容が、上の行の内容を上書きしていく。
+
+!CSSのセレクターの書き方の指定方法が詳細な書き方の方がさらに優先される。
+p指定よりも、header p指定の方が優先される。
+これは書かれている行数よりも優先される。
+
+!classとidはタグ名指定よりも、強い優先度を持っている。
+*タグ名の指定=1個につき、1点(例:header p と書けば、2点)
+*class名の指定=1個につき、10点(例:header .blueと書けば、11点)
+*id名の指定=1個につき、100点。idで指定した内容はclassやタグではほぼ勝てない。
+?この点数ルールによって、点数の高い方が効く。低い方は上書きされて、効かなくなる。
+?点数が同点だった場合は、下の行に書かれている方が勝つ。
+*/
+
+
+
+html {
+    body {
+        p {
+            color: #999;
+        }
+
+        p.blue {
+            color: #0bd;
+        }
+
+        p.text-center {
+            text-align: center;
+        }
+
+        p.small {
+            font-size: .875em;
+        }
+
+        p.text-center.small{
+            font-weight: bold;
+            color: #ff0000;
+        }
+
+        p#orange {
+            color: #fa2;
+        }
+
+        p#green {
+            color: #adff2f;
+        }
+    }
+}

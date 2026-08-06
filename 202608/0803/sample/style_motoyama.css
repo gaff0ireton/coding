@@ -1,0 +1,110 @@
+@charset "UTF-8";
+/* 単位
+①絶対単位 = px(ピクセル)
+他の要素の影響を全く受けない。指定した値そのままの値から変化しない単位。
+柔軟性に欠けるので、使用する場合は必要な時のみ。
+また、widthプロパティに絶対単位で大きな数字(400px以上)はなるべく使わない。 */
+
+/* ②相対単位 = %(パーセント) , em（エム） , rem(レム) , vw(ブイダブリュー) , vh(ブイエイチ)
+他の要素に応じて相対的に変化していく単位。
+関連する要素に応じて柔軟にサイズ変更が行われる。
+用途に応じて相対単位を使い分けるのがベスト。 */
+
+/* %(パーセント)=親要素の幅を基準とした割合で指定する。 */
+/* em = 親要素の文字サイズを基準とした単位。font-sizeプロパティの値を見ています。
+    また、自分自身の文字サイズも基準にします。
+    1em = １文字分 */
+
+/* rem = ルート要素(htmlタグ)の文字サイズを基準とした単位。 */
+/* htmlタグのCSSにfont-size:100%と指定をしておくと、
+    ブラウザの設定による文字の大小を継承することができます。 */
+/* ユーザビリティとして優れた文字サイズ指定の単位となってます。 */
+
+/* vw(viewport width) vh(viewport height)
+    表示領域（ブラウザの両端）全域を100とした相対単位。 */
+/* 様々な端末に対して、等しい表示をしたい場合によく用いられます。 */
+
+html {
+    font-size: 100%;
+}
+
+header {
+    /* %(パーセント)=相対単位。親要素の幅を基準とした割合で指定する。 */
+    width: 60%;
+
+    /* 最小幅。コンテンツを必要以上に小さくしたくない場合、最小幅を指定する */
+    min-width: 360px;
+
+    /* 最大幅。コンテンツを必要以上に大きくしたくない場合、最大幅を指定する */
+    max-width: 1000px;
+
+    /* 高さを指定する場合は必要な時のみにしましょう */
+    /* 基本はheightはautoでコンテンツに応じて自動調整するようにしておく */
+    height: auto;
+    background-color: lightblue;
+}
+
+h1 {
+    text-align: center;
+    color: darkslateblue;
+}
+
+header nav {
+    background-color: #fff;
+    border: 1px solid black;
+}
+
+header nav ul {
+    /* list-style-type: cjk-ideographic; */
+    /* list-style-position: outside; */
+    list-style-image: url(ここに画像のパスを入れる);
+    /* list-style: cjk-ideographic inside; */
+    list-style: none;
+
+}
+
+header nav ul li {
+    background-color: rgb(238, 131, 131);
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+main {
+    width: 60%;
+    background-color: lavender;
+}
+
+article {
+    width: 50vw;
+    background-color: aliceblue;
+    /* border-width: 6px 12px;
+    border-style: solid;
+    border-color: brown; */
+    /* border: 6px solid brown; */
+    border-top: 6px solid brown;
+    font-size: 32px;
+}
+
+article p {
+    font-size: 1rem;
+}
+
+aside {
+    background-color: cadetblue;
+
+    /* h2 {
+        font-size: 18px;
+        color: #fff;
+    } */
+}
+
+/* セレクターを細かく書くことで、特定の場所だけにスタイルを当てることができる */
+/* 〇〇(半角スペース)△△ = 〇〇の中の△△ */
+aside h2 {
+    font-size: 18px;
+    color: #fff;
+}
+
+footer {
+    background-color: lightslategray;
+}

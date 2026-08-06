@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="初学者向けのflexbox練習問題集">
+    <title>flexbox練習(初級)</title>
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="site_header">
+        <a class="logo" href="../index.html">Flex Practice</a>
+        <nav class="level_links">
+            <ul>
+                <li><a class="level_link level_link_active" href="../01_beginner/index.html" aria-current="page">初級編</a></li>
+                <li><a class="level_link" href="../02_intermediate/index.html">中級編</a></li>
+                <li><a class="level_link" href="../03_advanced/index.html">上級編</a></li>
+            </ul>
+        </nav>
+        <nav class="header_nav">
+            <ul>
+                <li><a href="#problem1">問題1</a></li>
+                <li><a href="#problem2">問題2</a></li>
+                <li><a href="#problem3">問題3</a></li>
+                <li><a href="#problem4">問題4</a></li>
+                <li><a href="#problem5">問題5</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>flexbox 練習問題(初級)</h1>
+        <p class="lead">
+            <code>01_beginner/style.css</code> を編集して、それぞれの問題の目標を達成しましょう。
+            編集する場所には <code>/* TODO */</code> というコメントが書かれています。
+        </p>
+
+        <!-- 問題1 -->
+        <section class="problem" id="problem1">
+            <h2>問題1：横に並べて均等に配置する</h2>
+            <p>
+                目標：<code>.problem1_box</code> を <strong>display: flex</strong> にして、
+                中の3つの箱が横一列に並び、かつ <strong>均等な間隔</strong> で配置されるようにしてください。
+            </p>
+            <div class="problem1_box">
+                <div class="item">1</div>
+                <div class="item">2</div>
+                <div class="item">3</div>
+            </div>
+        </section>
+
+        <!-- 問題2 -->
+        <section class="problem" id="problem2">
+            <h2>問題2：縦横の中央に揃える</h2>
+            <p>
+                目標：<code>.problem2_box</code> の高さは 150px あります。
+                以下を満たすように並べてください。
+            </p>
+            <ul>
+                <li>まず、高さの異なる3つの箱を <strong>縦方向の中央</strong> に揃える。</li>
+                <li>揃えられたら、3つの箱のまとまりが箱全体の <strong>横方向の中央</strong> にもくるようにする。</li>
+            </ul>
+            <div class="problem2_box">
+                <div class="item item_short">A</div>
+                <div class="item item_tall">B</div>
+                <div class="item item_medium">C</div>
+            </div>
+        </section>
+
+        <!-- 問題3 -->
+        <section class="problem" id="problem3">
+            <h2>問題3：縦に並べる</h2>
+            <p>
+                目標：<code>.problem3_box</code> の中の箱を、横並びではなく
+                <strong>上から下へ縦に</strong> 並べてください。
+            </p>
+            <div class="problem3_box">
+                <div class="item">Menu 1</div>
+                <div class="item">Menu 2</div>
+                <div class="item">Menu 3</div>
+            </div>
+        </section>
+
+        <!-- 問題4 -->
+        <section class="problem" id="problem4">
+            <h2>問題4：折り返して並べる</h2>
+            <p>
+                目標：<code>.problem4_box</code> の幅は固定されています。
+                8つの箱を、<strong>幅に収まらない分は次の行に折り返して</strong> 並べてください。
+            </p>
+            <div class="problem4_box">
+                <div class="item">1</div>
+                <div class="item">2</div>
+                <div class="item">3</div>
+                <div class="item">4</div>
+                <div class="item">5</div>
+                <div class="item">6</div>
+                <div class="item">7</div>
+                <div class="item">8</div>
+            </div>
+        </section>
+
+        <!-- 問題5 -->
+        <section class="problem" id="problem5">
+            <h2>問題5：応用（並び順と幅を調整する）</h2>
+            <p>
+                目標：<code>.problem5_box</code> の中の箱について、次の2つを満たしてください。
+            </p>
+            <ul>
+                <li>「Sidebar」を一番右に表示する（HTMLの順番は変えないこと）</li>
+                <li>「Main」の幅が残りのスペースいっぱいに広がるようにする</li>
+            </ul>
+            <div class="problem5_box">
+                <div class="item item_sidebar">Sidebar</div>
+                <div class="item item_main">Main</div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site_footer">
+        <p><small>&copy; 2026 edu-ktmr</small></p>
+    </footer>
+
+</body>
+</html>

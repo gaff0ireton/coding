@@ -1,0 +1,47 @@
+/* ==========================================
+   トップページ：レベル選択カード
+   ========================================== */
+.level_grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.level_card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1 1 200px;
+
+    padding: 16px;
+    background-color: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+
+    color: inherit;
+    text-decoration: none;
+}
+
+.level_card_eyebrow {
+    margin: 0;
+    font-size: 12px;
+    font-weight: bold;
+    color: var(--color-accent);
+}
+
+.level_card h2 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.level_card p {
+    margin: 0;
+    font-size: 14px;
+    color: var(--color-text-muted);
+}
+
+.level_card .level_card_cta {
+    margin-top: auto;
+    font-size: 14px;
+    color: var(--color-accent);
+}

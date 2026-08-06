@@ -1,0 +1,126 @@
+@charset "UTF-8";
+
+/* ?単位 */
+
+/* !①絶対単位=px
+他の要素の影響を全く受けない。指定した値そのままの値から変化しない単位。
+柔軟性に欠けるので、使用する場合は必要な時のみ。
+また、widthプロパティに絶対単位で大きな数字(400px)は使わない。 */
+
+/* !②相対単位 = %(パーセント) , em(エム) , rem(レム) , vw(ブイダブリュー) , vh(ブイエイチ)
+他の要素に応じて、相対的に変化していく単位。
+関連する要素に応じて、柔軟にサイズ変更が行われる。
+用途に応じて、相対単位を使い分けるのがベスト。 */
+
+/* *％（パーセント）＝相対単位。親要素の幅を基準とした割り合いで指定する */
+
+/* *em＝親要素の文字サイズを基準とした割り合いで指定する。
+フォントサイズプロパティの値を見ている。また、自分自身の文字サイズも基準とします。
+1em＝1文字分。 */
+
+/* *rem＝ルート要素(htmlタグ)の文字サイズを基準とした単位。
+htmlタグのCSSにfont-size: 100%;と指定しておくと、ブラウザの設定による文字の大小を継承することができる。
+ユーザビリティとして優れた文字サイズ指定の単位となっている。*/
+
+/* *vw(viewport width),vh(viewport height)=表示領域（ブラウザの両端）全域を100とした相対単位。 
+さまざまな端末に対して、等しい表示をしたい場合によく用いられます。
+*/
+
+/* *ブロックボックス（ブロック要素）
+*領域が親要素の左端から右端まで必ず存在している要素
+!width,height,margin,paddingこれら全てが使える
+この領域が終わると、必ず次の箱の領域になる（改行される） */
+
+/* *インラインボックス（インライン要素）
+*領域がコンテンツの幅と高さのみ存在している要素
+!width,heightは全く効かない。marginとpaddingは左右しか効かない。
+この領域が終わると、右側にコンテンツが入る領域があれば、そこに別のインラインボックスが割り込んでくる 
+!aタグ,inputタグ,spanタグ,pictureタグ
+*/
+
+html {
+    font-size: 100%;
+
+    body {
+        background-color: #ffffff;
+
+        header {
+            background-color: #d0ffff;
+            /* 高さを指定する場合は必要な時のみにする */
+            /* 基本はheightはautoでコンテンツに応じて自動調整するようにしておく */
+            /* ％（パーセント）＝相対単位。親要素の幅を記述んとした割り合いで指定する */
+            width: 60%;
+            /* 最小幅。コンテンツを必要以上に小さくしたくない場合、最小幅を指定する*/
+            min-width: 360px;
+            /* 最大幅。コンテンツを必要以上大きくしたくない場合、最大幅を指定する */
+            max-width: 360px;
+            /* height: 300px; */
+
+            h1 {
+                text-align: center;
+                color: #5f9ea0;
+            }
+
+            nav {
+                background-color: #fff;
+                border: solid 1px #000;
+
+                ul{
+                    list-style-type: cjk-ideographic;
+                    list-style-position: inside;
+                    list-style-image: url(ここに画像パスを入れる);
+                    list-style: none;
+                    li{
+                        margin: 0 0 1rem 0;
+                        background: #adf8ff;
+                        padding: .5rem;
+                        a{
+                            display: inline-block;
+                        }
+                    }
+                }
+            }
+        }
+
+        main {
+            width: 60%;
+            background-color: #c0c0ff;
+
+            article {
+                width: 50vw;
+                background-color: #adf8ff;
+                border-color: #5f9ea0;
+                border-style: dashed none;
+                border-width: 2px;
+                border: 2px dashed #5f9ea0;
+                font-size: 32px;
+                mix-blend-mode: color-burn;
+
+                h3 {
+                    font-size: .75em;
+                }
+
+                p {
+                    font-size: 1rem;
+                }
+            }
+
+            aside {
+                background-color: #ffc8c8;
+                mix-blend-mode: color-burn;
+
+                h2 {
+                    font-size: 16px;
+                }
+
+                p {
+                    color: #fa7777;
+                }
+            }
+        }
+
+        footer {
+            background-color: #f0ffc8;
+        }
+    }
+}

@@ -1,0 +1,145 @@
+/* ==========================================
+   上級編：レベル固有のスタイル
+   共通スタイル（body / header / footer 等）は base.css を参照
+   ========================================== */
+
+/* ==========================================
+   問題1：料金プランを組み立てる（入れ子のflexbox）
+   ========================================== */
+.advanced1_features {
+    border: 2px dashed var(--color-border-dashed);
+    padding: 16px;
+
+    /* TODO（1階層目）：3枚のカードを横に並べ、間隔を16pxにしてください */
+}
+
+.advanced1_card {
+    background-color: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: 16px;
+    height: 280px;
+
+    /* TODO（1階層目）：flex: 1; にして幅を均等に分け合うようにしてください */
+
+    /* TODO（2階層目）：見出し行・説明文・ボタンを縦に並べ、間隔を16pxにしてください */
+}
+
+.advanced1_card_head {
+
+    /* TODO（3階層目）：アイコンとタイトルを横に並べ、間隔を16pxで縦方向の中央に揃えてください */
+}
+
+.advanced1_icon {
+    /* TODO：flexアイテムなので width を flex-basis に書き換えてください */
+    width: 40px;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.advanced1_icon img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+}
+
+.advanced1_card h3 {
+    margin: 0;
+    font-size: 16px;
+}
+
+.advanced1_card p {
+    margin: 0;
+    font-size: 14px;
+    color: var(--color-text-muted);
+}
+
+.advanced1_button {
+    background-color: var(--color-accent);
+    color: var(--color-white);
+    border: none;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 16px;
+    padding-right: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+
+    /* TODO（2階層目）：ボタンをカードの一番下に固定してください */
+}
+
+.advanced1_button:hover {
+    background-color: var(--color-accent-hover);
+}
+
+/* ==========================================
+   問題2：記事プレビューを組み立てる（入れ子のflexbox）
+   ========================================== */
+.advanced2_media {
+    border: 2px dashed var(--color-border-dashed);
+    padding: 16px;
+
+    /* TODO（1階層目）：画像を左、.advanced2_media_body を右に配置し、間隔を16pxにしてください */
+}
+
+.advanced2_media_image {
+    width: 200px;
+    border-radius: 8px;
+    /* overflow: hidden; */
+
+    /* TODO（1階層目）：flex-basis を200pxに、flex-shrink を0にして、画像側の幅を固定し縮まないようにしてください */
+}
+
+.advanced2_media_image img {
+    width: 100%;
+    aspect-ratio: 200 / 150;
+}
+
+.advanced2_media_body {
+
+    /* TODO（1階層目）：flex: 1; にして残りの幅いっぱいに広げてください */
+
+    /* TODO（2階層目）：タイトル・説明文・投稿者情報を縦に並べ、間隔を16pxにしてください */
+}
+
+.advanced2_media_body h3 {
+    margin: 0;
+    font-size: 16px;
+}
+
+.advanced2_media_body p {
+    margin: 0;
+    font-size: 14px;
+    color: var(--color-text-muted);
+}
+
+.advanced2_author {
+
+    /* TODO（3階層目）：アバター画像とテキストを横に並べ、間隔を16pxで縦方向の中央に揃えてください */
+}
+
+.advanced2_avatar {
+    /* TODO：flexアイテムなので width を flex-basis に書き換えてください */
+    width: 48px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.advanced2_avatar img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+}
+
+.advanced2_author_text p {
+    margin: 0;
+}
+
+.advanced2_author_name {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.advanced2_author_role {
+    font-size: 13px;
+    color: var(--color-text-muted);
+}

@@ -1,0 +1,233 @@
+/* ==========================================
+   中級編：レベル固有のスタイル
+   共通スタイル（body / header / footer 等）は base.css を参照
+   ========================================== */
+
+/* ==========================================
+   問題1：ヘッダーを組み立てる
+   ========================================== */
+.problem1_header {
+    border: 2px dashed var(--color-border-dashed);
+    padding: 16px;
+    
+    /* TODO：ロゴを左端、ボタンを右端に配置し、縦方向の中央で揃えてください */
+    display: flex;
+    justify-content: space-between;
+}
+
+.problem1_logo {
+    /* TODO：flexアイテムなので width を flex-basis に書き換えてください */
+    width: 48px;
+}
+
+.problem1_right {
+
+    /* TODO：ナビゲーションとボタンを横に並べ、間隔をあけて縦方向の中央で揃えてください */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+}
+
+.problem1_nav {
+    display: flex;
+    gap: 16px;
+}
+
+.problem1_nav a {
+    color: var(--color-text);
+    text-decoration: none;
+}
+
+.problem1_button {
+    background-color: var(--color-accent);
+    color: var(--color-white);
+    border: none;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 16px;
+    padding-right: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+}
+
+.problem1_button:hover {
+    background-color: var(--color-accent-hover);
+}
+
+/* ==========================================
+   問題2：カードを縦に組み立てる
+   ========================================== */
+.problem2_card {
+    border: 2px dashed var(--color-border-dashed);
+    border-radius: 8px;
+    padding: 16px;
+    width: 332px;
+
+    /* TODO：画像・タイトル・説明文・ボタンを縦に並べ、間隔を16pxにしてください */
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.problem2_image {
+    width: 300px;
+}
+
+.problem2_image img {
+    aspect-ratio: 300 / 171;
+}
+
+.problem2_card h3 {
+    margin: 0;
+    font-size: 16px;
+}
+
+.problem2_card p {
+    margin: 0;
+    font-size: 14px;
+    color: var(--color-text-muted);
+}
+
+.problem2_button {
+    background-color: var(--color-accent);
+    color: var(--color-white);
+    border: none;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 16px;
+    padding-right: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+}
+
+.problem2_button:hover {
+    background-color: var(--color-accent-hover);
+}
+
+/* ==========================================
+   問題3：カードを並べて折り返す
+   ========================================== */
+.problem3_grid {
+    border: 2px dashed var(--color-border-dashed);
+    padding: 16px;
+    width: 380px;
+
+    /* TODO：カードを横に並べ、収まらない分は折り返し、間隔を16pxにしてください */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.problem3_card {
+    /* TODO：flexアイテムなので width を flex-basis に書き換えてください */
+    flex-basis: 156px;
+}
+
+.problem3_image img {
+    aspect-ratio: 156 / 100;
+}
+
+.problem3_card p {
+    margin-top: 8px;
+    font-size: 14px;
+    text-align: center;
+}
+
+/* ==========================================
+   問題4：プロフィール項目を組み立てる
+   ========================================== */
+.problem4_profile {
+    border: 2px dashed var(--color-border-dashed);
+    padding: 16px;
+
+    /* TODO：アバター画像とテキストを横並びにし、間隔を16pxあけて縦方向の中央で揃えてください */
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.problem4_avatar {
+    /* TODO：flexアイテムなので width を flex-basis に書き換えてください */
+    flex-basis: 64px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.problem4_avatar img {
+    aspect-ratio: 1 / 1;
+}
+
+.problem4_text p {
+    margin: 0;
+}
+
+.problem4_name {
+    font-weight: bold;
+}
+
+.problem4_role {
+    font-size: 14px;
+    color: var(--color-text-muted);
+}
+
+/* ==========================================
+   問題5：応用（ボタンをカード下端に固定する）
+   ========================================== */
+.problem5_grid {
+    display: flex;
+    gap: 16px;
+}
+
+.problem5_card {
+    border: 2px dashed var(--color-border-dashed);
+    border-radius: 8px;
+    padding: 16px;
+    flex-basis: 232px;
+
+    /* TODO（コンテナ側）：画像・タイトル・説明文・ボタンを縦に並べ、間隔を16pxにしてください */
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.problem5_image {
+    width: 200px;
+}
+
+.problem5_image img {
+    aspect-ratio: 200 / 133;
+}
+
+.problem5_card h3 {
+    margin: 0;
+    font-size: 16px;
+}
+
+.problem5_card p {
+    margin: 0;
+    font-size: 14px;
+    color: var(--color-text-muted);
+}
+
+.problem5_button {
+    background-color: var(--color-accent);
+    color: var(--color-white);
+    border: none;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 16px;
+    padding-right: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+
+    /* TODO（アイテム側）：ボタンをカードの一番下に固定してください */
+    margin-top: auto;
+}
+
+.problem5_button:hover {
+    background-color: var(--color-accent-hover);
+}

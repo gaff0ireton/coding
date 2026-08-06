@@ -1,0 +1,120 @@
+
+/* ==========================================
+   初級編：レベル固有のスタイル
+   共通スタイル（body / header / footer 等）は base.css を参照
+   ========================================== */
+.item {
+    background-color: var(--color-accent);
+    color: var(--color-white);
+    padding: 16px;
+    border-radius: 6px;
+    text-align: center;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ==========================================
+   問題1：横に並べて均等に配置する
+   ========================================== */
+.problem1_box {
+    border: 2px dashed var(--color-border-dashed);
+    padding: 16px;
+
+    /* TODO */
+    display: flex;
+    justify-content: space-between;
+}
+
+.problem1_box .item {
+    flex-basis: 80px;
+}
+
+/* ==========================================
+   問題2：縦方向の中央に揃える
+   ========================================== */
+.problem2_box {
+    display: flex;
+    border: 2px dashed var(--color-border-dashed);
+    padding: 16px;
+    height: 150px;
+    gap: 16px;
+
+    /* TODO */
+    justify-content: center;
+    align-items: center;
+}
+
+.problem2_box .item {
+    flex-basis: 80px;
+}
+
+.item_short {
+    height: 64px;
+}
+
+.item_tall {
+    height: 124px;
+}
+
+.item_medium {
+    height: 94px;
+}
+
+/* ==========================================
+   問題3：縦に並べる
+   ========================================== */
+.problem3_box {
+    display: flex;
+    border: 2px dashed var(--color-border-dashed);
+    padding: 16px;
+    gap: 12px;
+
+    /* TODO */
+    flex-direction: column;
+}
+
+/* ==========================================
+   問題4：折り返して並べる
+   ========================================== */
+.problem4_box {
+    display: flex;
+    border: 2px dashed var(--color-border-dashed);
+    padding: 16px;
+    gap: 12px;
+    width: 380px;
+
+    /* TODO */
+    flex-wrap: wrap;
+}
+
+.problem4_box .item {
+    flex-basis: 80px;
+}
+
+/* ==========================================
+   問題5：応用（並び順と幅を調整する）
+   ========================================== */
+.problem5_box {
+    display: flex;
+    border: 2px dashed var(--color-border-dashed);
+    padding: 16px;
+    gap: 12px;
+}
+
+.item_sidebar {
+    flex-basis: 120px;
+    background-color: var(--color-demo-brown);
+
+    /* TODO */
+    order: 2;
+}
+
+.item_main {
+    background-color: var(--color-demo-green);
+
+    /* TODO */
+    order: 1;
+    flex: 1;
+}

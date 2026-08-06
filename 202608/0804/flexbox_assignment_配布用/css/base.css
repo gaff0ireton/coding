@@ -1,0 +1,158 @@
+/* ==========================================
+   共通スタイル（編集不要）
+   header / footer / typography まわり
+   3レベル（初級・中級・上級）で共有します
+   ========================================== */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 1.7;
+    color: var(--color-text);
+    background-color: var(--color-bg);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+
+/* ==========================================
+   ヘッダー・フッター
+   ========================================== */
+.site_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    padding-left: 24px;
+    padding-right: 24px;
+    background-color: var(--color-header-bg);
+    color: var(--color-white);
+}
+
+.site_header .logo {
+    margin: 0;
+    font-weight: bold;
+    color: var(--color-white);
+    text-decoration: none;
+}
+
+.level_links ul {
+    display: flex;
+    gap: 16px;
+    list-style: none;
+}
+
+.level_link {
+    color: var(--color-header-link);
+    text-decoration: none;
+}
+
+.level_link_active {
+    color: var(--color-white);
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.header_nav ul {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+}
+
+.header_nav a {
+    color: var(--color-white);
+    text-decoration: none;
+}
+
+.site_footer {
+    text-align: center;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    padding-left: 24px;
+    padding-right: 24px;
+    background-color: var(--color-header-bg);
+    color: var(--color-white);
+}
+
+/* ==========================================
+   ページ本文・タイポグラフィ
+   ========================================== */
+main {
+    flex: 1;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 24px;
+    padding-bottom: 64px;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+h1 {
+    font-size: 24px;
+}
+
+.lead {
+    background-color: var(--color-lead-bg);
+    border: 1px solid var(--color-lead-border);
+    padding-top: 12px;
+    padding-bottom: 12px;
+    padding-left: 16px;
+    padding-right: 16px;
+    border-radius: 6px;
+}
+
+code {
+    background-color: var(--color-code-bg);
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 4px;
+    padding-right: 4px;
+    border-radius: 3px;
+}
+
+/* ==========================================
+   問題セクション（共通の見た目、TODO部分は各ファイルで指定）
+   ========================================== */
+.problem {
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid var(--color-border);
+}
+
+.problem h2 {
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+.problem p {
+    margin-top: 0;
+    margin-bottom: 8px;
+}
+
+.problem ul {
+    margin-top: 0;
+    margin-bottom: 8px;
+    padding-left: 20px;
+}
+
+.problem li {
+    margin-bottom: 4px;
+}
+
+.problem li:last-child {
+    margin-bottom: 0;
+}

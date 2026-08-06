@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="中級者向けのflexbox練習問題集。ヘッダーやカードなど実践的なUIパーツを組み立てながら学べます。">
+    <title>flexbox練習(中級編)</title>
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header class="site_header">
+        <a class="logo" href="../index.html">Flex Practice</a>
+        <nav class="level_links">
+            <ul>
+                <li><a class="level_link" href="../01_beginner/index.html">初級編</a></li>
+                <li><a class="level_link level_link_active" href="../02_intermediate/index.html" aria-current="page">中級編</a></li>
+                <li><a class="level_link" href="../03_advanced/index.html">上級編</a></li>
+            </ul>
+        </nav>
+        <nav class="header_nav">
+            <ul>
+                <li><a href="#problem1">問題1</a></li>
+                <li><a href="#problem2">問題2</a></li>
+                <li><a href="#problem3">問題3</a></li>
+                <li><a href="#problem4">問題4</a></li>
+                <li><a href="#problem5">問題5</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>flexbox 練習問題(中級)</h1>
+        <p class="lead">
+            <code>02_intermediate/style.css</code> を編集して、それぞれの目標を達成しましょう。
+            中級編は、ヘッダーやカードなど <strong>実際のUIパーツ</strong> を組み立てる練習です。
+            編集する場所には、
+            <code>/* TODO */</code> というコメントが書かれています。
+            また、一部の要素は便宜上 <code>width</code> で幅を指定していますが、
+            flexアイテムとして扱う場合は <code>flex-basis</code> に書き換えたほうが適切です。
+            該当箇所にも <code>/* TODO */</code> コメントがあります。
+        </p>
+
+        <!-- 問題1 -->
+        <section class="problem" id="problem1">
+            <h2>問題1：ヘッダーを組み立てる</h2>
+            <p>
+                目標：<code>.problem1_header</code> の中の要素を、以下を満たすように配置してください。
+            </p>
+            <ul>
+                <li>
+                    ロゴを <strong>左端</strong>、<code>.problem1_right</code>
+                    （ナビゲーションとボタンをまとめたグループ）を <strong>右端</strong> に配置する。
+                </li>
+                <li>高さの異なる要素同士も <strong>縦方向の中央</strong> で揃える。</li>
+                <li>
+                    <code>.problem1_right</code> 自体も、中のナビゲーションとボタンが
+                    <strong>横に並び</strong>、間隔が24pxあいて <strong>縦方向の中央</strong> で揃うようにする。
+                </li>
+            </ul>
+            <div class="problem1_header">
+                <div class="problem1_logo">
+                    <img src="images/logo.svg" alt="株式会社xxxxxx">
+                </div>
+                <div class="problem1_right">
+                    <nav class="problem1_nav">
+                        <a href="#">Home</a>
+                        <a href="#">Service</a>
+                        <a href="#">Contact</a>
+                    </nav>
+                    <button class="problem1_button">お問い合わせ</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 問題2 -->
+        <section class="problem" id="problem2">
+            <h2>問題2：カードを縦に組み立てる</h2>
+            <p>
+                目標：<code>.problem2_card</code> の中の
+                画像・タイトル・説明文・ボタンを、<strong>上から下へ縦に</strong> 並べてください。それぞれの間隔は16pxとする。
+            </p>
+            <div class="problem2_card">
+                <div class="problem2_image">
+                    <img src="images/cup.webp" alt="白とブルーのバイカラーの陶器のコップとスプーン">
+                </div>
+                <h3>商品タイトル</h3>
+                <p>ここに商品やサービスの説明文が入ります。</p>
+                <button class="problem2_button">詳しく見る</button>
+            </div>
+        </section>
+
+        <!-- 問題3 -->
+        <section class="problem" id="problem3">
+            <h2>問題3：カードを並べて折り返す</h2>
+            <p>
+                目標：<code>.problem3_grid</code> の幅は固定されています。
+                6枚のカードを横に並べ、<strong>幅に収まらない分は次の行に折り返して</strong> 並べてください。それぞれの間隔は16pxとする。
+            </p>
+            <div class="problem3_grid">
+                <div class="problem3_card">
+                    <div class="problem3_image">
+                        <img src="images/car01.webp" alt="地面に置かれた黄色のおもちゃの車">
+                    </div>
+                    <p>Card 1</p>
+                </div>
+                <div class="problem3_card">
+                    <div class="problem3_image">
+                        <img src="images/car02.webp" alt="地面に置かれた赤色のおもちゃの車">
+                    </div>
+                    <p>Card 2</p>
+                </div>
+                <div class="problem3_card">
+                    <div class="problem3_image">
+                        <img src="images/car03.webp" alt="地面に置かれたピンク色のおもちゃの車">
+                    </div>
+                    <p>Card 3</p>
+                </div>
+                <div class="problem3_card">
+                    <div class="problem3_image">
+                        <img src="images/car04.webp" alt="地面に置かれた赤と白のバイカラーのおもちゃのワゴン車">
+                    </div>
+                    <p>Card 4</p>
+                </div>
+                <div class="problem3_card">
+                    <div class="problem3_image">
+                        <img src="images/car05.webp" alt="地面に置かれた白のおもちゃのスポーツカー">
+                    </div>
+                    <p>Card 5</p>
+                </div>
+                <div class="problem3_card">
+                    <div class="problem3_image">
+                        <img src="images/car06.webp" alt="地面に置かれたベージュと紺のバイカラーのおもちゃのワゴン車">
+                    </div>
+                    <p>Card 6</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 問題4 -->
+        <section class="problem" id="problem4">
+            <h2>問題4：プロフィール項目を組み立てる</h2>
+            <p>
+                目標：<code>.problem4_profile</code> の中の
+                アバター画像とテキストを横並びにし、<strong>縦方向の中央</strong> で揃えてください。
+                間隔は16pxとする。
+            </p>
+            <div class="problem4_profile">
+                <div class="problem4_avatar">
+                    <img src="images/person.webp" alt="">
+                </div>
+                <div class="problem4_text">
+                    <p class="problem4_name">山田 太郎</p>
+                    <p class="problem4_role">Webデザイナー</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 問題5 -->
+        <section class="problem" id="problem5">
+            <h2>問題5：応用（ボタンをカード下端に固定する）</h2>
+            <p>
+                目標：<code>.problem5_grid</code> の中に3枚のカードが並んでいます。
+                以下を満たすようにしてください。
+            </p>
+            <ul>
+                <li>
+                    各 <code>.problem5_card</code> の中の画像・タイトル・説明文・ボタンを
+                    <strong>縦に</strong> 並べる。間隔は16pxとする。
+                </li>
+                <li>
+                    説明文の分量が違っても、<strong>ボタンは常にカードの一番下</strong> に表示されるようにする。
+                </li>
+            </ul>
+            <div class="problem5_grid">
+                <div class="problem5_card">
+                    <div class="problem5_image">
+                        <img src="images/clock01.webp" alt="ローマ数字の文字盤に装飾が施された壁掛け時計">
+                    </div>
+                    <h3>商品A</h3>
+                    <p>シンプルな一言コメントです。</p>
+                    <button class="problem5_button">購入する</button>
+                </div>
+                <div class="problem5_card">
+                    <div class="problem5_image">
+                        <img src="images/clock02.webp" alt="チェーンが付いたアンティーク調の懐中時計">
+                    </div>
+                    <h3>商品B</h3>
+                    <p>商品の特徴を2〜3文程度で説明する、標準的な長さの説明文です。</p>
+                    <button class="problem5_button">購入する</button>
+                </div>
+                <div class="problem5_card">
+                    <div class="problem5_image">
+                        <img src="images/clock03.webp" alt="金色のアーチ型スタンドが付いた置き時計">
+                    </div>
+                    <h3>商品C</h3>
+                    <p>この商品はとても人気があります。素材にこだわり、使い心地も抜群です。長期間使用しても品質が落ちにくく、多くのお客様にご満足いただいています。</p>
+                    <button class="problem5_button">購入する</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="site_footer">
+        <p><small>&copy; 2026 edu-ktmr</small></p>
+    </footer>
+
+</body>
+
+</html>

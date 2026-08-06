@@ -1,0 +1,141 @@
+@charset "UTF-8";
+
+.toggleButton {
+    display: none;
+}
+
+#drawerMenu ul {
+    width: 100%;
+    height: 40px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#drawerMenu li {
+    flex: 1;
+    text-align: center;
+}
+
+#drawerMenu a {
+    display: block;
+    padding: 1rem; /* マウスが反応する範囲を少し広げている*/
+    opacity: 1;
+    transition: all 0.4s ease-in-out;
+}
+
+#drawerMenu a:last-child {
+    padding-right: 0;
+}
+
+#drawerMenu a:hover {
+    opacity: 1;
+    color: #fff;
+    background-color: #a0dbf1;
+    border-radius: 0.5rem;
+}
+
+/* アンカーリンクにマウスが乗ると、他のアンカーリンクが少し薄くなる指定 */
+#drawerMenu ul:has(a:hover) a:not(:hover) {
+    opacity: 0.3;
+}
+
+@media (width <=800px) {
+    /* メディアクエリの値はお好みで */
+    .toggleButton {
+        position: fixed;
+        top: 12px;
+        right: 12px;
+        width: 40px;
+        height: 40px;
+        display: block; /* display:none;を解除するために入れている */
+        background: #a0dbf1;
+        border-radius: 5px;
+        z-index: 100;
+    }
+
+    .toggleButton::after {
+        content: 'MENU';
+        position: absolute;
+        bottom: -1rem;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 0.75rem;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .toggleButton span {
+        width: 60%;
+        height: 4px;
+        display: block;
+        position: absolute;
+        left: 20%;
+        background-color: #333;
+        border-radius: 5px;
+        transition: all 0.2s linear;
+    }
+
+    .toggleButton span:nth-of-type(1) {
+        top: 10px;
+        transform: rotate(0);
+    }
+
+    .toggleButton span:nth-of-type(2) {
+        top: 18px;
+        transform: scale(1);
+    }
+
+    .toggleButton span:nth-of-type(3) {
+        bottom: 10px;
+        transform: rotate(0);
+    }
+
+    .close span:nth-of-type(1) {
+        top: 18px;
+        transform: rotate(-45deg);
+    }
+
+    .close span:nth-of-type(2) {
+        transform: scale(0);
+    }
+
+    .close span:nth-of-type(3) {
+        bottom: 18px;
+        transform: rotate(45deg);
+    }
+
+    #drawerMenu {
+        position: fixed;
+        top: -240px;
+        right: -240px;
+        transition: all 0.3s linear;
+    }
+
+    #drawerMenu.open {
+        top: 0;
+        right: 0;
+    }
+
+    #drawerMenu ul {
+        display: block;
+        width: 200px;
+        height: 100%;
+        padding: 80px 20px 20px 20px;
+        background-image: radial-gradient(
+            farthest-corner circle at 100% 0% in oklab,
+            oklch(100% 0 178 / 80%) 0%,
+            oklch(75% 0 196 / 80%) 100%
+        );
+        backdrop-filter: blur(3px);
+        box-shadow: -2px 2px 10px 2px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+        text-align: center;
+        list-style-type: none;
+        border-radius: 0 0 0 0.5rem;
+    }
+
+    #drawerMenu li {
+        width: 100%;
+    }
+}

@@ -1,0 +1,16 @@
+@charset "UTF-8";
+
+body {
+    background-color: #f5f2e5;
+    /* background-image: url(../images/bg.png);
+    background-repeat: no-repeat;
+    background-position: 30px 80px; */
+
+    div {
+        /* background-image: url(../images/bg_airplane.jpg);
+        background-repeat: no-repeat;
+        background-size: contain; */
+        background: #70a2dc url(../images/bg_airplane.jpg) no-repeat center bottom/cover;
+        height: 100vh;
+    }
+}
