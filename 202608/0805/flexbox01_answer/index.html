@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flexbox練習</title>
+    <meta name="description" content="Flexboxの練習問題です。" />
+    <link rel="stylesheet" href="css/destyle.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&family=Sono:wght@400;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/drawerMenu.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    
+    <script src="js/drawerMenu.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="header__inner">
+            <h1>Flexbox復習</h1>
+            <!-- ドロワーボタン -->
+            <button class="toggleButton">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <nav id="drawerMenu">
+                <ul>
+                    <li><a href="#sec01">問題０１</a></li>
+                    <li><a href="#sec02">問題０２</a></li>
+                    <li><a href="#sec03">問題０３</a></li>
+                </ul>
+            </nav>
+        </div>
+        <!-- /.header__inner -->
+    </header>
+
+    <!--------------------- ここから問題文のHTML --------------------------->
+    <main>
+        <section id="sec01">
+            <h2>問題０１:flexboxを使ってこのレイアウトを作りましょう。テキスト同士の間は16px空ける。</h2>
+
+            <div class="sec01box">
+                <h3><img src="images/logo.png" alt="ロゴ" /></h3>
+
+                <ul>
+                    <li>メニュー１</li>
+                    <li>メニュー２</li>
+                    <li>メニュー３</li>
+                    <li>メニュー４</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="sec02">
+            <h2>問題２:3つのボックスを横並びにして、ボックス同士や文字・写真の間は16px空ける。</h2>
+
+            <div class="sec02container">
+                <div class="sec02box">
+                    <div class="sec02img">
+                        <img src="images/cat01.jpg" alt="猫" />
+                    </div>
+                    <h3>猫は今日も元気です</h3>
+
+                    <p>
+                        吾輩わがはいは猫である。名前はまだ無い。
+                        どこで生れたかとんと見当けんとうがつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。吾輩はここで始めて人間というものを見た。
+                    </p>
+                    <p class="sec02button">続きはこちら</p>
+                </div>
+
+                <div class="sec02box">
+                    <div class="sec02img">
+                        <img src="images/cat02.jpg" alt="猫" />
+                    </div>
+                    <h3>猫は今日も元気です</h3>
+
+                    <p>
+                        吾輩わがはいは猫である。名前はまだ無い。
+                        どこで生れたかとんと見当けんとうがつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。吾輩はここで始めて人間というものを見た。
+                    </p>
+                    <p class="sec02button">続きはこちら</p>
+                </div>
+
+                <div class="sec02box">
+                    <div class="sec02img">
+                        <img src="images/cat03.jpg" alt="猫" />
+                    </div>
+                    <h3>猫は今日も元気です</h3>
+
+                    <p>
+                        吾輩わがはいは猫である。名前はまだ無い。
+                        どこで生れたかとんと見当けんとうがつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。吾輩はここで始めて人間というものを見た。
+                    </p>
+                    <p class="sec02button">続きはこちら</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="sec03">
+            <h2>問題０３：画像とテキストの複雑なレイアウト</h2>
+
+            <div class="sec03box">
+                <div class="sec03item-img">
+                    <img src="images/shark001.png" alt="鮫現る" />
+                </div>
+                <!-- /.sec03item-img -->
+
+                <div class="sec03textArea">
+                    <div class="sec03textAreaHeader">
+                        <h3>SHARK</h3>
+                        <p>-He is cool and clever-</p>
+                    </div>
+
+                    <p>
+                        Shu, a shark living in the deep sea, and Mina, a mysterious cat. They met in the lightless
+                        sea and nurtured their friendship. Shu swims and Mina floats. In the abyss, the two worlds
+                        intersected and their hearts communicated.
+                    </p>
+
+                    <div class="sec03textAreaGarrery">
+                        <div class="sec03textArea-img">
+                            <img src="images/cat004.png" alt="鮫を抱いて眠る猫" />
+                        </div>
+
+                        <div class="sec03textArea-img">
+                            <img src="images/underTheSea.png" alt="海底" />
+                        </div>
+                        <!-- /.sec03textArea-img -->
+                    </div>
+                    <!-- /.sec03textAreaGarrery -->
+                </div>
+                <!-- /.sec03textArea -->
+            </div>
+            <!-- /.sec03box -->
+        </section>
+    </main>
+
+    <footer>
+        <p class="footer_text"><small>&copy;2023 Syo Motoyama</small></p>
+    </footer>
+</body>
+
+</html>
