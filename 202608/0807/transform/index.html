@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="translate・rotate・scale・skewXによる変形や、transformプロパティの省略、transform-originによる基準点の変更を7つのサンプルで学べる練習用ページです。">
+    <title>transformの練習</title>
+    <link rel="stylesheet" href="css/ress.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <h1>transform（変形）の練習</h1>
+
+    <!-- ===== 1.平行移動 ===== -->
+    <section id="translate">
+        <h2>平行移動（translate）</h2>
+        <div class="container">
+            <div class="item">基準<br>（transformなし）</div>
+            <div class="item item01">translateX(50px)</div>
+            <div class="item item02">translateY(30px)</div>
+            <div class="item item03">translate(50px, 30px)</div>
+        </div>
+    </section>
+
+    <!-- ===== 2.回転 ===== -->
+    <section id="rotate">
+        <h2>回転（rotate）</h2>
+        <div class="container">
+            <div class="item">基準<br>（transformなし）</div>
+            <div class="item item01">rotate(15deg)</div>
+            <div class="item item02">rotate(45deg)</div>
+            <div class="item item03">rotate(-30deg)</div>
+        </div>
+    </section>
+
+    <!-- ===== 3.拡大縮小 ===== -->
+    <section id="scale">
+        <h2>拡大・縮小（scale）</h2>
+        <div class="container">
+            <div class="item">基準<br>（transformなし）</div>
+            <div class="item item01">scale(1.5)</div>
+            <div class="item item02">scale(0.7)</div>
+            <div class="item item03">scale(1.5, 0.5)</div>
+        </div>
+    </section>
+
+    <!-- ===== 4.傾斜 ===== -->
+    <section id="skew">
+        <h2>傾斜（skewX）</h2>
+        <p class="note">skewXは、元々垂直だった辺（左右の辺）が垂直線から何度傾くかを表します。（skewYの場合は、水平だった辺が水平線から何度傾くかで確認できます）</p>
+        <div class="container">
+            <div class="item">基準<br>（transformなし）</div>
+            <div class="item item01">skewX(15deg)</div>
+            <div class="item item02">skewX(30deg)</div>
+            <div class="item item03">skewX(-20deg)</div>
+        </div>
+    </section>
+
+    <!-- ===== 5.複数の変形の組み合わせ ===== -->
+    <section id="multiple">
+        <h2>複数の変形をまとめて指定（順序に注意）</h2>
+        <p class="note">複数のtransform関数は書いた順に適用され、後ろの関数は前の関数で作られた新しい座標系（回転・拡大縮小した向き）に対して働きます。例えば「translate→rotate」は移動してからその場で回転しますが、「rotate→translate」はrotateでX軸ごと傾いた後なので、translateはその傾いたX軸上を移動することになり、見た目には斜め方向に動きます。</p>
+        <div class="container">
+            <div class="item">基準<br>（transformなし）</div>
+            <div class="item item01">translate→rotateの順</div>
+            <div class="item item02">rotate→translateの順</div>
+            <div class="item item03">scale＋rotate</div>
+        </div>
+    </section>
+
+    <!-- ===== 6.個別のtransformプロパティ ===== -->
+    <section id="individual">
+        <h2>個別のtransformプロパティ（transform:の省略）</h2>
+        <div class="container">
+            <div class="item">基準<br>（transformなし）</div>
+            <div class="item item01">translate: 40px 20px;</div>
+            <div class="item item02">rotate: 30deg;</div>
+            <div class="item item03">translate/rotate/scaleを併記</div>
+        </div>
+    </section>
+
+    <!-- ===== 7.基準点の変更 ===== -->
+    <section id="origin">
+        <h2>変形の基準点（transform-origin）</h2>
+        <p class="note">top leftやbottom rightのようなキーワードのほか、座標（X, Y）でも指定できます。%は要素自身の幅・高さに対する割合で、Y座標の100%は要素の上端から要素の高さ分だけ下にずれた位置＝下端を意味します。「0 100%」はX座標が左端（0）、Y座標が下端（100%）を意味し、left bottomと同じです。値はpx指定も可能で、要素内の任意の点を基準点にできます。</p>
+        <div class="container">
+            <div class="item">基準<br>（center）</div>
+            <div class="item item01">origin: top left</div>
+            <div class="item item02">origin: bottom right</div>
+            <div class="item item03">origin: 0 100%（scale）</div>
+        </div>
+    </section>
+
+</body>
+
+</html>

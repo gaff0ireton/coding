@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSSフローレイアウト</title>
+    <meta name="description" content="CSSレイアウトにおけるブロックレベル要素、インラインレベル要素の説明資料">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <h1>CSSフローレイアウト</h1>
+
+    <section id="sec_box">
+        <h2>ブロックレベル要素</h2>
+        <ul>
+            <li>ulもliもブロックレベル要素です</li>
+            <li>ulもliもブロックレベル要素です</li>
+            <li>ulもliもブロックレベル要素です</li>
+        </ul>
+        <p>pはブロックレベル要素です</p>
+        <div>divはブロックレベル要素です</div>
+    </section>
+
+    <sectiom id="sec_inline">
+        <h2>インラインレベル要素</h2>
+        <div class="container"><a href="#">aはインラインレベル要素です</a></div>
+        <a href="#">aはインラインレベル要素です</a>
+        <a href="#">aはインラインレベル要素です</a>
+        <span>spanはインラインレベル要素です</span>
+        <div class="img_container">
+            <img src="images/dog01.webp" alt="草原でお座りするコーギー">
+        </div>
+        <input type="text" name="username" id="user_name" placeholder="inputはインラインレベル要素です">
+        <button>buttonはインラインレベル要素です</button>
+    </sectiom>
+</body>
+
+</html>

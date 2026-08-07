@@ -1,0 +1,99 @@
+@charset "UTF-8";
+
+h1 {
+  font-size: 20px;
+  text-align: center;
+  border: 1px solid #ccc;
+  padding: 24px;
+}
+
+h2 {
+  font-size: 18px;
+  padding-bottom: 16px;
+}
+
+section {
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.note {
+  font-size: 13px;
+  color: #666;
+  padding-bottom: 16px;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  padding: 40px;
+  background-color: #dadada;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 120px;
+  height: 100px;
+  background: #0bd;
+  color: #fff;
+  border: 3px solid #00a8c6;
+  padding: 10px;
+  font-size: 13px;
+}
+
+/* -- 1.平行移動（translate） ----- */
+#translate .item01 { transform: translateX(50px); }
+#translate .item02 { transform: translateY(30px); }
+#translate .item03 { transform: translate(50px, 30px); }
+
+/* -- 2.回転（rotate） ----- */
+#rotate .item01 { transform: rotate(15deg); }
+#rotate .item02 { transform: rotate(45deg); }
+#rotate .item03 { transform: rotate(-30deg); }
+
+/* -- 3.拡大・縮小（scale） ----- */
+#scale .item01 { transform: scale(1.5); }
+#scale .item02 { transform: scale(0.7); }
+#scale .item03 { transform: scale(1.5, 0.5); }
+
+/* -- 4.傾斜（skewX） ----- */
+#skew .item01 { transform: skewX(15deg); }
+#skew .item02 { transform: skewX(30deg); }
+#skew .item03 { transform: skewX(-20deg); }
+
+/* -- 5.複数の変形をまとめて指定（順序に注意） ----- */
+/* 同じ移動量・回転角でも、書く順序によって結果が変わる */
+#multiple .item01 { transform: translate(60px, 0) rotate(45deg); }
+#multiple .item02 { transform: rotate(45deg) translate(60px, 0); }
+#multiple .item03 { transform: scale(1.3) rotate(20deg); }
+
+/* -- 6.個別のtransformプロパティ（transform:の省略） ----- */
+/* translate・rotate・scaleは個別のプロパティとしても指定できる */
+/* transformプロパティを書かずに、そのまま値を指定できる */
+#individual .item01 { translate: 40px 20px; }
+#individual .item02 { rotate: 30deg; }
+/* 複数の個別プロパティを併記した場合、常に translate → rotate → scale の順で適用される */
+/* skewXには個別プロパティが無く、transform: skewX() でのみ指定できる */
+#individual .item03 {
+  translate: 30px;
+  rotate: 20deg;
+  scale: 1.2;
+}
+
+/* -- 7.変形の基準点（transform-origin） ----- */
+#origin .item01 {
+  transform-origin: top left;
+  transform: rotate(30deg);
+}
+#origin .item02 {
+  transform-origin: bottom right;
+  transform: rotate(30deg);
+}
+#origin .item03 {
+  transform-origin: 0 100%;
+  transform: scale(1.5);
+}

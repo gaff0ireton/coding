@@ -3,6 +3,7 @@
 body {
     font-size: 100%;
     font-family: "M PLUS 1", sans-serif;
+    background-color: #FAFFFE;
 
     img {
         width: 100%;
@@ -118,7 +119,6 @@ main {
     max-width: 1200px;
     width: 100%;
     margin: 0 auto;
-    background-color: #FAFFFE;
 
     .wrapper {
         gap: 8.33333333rem;
@@ -252,7 +252,7 @@ main {
 
                 .blogSection__img {
                     display: flex;
-                    gap: 56px;
+                    gap: clamp(28px, calc(32 / 1200 * 100vw), 32px);
                     justify-content: space-between;
                 }
             }

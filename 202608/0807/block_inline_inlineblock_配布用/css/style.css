@@ -1,0 +1,80 @@
+@charset "utf-8";
+
+/* 共通設定 */
+/* ---------------------------------- */
+
+img{
+    /* Fluid Image　フルードイメージ */
+    /* !原寸サイズを超えない縮尺 */
+    max-width: 100%;
+    
+    /* !画面幅いっぱい */
+    /* width: 100%; */
+    height: auto;
+    vertical-align: bottom;
+}
+
+
+h1 {
+    background-color: #0bd;
+}
+
+.img_container{
+    border-radius: calc(50/1920*100vw);
+    width: fit-content;
+    height: fit-content;
+    border: 2px solid #0bd;
+    overflow: hidden;
+    
+    /* background-color: #0bd; */
+}
+
+/* !ブロックレベル要素 */
+#sec_box {
+
+    h2,
+    ul,
+    li,
+    p,
+    div {
+        background-color: #0bd;
+    }
+
+}
+
+/* !インラインブロック要素 */
+#sec_inline {
+    /* text-align: center; */
+
+    .container{
+        text-align: center;
+    }
+
+    a,
+    span,
+    img,
+    input,
+    button {
+        background-color: #dba100;
+    }
+
+    a{
+        display: block;
+        /* display: inline-block; */
+        width: fit-content;
+        margin: 0 auto;
+        padding: 24px;
+        margin-bottom: 2rem;
+    }
+}
+
+/* 中央寄せ */
+/* ---------------------------------- */
+h1 {
+    width: fit-content;
+    margin: 0 auto;
+}
+
+h2 {
+    text-align: center;
+}
