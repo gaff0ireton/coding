@@ -1,0 +1,441 @@
+@charset "utf-8";
+
+/* 共通部分 */
+/* --------------------------------------- */
+
+html {
+    font-size: 100%;
+}
+
+body {
+    font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "BIZ UDPGothic", sans-serif;
+    line-height: 1.7;
+    color: #432;
+
+    a {
+        text-decoration: none;
+
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+}
+
+/* --------------------------------------- */
+/* レイアウト */
+/* --------------------------------------- */
+
+.align-center {
+    text-align: center;
+}
+
+/* --------------------------------------- */
+/* 見出し */
+/* --------------------------------------- */
+.font-english {
+    font-family: "Philosopher", sans-serif;
+    font-weight: normal;
+}
+
+.page-title,
+.heading-large,
+.heading-medium {
+    font-size: 3rem;
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.page-title {
+    line-height: 1.4;
+
+    @media (min-width: 800px) {
+        font-size: 5rem;
+    }
+}
+
+.heading-large {
+    margin-bottom: 1rem;
+
+    @media (min-width: 800px) {
+        font-size: 4rem;
+    }
+}
+
+/* --------------------------------------- */
+/* ボタン */
+/* --------------------------------------- */
+
+.btn {
+    display: inline-block;
+    font-size: 1.5rem;
+    background-color: #0bd;
+    color: #fff;
+    border-radius: 8px;
+    padding: .75rem 1.5rem;
+    padding: 2rem;
+    /* transition: background-color .3s; */
+    transition: .3s;
+
+    &:hover {
+        background-color: #0090aa;
+        /* scale: 1.2; */
+        /* rotate: 360deg; */
+        translate: 10px;
+        /* transition: .3s; */
+        /* !往復アニメーションにするには、元要素に指定する必要がある。transition */
+    }
+}
+
+/* --------------------------------------- */
+/* ヘッダー箇所 */
+/* --------------------------------------- */
+
+header.page-header {
+    /* display: flex;
+    justify-content: space-between;
+    align-items: center; */
+    padding-top: .5rem;
+
+    h1 {
+        img.logo {
+            width: 210px;
+        }
+    }
+
+    ul.main-nav {
+        display: flex;
+        justify-content: center;
+        gap: 2.5rem;
+        font-size: 1.5rem;
+        list-style: none;
+
+        a {
+            color: #432;
+            transition: color .3s;
+
+            /* 擬似クラス　マウスが乗った時の指定 */
+            /* スマホではマウスがそもそもないので、効果は薄い */
+            &:hover {
+                color: #0bd;
+            }
+        }
+    }
+
+    /* --------------------------------------- */
+    /* デスクトップ版 */
+    /* --------------------------------------- */
+    /* 画面幅が800pxよりも大きくなった時に適用するCSS */
+    @media (min-width: 800px) {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        ul.main-nav {
+            font-size: 2rem;
+        }
+
+        /* min-width: 800px */
+    }
+}
+
+.wrapper {
+    max-width: 1120px;
+    margin: auto;
+    padding: 0 1.5rem;
+}
+
+/* --------------------------------------- */
+/* headerCover */
+/* --------------------------------------- */
+.cover {
+    background-size: cover;
+    background-position: center bottom;
+    height: 800px;
+}
+
+.sub-cover {
+    background-size: cover;
+    background-position: center bottom;
+    height: 528px;
+    margin-bottom: 4rem;
+}
+
+/* --------------------------------------- */
+/* home */
+/* --------------------------------------- */
+
+.cover-home {
+    background-image: url(../images/cover-home-s.webp);
+
+    @media (min-width: 800px) {
+        background-image: url(../images/cover-home-l.webp);
+    }
+}
+
+/* --------------------------------------- */
+/* aboutSection */
+/* --------------------------------------- */
+.about {
+    max-width: 736px;
+    padding: 0 1.5rem;
+    margin: 3rem auto 0;
+
+    @media (min-width: 800px) {
+        margin: 4rem auto 0;
+    }
+
+    /* *ボックスモデルの箱自体の真ん中寄せの方法 */
+    /* margin-inline: auto; */
+    /* !ただし、ボックスに幅を指定しないと効かない */
+
+    p {
+        margin-bottom: 3rem;
+    }
+}
+
+/* --------------------------------------- */
+/* news */
+/* --------------------------------------- */
+
+.cover-news {
+    background-image: url(../images/cover-news-s.webp);
+
+    @media (min-width: 800px) {
+        background-image: url(../images/cover-news-l.webp);
+    }
+}
+
+/* --------------------------------------- */
+/* menu */
+/* --------------------------------------- */
+.cover-menu {
+    background-image: url(../images/cover-menu-s.webp);
+
+    @media (min-width: 800px) {
+        background-image: url(../images/cover-menu-l.webp);
+    }
+}
+
+.wrapper.grid {
+    display: grid;
+    gap: 2rem 1.5rem;
+    grid-template-columns: repeat(2, 1fr);
+    text-align: center;
+
+    @media (min-width: 800px) {
+        /* 1fr 1fr 1fr */
+        grid-template-columns: repeat(3, 1fr);
+        /* grid-template-columns: 2fr 1fr; */
+        /* grid-template-rows: 2fr 1fr; */
+        /* 2:1 */
+        /* grid-template-columns: 2fr 2fr 2fr; */
+        /* 1:1:1 */
+        gap: 3rem 2rem;
+    }
+
+    .item {
+
+        img {
+            aspect-ratio: 1/1;
+            object-fit: cover;
+            border-radius: 1rem;
+
+            @media (min-width: 800px) {
+                margin-bottom: .5rem;
+            }
+        }
+
+        p {
+            font-size: .875rem;
+
+            @media (min-width: 800px) {
+                font-size: 1rem;
+            }
+        }
+    }
+
+    .item-big{
+        grid-column: 1/3;
+        grid-row: 1/3;
+
+        img{
+            width: 100%;
+            height: 94.5%;
+        }
+    }
+}
+
+/* --------------------------------------- */
+/* 記事部分 */
+/* --------------------------------------- */
+
+.post {
+    margin-bottom: 3rem;
+
+    .post-title {
+        font-weight: normal;
+        margin-bottom: 1.25rem;
+    }
+
+    .post-info {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 2rem;
+        align-items: center;
+
+        .post-cat {
+            display: flex;
+            list-style: none;
+            gap: .5rem;
+
+            a {
+                color: #432;
+                background-color: #faf7f0;
+                border-radius: 8px;
+                font-size: .875rem;
+                padding: .5rem .75rem;
+                transition: .3s;
+
+                &:hover {
+                    background-color: #c9c2bc;
+                }
+            }
+        }
+
+        .post-date {
+            font-size: .875rem;
+        }
+    }
+
+    .post-thumbnail {
+        border-radius: 16px;
+        margin-bottom: 1.5rem;
+    }
+
+    p {
+        margin-bottom: 1.5rem;
+        line-height: 2;
+    }
+}
+
+/* --------------------------------------- */
+/* サイドバー箇所 */
+/* --------------------------------------- */
+
+.side-menu {
+    list-style: none;
+    text-align: center;
+    margin-bottom: 4rem;
+
+    li {
+        border-bottom: 1px solid #c9c2bc;
+
+        a {
+            color: #432;
+            display: block;
+            padding: 1rem;
+            transition: .3s;
+
+            &:hover {
+                color: #0bd;
+            }
+        }
+    }
+}
+
+/* --------------------------------------- */
+/* フッター箇所 */
+/* --------------------------------------- */
+.page-footer {
+    background-image: url(../images/footer-s.webp);
+    background-size: cover;
+    background-position: center;
+    padding-top: 12rem;
+
+    @media (min-width: 600px) {
+        /* タブレット版メディアクエリ */
+        padding-top: 16rem;
+    }
+
+    @media (min-width: 900px) {
+        background-image: url(../images/footer-l.webp);
+        padding-top: 25rem;
+    }
+
+    .info {
+        width: 100%;
+        max-width: 544px;
+        margin: auto;
+        padding: 0 1.5rem;
+        border-spacing: 0;
+
+        th,
+        td {
+            border-bottom: 1px solid #c9c2bc;
+        }
+
+        th {
+            text-align: left;
+            font-weight: normal;
+            padding: 1rem;
+
+            @media (min-width: 800px) {
+                padding-left: 2.5rem;
+            }
+        }
+
+        td {
+            padding: 1rem 0;
+        }
+    }
+
+    .copylight {
+        background-color: #432;
+        text-align: center;
+        padding: 2rem 0;
+        margin-top: 6rem;
+        color: #fff;
+    }
+}
+
+/* --------------------------------------- */
+/* デスクトップ版 */
+/* --------------------------------------- */
+/* 画面幅が800pxよりも大きくなった時に適用するCSS */
+@media (min-width: 800px) {
+
+    .post-title {
+        font-size: 2rem;
+    }
+
+    .sub-cover {
+        height: 400px;
+        margin-bottom: 6rem;
+    }
+
+    .news-contents {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .post {
+        flex-basis: 60%;
+        order: 2;
+    }
+
+    .sidebar {
+        flex-basis: 22%;
+        order: 3;
+
+        .heading-medium {
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+    }
+
+    .ad {
+        order: 1;
+    }
+}
