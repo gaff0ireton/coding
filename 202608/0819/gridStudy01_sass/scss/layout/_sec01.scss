@@ -1,46 +1,160 @@
 @use "../common" as *;
 
-.sec01{
+.sec01 {
 
     &box {
         display: grid;
         grid-template-columns: repeat(3,1fr);
-        
+        gap: 1rem;
+        border-radius: 1rem;
+        overflow: hidden;
+
+        @include mq(tab) {
+             grid-template-columns: repeat(2,1fr);
+        }
+
+        .grid01 {
+            grid-column: 1/-1;
+
+            ul {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 3rem;
+
+                @include mq(tab) {
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: .5rem;
+                }
+            }
+        }
+
+        .grid02 {
+            grid-column: 1/2;
+            grid-row: 2/4;
+
+            @include mq(tab) {
+                grid-column: 1/-1;
+                grid-row: 4/5;
+            }
+        }
+
+        .grid03 {
+            grid-column: 2/4;
+            grid-row: 2/3;
+
+            @include mq(tab) {
+                grid-column: 1/-1;
+                grid-row: 2/3;
+            }
+        }
+
+        .grid04 {
+            @include mq(tab) {
+                grid-column: 1/2;
+                grid-row: 3/4;
+            }
+        }
+
+        .grid06 {
+            grid-column: 1/-1;
+            grid-row: 4/5;
+
+            @include mq(tab) {
+                grid-column: 1/-1;
+                grid-row: 5/6;
+            }
+        }
     }
-    
+
     &item.grid01 {
         display: flex;
         justify-content: space-between;
         align-items: center;
         background-color: #A1E1F8;
         padding: 1rem;
-        
-        ul{
-            display: flex;
-            gap: 3rem;
+
+        @include mq(tab) {
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        h3 {
+            @include mq(tab) {
+                flex-basis: 100%;
+                text-align: center;
+            }
         }
     }
+
     &item.grid02 {
         display: flex;
         align-items: center;
         flex-direction: column;
         background-color: #EEC17A;
-        padding: 1rem;
+        padding: 3rem 1rem;
         gap: 1rem;
-        
-        ul{
+
+        @include mq(tab) {
+            padding: 1rem;
+        }
+
+        ul {
             align-self: stretch;
             text-align: center;
-            li{
+
+            li {
                 padding: .5rem 0;
                 border-top: 1px;
                 border-color: #000;
                 border-style: solid;
 
-                a{
-                    display: block;
+                &:last-child {
+                    border-bottom: 1px;
+                    border-color: #000;
+                    border-style: solid;
                 }
             }
         }
+    }
+
+    &item.grid03 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #b3ede0;
+        padding: 1rem;
+    }
+
+    &item.grid04,
+    &item.grid05 {
+        border-radius: 1rem;
+        overflow: hidden;
+        aspect-ratio: 1/1;
+
+        img {
+            object-fit: cover;
+        }
+    }
+
+    &item.grid04 {
+        img {
+            object-position: left;
+        }
+    }
+
+    &item.grid05 {
+        img {
+            object-position: right;
+        }
+    }
+
+    &item.grid06 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #778798;
+        color: #fff;
+        padding: 1rem;
+        gap: 1rem;
     }
 }

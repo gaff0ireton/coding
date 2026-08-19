@@ -4,6 +4,15 @@ html {
   font-size: 100%;
 }
 
+img {
+  width: 100%;
+  height: 100%;
+}
+
+h3 {
+  font-size: 1.4rem;
+}
+
 @keyframes wave {
   0% {
     mask-position: 0% top, center bottom;
@@ -167,6 +176,64 @@ html {
 .sec01box {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+@media screen and (max-width: 660px) {
+  .sec01box {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+.sec01box .grid01 {
+  grid-column: 1/-1;
+}
+.sec01box .grid01 ul {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 3rem;
+}
+@media screen and (max-width: 660px) {
+  .sec01box .grid01 ul {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+  }
+}
+.sec01box .grid02 {
+  grid-column: 1/2;
+  grid-row: 2/4;
+}
+@media screen and (max-width: 660px) {
+  .sec01box .grid02 {
+    grid-column: 1/-1;
+    grid-row: 4/5;
+  }
+}
+.sec01box .grid03 {
+  grid-column: 2/4;
+  grid-row: 2/3;
+}
+@media screen and (max-width: 660px) {
+  .sec01box .grid03 {
+    grid-column: 1/-1;
+    grid-row: 2/3;
+  }
+}
+@media screen and (max-width: 660px) {
+  .sec01box .grid04 {
+    grid-column: 1/2;
+    grid-row: 3/4;
+  }
+}
+.sec01box .grid06 {
+  grid-column: 1/-1;
+  grid-row: 4/5;
+}
+@media screen and (max-width: 660px) {
+  .sec01box .grid06 {
+    grid-column: 1/-1;
+    grid-row: 5/6;
+  }
 }
 .sec01item.grid01 {
   display: flex;
@@ -175,17 +242,30 @@ html {
   background-color: #A1E1F8;
   padding: 1rem;
 }
-.sec01item.grid01 ul {
-  display: flex;
-  gap: 3rem;
+@media screen and (max-width: 660px) {
+  .sec01item.grid01 {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+@media screen and (max-width: 660px) {
+  .sec01item.grid01 h3 {
+    flex-basis: 100%;
+    text-align: center;
+  }
 }
 .sec01item.grid02 {
   display: flex;
   align-items: center;
   flex-direction: column;
   background-color: #EEC17A;
-  padding: 1rem;
+  padding: 3rem 1rem;
   gap: 1rem;
+}
+@media screen and (max-width: 660px) {
+  .sec01item.grid02 {
+    padding: 1rem;
+  }
 }
 .sec01item.grid02 ul {
   align-self: stretch;
@@ -197,8 +277,108 @@ html {
   border-color: #000;
   border-style: solid;
 }
-.sec01item.grid02 ul li a {
-  display: block;
+.sec01item.grid02 ul li:last-child {
+  border-bottom: 1px;
+  border-color: #000;
+  border-style: solid;
+}
+.sec01item.grid03 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #b3ede0;
+  padding: 1rem;
+}
+.sec01item.grid04, .sec01item.grid05 {
+  border-radius: 1rem;
+  overflow: hidden;
+  aspect-ratio: 1/1;
+}
+.sec01item.grid04 img, .sec01item.grid05 img {
+  object-fit: cover;
+}
+.sec01item.grid04 img {
+  object-position: left;
+}
+.sec01item.grid05 img {
+  object-position: right;
+}
+.sec01item.grid06 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #778798;
+  color: #fff;
+  padding: 1rem;
+  gap: 1rem;
+}
+
+.sec02box {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+}
+.sec02item {
+  border-radius: 1rem;
+  border: 1px solid #000;
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+@media screen and (max-width: 660px) {
+  .sec02item {
+    grid-template-columns: 1fr;
+  }
+}
+.sec02item_image {
+  aspect-ratio: 16/9;
+  border-radius: 1rem;
+  overflow: hidden;
+  grid-column: 1/-1;
+  grid-row: 1/2;
+}
+@media screen and (max-width: 660px) {
+  .sec02item_image {
+    grid-row: 2/3;
+  }
+}
+.sec02item_image img {
+  object-fit: cover;
+}
+.sec02item h3 {
+  grid-column: 1/2;
+  grid-row: 2/3;
+}
+@media screen and (max-width: 660px) {
+  .sec02item h3 {
+    grid-row: 1/2;
+    justify-self: center;
+  }
+}
+.sec02item_tag {
+  grid-column: 2/3;
+  grid-row: 2/3;
+  justify-self: right;
+}
+@media screen and (max-width: 660px) {
+  .sec02item_tag {
+    grid-column: 1/2;
+    grid-row: 4/5;
+    justify-self: left;
+  }
+}
+.sec02item_tag a {
+  border-radius: 50%;
+  background-color: #d3d3d3;
+  padding: 0.4rem;
+  font-size: 0.75em;
+}
+.sec02item p {
+  grid-column: 1/-1;
+  grid-row: 3/4;
+  border: 1px solid #000;
+  padding: 1rem;
 }
 
 /*! destyle.css v4.0.0 | MIT License | https://github.com/nicolas-cusan/destyle.css */
