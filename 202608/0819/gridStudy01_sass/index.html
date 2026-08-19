@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>flexbox003</title>
+        <!-- Google Material Icons -->
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,400,0,0"
+        />
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&family=Sono:wght@400;700&display=swap"
+            rel="stylesheet"
+        />
+        <!-- style.css  -->
+        <link rel="stylesheet" href="css/style.css" />
+
+        <!-- JavaScript -->
+        <script src="js/drawerMenu.js"></script>
+    </head>
+
+    <body>
+        <header>
+            <div class="header__inner">
+                <h1>CSS Grid001</h1>
+                <!-- ドロワーボタン -->
+                <button class="toggleButton">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
+                <nav id="drawerMenu">
+                    <ul>
+                        <li><a href="#sec01">問題０１</a></li>
+                        <li><a href="#sec02">問題０２</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <!-- /.header__inner -->
+        </header>
+
+        <main>
+            <!-------------------------------- 問題０１ ---------------------------------->
+            <section id="sec01">
+                <h2 class="questionHeader">問題01：グリッドレイアウトを作ってみよう。</h2>
+
+                <!-- グリッド親要素 -->
+                <div class="sec01box">
+                    <!-- ヘッダーグリッド -->
+                    <div class="sec01item grid01">
+                        <h3>ヘッダー</h3>
+                        <ul>
+                            <li><a href="#">メニュー01</a></li>
+                            <li><a href="#">メニュー02</a></li>
+                            <li><a href="#">メニュー03</a></li>
+                            <li><a href="#">メニュー04</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- サイドバーグリッド -->
+                    <div class="sec01item grid02">
+                        <h3>サイドバー</h3>
+                        <ul>
+                            <li><a href="#">リンク01</a></li>
+                            <li><a href="#">リンク02</a></li>
+                            <li><a href="#">リンク03</a></li>
+                            <li><a href="#">リンク04</a></li>
+                        </ul>
+                        <div class="sec01item_banner">
+                            <img src="images/cat_banner.jpg" alt="子猫達をバナー画像にしてみました" />
+                        </div>
+                    </div>
+
+                    <!-- セクショングリッド -->
+                    <div class="sec01item grid03">
+                        <h3>セクション</h3>
+                    </div>
+
+                    <!-- 画像グリッド01 -->
+                    <div class="sec01item grid04">
+                        <img src="images/catGrid.jpg" alt="真正面を向いた猫" />
+                    </div>
+
+                    <!-- 画像グリッド02 -->
+                    <div class="sec01item grid05">
+                        <img src="images/dogGrid.jpg" alt="くしゃっとした犬" />
+                    </div>
+
+                    <!-- フッターグリッド -->
+                    <div class="sec01item grid06">
+                        <h3>フッター</h3>
+                        <p><small>&copy;2023_グリッドレイアウト練習</small></p>
+                    </div>
+                </div>
+                <!-- /.sec01box -->
+            </section>
+            <!-------------------------------- 問題０１ ここまで---------------------------------->
+
+            <!-------------------------------- 問題０2 ---------------------------------->
+            <section id="sec02">
+                <h2 class="questionHeader">問題02：折り返しデザインをGridで設計してみよう</h2>
+
+                <!-- グリッド親要素 -->
+                <div class="sec02box">
+                    <!-- グリッド子要素01 -->
+                    <div class="sec02item">
+                        <div class="sec02item_image"><img src="images/cat001.png" alt="猫の写真" /></div>
+                        <h3>アイテム１</h3>
+                        <div class="sec02item_tag">
+                            <a href="#" class="material-symbols-outlined">pet_supplies</a>
+                        </div>
+                        <p>
+                            吾輩は猫である。名前はまだない。どこで生まれたのかとんと見当がつかぬ。吾輩は猫である。名前はまだない。どこで生まれたのかとんと見当がつかぬ。
+                        </p>
+                    </div>
+                    <!-- グリッド子要素02 -->
+                    <div class="sec02item">
+                        <div class="sec02item_image"><img src="images/cat002.png" alt="猫の写真" /></div>
+                        <h3>アイテム２</h3>
+                        <div class="sec02item_tag">
+                            <a href="#" class="material-symbols-outlined">pet_supplies</a>
+                            <a href="#" class="material-symbols-outlined">pets</a>
+                        </div>
+                        <p>
+                            吾輩は猫である。名前はまだない。どこで生まれたのかとんと見当がつかぬ。吾輩は猫である。名前はまだない。どこで生まれたのかとんと見当がつかぬ。
+                        </p>
+                    </div>
+                    <!-- グリッド子要素03 -->
+                    <div class="sec02item">
+                        <div class="sec02item_image"><img src="images/cat003.png" alt="猫の写真" /></div>
+                        <h3>アイテム３</h3>
+                        <div class="sec02item_tag">
+                            <a href="#" class="material-symbols-outlined">pet_supplies</a>
+                            <a href="#" class="material-symbols-outlined">pets</a>
+                            <a href="#" class="material-symbols-outlined">sound_detection_dog_barking</a>
+                        </div>
+                        <p>
+                            吾輩は猫である。名前はまだない。どこで生まれたのかとんと見当がつかぬ。吾輩は猫である。名前はまだない。どこで生まれたのかとんと見当がつかぬ。
+                        </p>
+                    </div>
+                    <!-- グリッド子要素04 -->
+                    <div class="sec02item">
+                        <div class="sec02item_image"><img src="images/dog001.png" alt="犬の写真" /></div>
+                        <h3>アイテム４</h3>
+                        <div class="sec02item_tag">
+                            <a href="#" class="material-symbols-outlined">pet_supplies</a>
+                            <a href="#" class="material-symbols-outlined">pets</a>
+                        </div>
+                        <p>
+                            吾輩は猫である。名前はまだない。どこで生まれたのかとんと見当がつかぬ。吾輩は猫である。名前はまだない。どこで生まれたのかとんと見当がつかぬ。
+                        </p>
+                    </div>
+                    <!-- グリッド子要素05 -->
+                    <div class="sec02item">
+                        <div class="sec02item_image"><img src="images/dog002.png" alt="犬の写真" /></div>
+                        <h3>アイテム５</h3>
+                        <div class="sec02item_tag">
+                            <a href="#" class="material-symbols-outlined">pet_supplies</a>
+                            <a href="#" class="material-symbols-outlined">pets</a>
+                        </div>
+                        <p>
+                            吾輩は猫である。名前はまだない。どこで生まれたのかとんと見当がつかぬ。吾輩は猫である。名前はまだない。どこで生まれたのかとんと見当がつかぬ。
+                        </p>
+                    </div>
+                    <!-- グリッド子要素06 -->
+                    <div class="sec02item">
+                        <div class="sec02item_image"><img src="images/dog003.png" alt="犬の写真" /></div>
+                        <h3>アイテム６</h3>
+                        <div class="sec02item_tag">
+                            <a href="#" class="material-symbols-outlined">pet_supplies</a>
+                            <a href="#" class="material-symbols-outlined">pets</a>
+                            <a href="#" class="material-symbols-outlined">sound_detection_dog_barking</a>
+                        </div>
+                        <p>
+                            吾輩は猫である。名前はまだない。どこで生まれたのかとんと見当がつかぬ。吾輩は猫である。名前はまだない。どこで生まれたのかとんと見当がつかぬ。
+                        </p>
+                    </div>
+                </div>
+                <!-- /.sec02container -->
+            </section>
+            <!-------------------------------- 問題０2 ここまで---------------------------------->
+        </main>
+
+        <footer>
+            <p class="footer_text"><small>&copy;2023 Syo Motoyama</small></p>
+        </footer>
+    </body>
+</html>

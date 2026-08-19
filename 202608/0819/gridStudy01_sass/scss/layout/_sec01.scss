@@ -1,0 +1,46 @@
+@use "../common" as *;
+
+.sec01{
+
+    &box {
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+        
+    }
+    
+    &item.grid01 {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #A1E1F8;
+        padding: 1rem;
+        
+        ul{
+            display: flex;
+            gap: 3rem;
+        }
+    }
+    &item.grid02 {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        background-color: #EEC17A;
+        padding: 1rem;
+        gap: 1rem;
+        
+        ul{
+            align-self: stretch;
+            text-align: center;
+            li{
+                padding: .5rem 0;
+                border-top: 1px;
+                border-color: #000;
+                border-style: solid;
+
+                a{
+                    display: block;
+                }
+            }
+        }
+    }
+}

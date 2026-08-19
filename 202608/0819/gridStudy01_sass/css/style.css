@@ -1,0 +1,821 @@
+@charset "UTF-8";
+/* ページ全体のスタイル */
+html {
+  font-size: 100%;
+}
+
+@keyframes wave {
+  0% {
+    mask-position: 0% top, center bottom;
+  }
+  100% {
+    mask-position: 100% top, center bottom;
+  }
+}
+@keyframes pathmove {
+  0% {
+    height: 0;
+    top: 15px;
+    opacity: 0;
+  }
+  30% {
+    height: 30px;
+    opacity: 1;
+  }
+  100% {
+    height: 0;
+    top: 65px;
+    opacity: 0;
+  }
+}
+@keyframes dot-blink {
+  0%, to {
+    opacity: 0;
+  }
+  30%, 70% {
+    opacity: 1;
+  }
+}
+@keyframes animate-svg-stroke-1 {
+  0% {
+    stroke-dashoffset: 933.7100830078px;
+    stroke-dasharray: 933.7100830078px;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    stroke-dasharray: 933.7100830078px;
+  }
+}
+@keyframes animate-svg-stroke-2 {
+  0% {
+    stroke-dashoffset: 247.1970214844px;
+    stroke-dasharray: 247.1970214844px;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    stroke-dasharray: 247.1970214844px;
+  }
+}
+@keyframes animate-svg-stroke-3 {
+  0% {
+    stroke-dashoffset: 61.0493621826px;
+    stroke-dasharray: 61.0493621826px;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    stroke-dasharray: 61.0493621826px;
+  }
+}
+@keyframes animate-svg-stroke-4 {
+  0% {
+    stroke-dashoffset: 61.0430870056px;
+    stroke-dasharray: 61.0430870056px;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    stroke-dasharray: 61.0430870056px;
+  }
+}
+@keyframes animate-svg-stroke-5 {
+  0% {
+    stroke-dashoffset: 61.0499000549px;
+    stroke-dasharray: 61.0499000549px;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    stroke-dasharray: 61.0499000549px;
+  }
+}
+@keyframes animate-svg-stroke-6 {
+  0% {
+    stroke-dashoffset: 61.0478973389px;
+    stroke-dasharray: 61.0478973389px;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    stroke-dasharray: 61.0478973389px;
+  }
+}
+@keyframes animate-svg-stroke-7 {
+  0% {
+    stroke-dashoffset: 61.0615196228px;
+    stroke-dasharray: 61.0615196228px;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    stroke-dasharray: 61.0615196228px;
+  }
+}
+@keyframes animate-svg-stroke-8 {
+  0% {
+    stroke-dashoffset: 61.069568634px;
+    stroke-dasharray: 61.069568634px;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    stroke-dasharray: 61.069568634px;
+  }
+}
+@keyframes a-ika-jump {
+  0% {
+    transform: scale(1);
+  }
+  80% {
+    transform: scale(1.15, 0.65);
+  }
+  90% {
+    transform: scale(0.85, 1.15);
+  }
+  100% {
+    transform: scale(0.85, 1.15);
+  }
+}
+:root {
+  --mh--easing04: cubic-bezier(0.22, 0.5, 0.7, 0.5);
+}
+
+@keyframes stripeMove {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(var(--stripe-move), var(--stripe-move), 0);
+  }
+}
+@keyframes colorCover {
+  0%, 35% {
+    transform: translateX(-100%);
+  }
+  45% {
+    transform: translateX(0);
+  }
+  55% {
+    transform: translateX(0);
+  }
+  65%, 100% {
+    transform: translateX(100%);
+  }
+}
+@keyframes imageChange {
+  0%, 49% {
+    background-image: url("../images/img_main_01.webp");
+  }
+  50%, 100% {
+    background-image: url("../images/img_main_02.webp");
+  }
+}
+.sec01box {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+.sec01item.grid01 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #A1E1F8;
+  padding: 1rem;
+}
+.sec01item.grid01 ul {
+  display: flex;
+  gap: 3rem;
+}
+.sec01item.grid02 {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: #EEC17A;
+  padding: 1rem;
+  gap: 1rem;
+}
+.sec01item.grid02 ul {
+  align-self: stretch;
+  text-align: center;
+}
+.sec01item.grid02 ul li {
+  padding: 0.5rem 0;
+  border-top: 1px;
+  border-color: #000;
+  border-style: solid;
+}
+.sec01item.grid02 ul li a {
+  display: block;
+}
+
+/*! destyle.css v4.0.0 | MIT License | https://github.com/nicolas-cusan/destyle.css */
+/* Reset box-model and set borders */
+/* ============================================ */
+@layer reset {
+  *,
+  ::before,
+  ::after {
+    box-sizing: border-box;
+    border-style: solid;
+    border-width: 0;
+  }
+  /* Document */
+  /* ============================================ */
+  /**
+   * 1. Correct the line height in all browsers.
+   * 2. Prevent adjustments of font size after orientation changes in iOS.
+   * 3. Remove gray overlay on links for iOS.
+   */
+  html {
+    line-height: 1.15;
+    /* 1 */
+    -webkit-text-size-adjust: 100%;
+    /* 2 */
+    -webkit-tap-highlight-color: transparent;
+    /* 3*/
+  }
+  /* Sections */
+  /* ============================================ */
+  /**
+   * Remove the margin in all browsers.
+   */
+  body {
+    margin: 0;
+  }
+  /**
+   * Render the `main` element consistently in IE.
+   */
+  main {
+    display: block;
+  }
+  /* Vertical rhythm */
+  /* ============================================ */
+  p,
+  table,
+  blockquote,
+  address,
+  pre,
+  iframe,
+  form,
+  figure,
+  dl {
+    margin: 0;
+  }
+  /* Headings */
+  /* ============================================ */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-size: inherit;
+    font-weight: inherit;
+    margin: 0;
+  }
+  /* Lists (enumeration) */
+  /* ============================================ */
+  ul,
+  ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  /* Lists (definition) */
+  /* ============================================ */
+  dt {
+    font-weight: bold;
+  }
+  dd {
+    margin-left: 0;
+  }
+  /* Grouping content */
+  /* ============================================ */
+  /**
+   * 1. Add the correct box sizing in Firefox.
+   * 2. Show the overflow in Edge and IE.
+   */
+  hr {
+    box-sizing: content-box;
+    /* 1 */
+    height: 0;
+    /* 1 */
+    overflow: visible;
+    /* 2 */
+    border-top-width: 1px;
+    margin: 0;
+    clear: both;
+    color: inherit;
+  }
+  /**
+   * 1. Correct the inheritance and scaling of font size in all browsers.
+   * 2. Correct the odd `em` font sizing in all browsers.
+   */
+  pre {
+    font-family: monospace, monospace;
+    /* 1 */
+    font-size: inherit;
+    /* 2 */
+  }
+  address {
+    font-style: inherit;
+  }
+  /* Text-level semantics */
+  /* ============================================ */
+  /**
+   * Remove the gray background on active links in IE 10.
+   */
+  a {
+    background-color: transparent;
+    text-decoration: none;
+    color: inherit;
+  }
+  /**
+   * 1. Remove the bottom border in Chrome 57-
+   * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.
+   */
+  abbr[title] {
+    text-decoration: underline dotted;
+    /* 2 */
+  }
+  /**
+   * Add the correct font weight in Chrome, Edge, and Safari.
+   */
+  b,
+  strong {
+    font-weight: bolder;
+  }
+  /**
+   * 1. Correct the inheritance and scaling of font size in all browsers.
+   * 2. Correct the odd `em` font sizing in all browsers.
+   */
+  code,
+  kbd,
+  samp {
+    font-family: monospace, monospace;
+    /* 1 */
+    font-size: inherit;
+    /* 2 */
+  }
+  /**
+   * Add the correct font size in all browsers.
+   */
+  small {
+    font-size: 80%;
+  }
+  /**
+   * Prevent `sub` and `sup` elements from affecting the line height in
+   * all browsers.
+   */
+  sub,
+  sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+  }
+  sub {
+    bottom: -0.25em;
+  }
+  sup {
+    top: -0.5em;
+  }
+  /* Replaced content */
+  /* ============================================ */
+  /**
+   * Prevent vertical alignment issues.
+   */
+  svg,
+  img,
+  embed,
+  object,
+  iframe {
+    vertical-align: bottom;
+  }
+  /* Forms */
+  /* ============================================ */
+  /**
+   * Reset form fields to make them styleable.
+   * 1. Make form elements stylable across systems iOS especially.
+   * 2. Inherit text-transform from parent.
+   */
+  button,
+  input,
+  optgroup,
+  select,
+  textarea {
+    -webkit-appearance: none;
+    /* 1 */
+    appearance: none;
+    vertical-align: middle;
+    color: inherit;
+    font: inherit;
+    background: transparent;
+    padding: 0;
+    margin: 0;
+    border-radius: 0;
+    text-align: inherit;
+    text-transform: inherit;
+    /* 2 */
+  }
+  /**
+   * Correct cursors for clickable elements.
+   */
+  button,
+  [type=button],
+  [type=reset],
+  [type=submit] {
+    cursor: pointer;
+  }
+  button:disabled,
+  [type=button]:disabled,
+  [type=reset]:disabled,
+  [type=submit]:disabled {
+    cursor: default;
+  }
+  /**
+   * Improve outlines for Firefox and unify style with input elements & buttons.
+   */
+  :-moz-focusring {
+    outline: auto;
+  }
+  select:disabled {
+    opacity: inherit;
+  }
+  /**
+   * Remove padding
+   */
+  option {
+    padding: 0;
+  }
+  /**
+   * Reset to invisible
+   */
+  fieldset {
+    margin: 0;
+    padding: 0;
+    min-width: 0;
+  }
+  legend {
+    padding: 0;
+  }
+  /**
+   * Add the correct vertical alignment in Chrome, Firefox, and Opera.
+   */
+  progress {
+    vertical-align: baseline;
+  }
+  /**
+   * Remove the default vertical scrollbar in IE 10+.
+   */
+  textarea {
+    overflow: auto;
+  }
+  /**
+   * Correct the cursor style of increment and decrement buttons in Chrome.
+   */
+  [type=number]::-webkit-inner-spin-button,
+  [type=number]::-webkit-outer-spin-button {
+    height: auto;
+  }
+  /**
+   * Correct the outline style in Safari.
+   */
+  [type=search] {
+    outline-offset: -2px;
+    /* 1 */
+  }
+  /**
+   * Remove the inner padding in Chrome and Safari on macOS.
+   */
+  [type=search]::-webkit-search-decoration {
+    -webkit-appearance: none;
+  }
+  /**
+   * 1. Correct the inability to style clickable types in iOS and Safari.
+   * 2. Fix font inheritance.
+   */
+  ::-webkit-file-upload-button {
+    -webkit-appearance: button;
+    /* 1 */
+    font: inherit;
+    /* 2 */
+  }
+  /**
+   * Fix appearance for Firefox
+   */
+  [type=number] {
+    -moz-appearance: textfield;
+  }
+  /**
+   * Clickable labels
+   */
+  label[for] {
+    cursor: pointer;
+  }
+  /* Interactive */
+  /* ============================================ */
+  /*
+   * Add the correct display in Edge, IE 10+, and Firefox.
+   */
+  details {
+    display: block;
+  }
+  /*
+   * Add the correct display in all browsers.
+   */
+  summary {
+    display: list-item;
+  }
+  /*
+   * Remove outline for editable content.
+   */
+  [contenteditable]:focus {
+    outline: auto;
+  }
+  /* Tables */
+  /* ============================================ */
+  /**
+  1. Correct table border color inheritance in all Chrome and Safari.
+  */
+  table {
+    border-color: inherit;
+    /* 1 */
+    border-collapse: collapse;
+  }
+  caption {
+    text-align: left;
+  }
+  td,
+  th {
+    vertical-align: top;
+    padding: 0;
+  }
+  th {
+    text-align: left;
+    font-weight: bold;
+  }
+}
+@layer entry {
+  /********** imgに対して、この記述を書いておくとコントロールしやすい ***********/
+  img {
+    max-width: 100%; /* 横幅を画像の元々の大きさの最大100%にする */
+    height: auto;
+  }
+  /*********************************************************************/
+  /* ---------------------- ここから記述 ----------------------------- */
+  /* ---------------------- 記述 ここまで----------------------------- */
+} /* @layer answer */
+@layer reset,template,entry;
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+:root {
+  /* Pantone colorの2023年カラーをメインにした配色 */
+  --pBase: #faeef2;
+  --pMain: #be3455;
+  --pDark: #27272a;
+  --pSwitch: #00c9b9;
+  /* Color Hunt https://colorhunt.co/palette/db6b97f2ffe9a6cf98557c55 */
+  /* ナチュラル系の配色 */
+  --nBase: #f2ffe9;
+  --nMain: #a6cf98;
+  --nDark: #557c55;
+  --nSwitch: #db6b97;
+  /* Color Hunt https://colorhunt.co/palette/171717444444da0037ededed */
+  /* モノトーン系の配色 */
+  --dBase: #ededed;
+  --dMain: #444444;
+  --dDark: #171717;
+  --dSwitch: #da0037;
+  /* Color Hunt https://colorhunt.co/palette/0a1931185adbffc947efefef */
+  /* 寒色ベースのレトロ系配色 */
+  --bBase: #efefef;
+  --bMain: #185adb;
+  --bDark: #0a1931;
+  --bSwitch: #ffc947;
+  /* 半透明の白背景 */
+  --baseBackground: rgba(255, 255, 255, 0.6);
+  /* 虹色のボーダーカラー。使う時はborder-imageで入れて、border-colorは白を入れる */
+  --borderRainbow: linear-gradient(
+          84.75deg,
+          rgb(0, 232, 162) 0%,
+          rgb(0, 163, 255) 23.7%,
+          rgb(182, 28, 255) 57.86%,
+          rgb(234, 25, 62) 87.24%,
+          rgb(253, 197, 0) 100%
+      )
+      1 / 1 / 0 stretch;
+  /* paddingの設定に使用 */
+  --innerSmall: 0.5rem;
+  --innerMiddle: 1rem;
+  --innerLarge: 1.5rem;
+  --innerXLarge: 2rem;
+  /* marginの設定に使用 */
+  --marginSmall: 0.5rem;
+  --marginMiddle: 1rem;
+  --marginLarge: 1.5rem;
+  --marginXLarge: 2rem;
+  /* フォントサイズの設定に使用。変数名と値はTailwind CSSと一緒 */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+  --text-5xl: 3rem;
+  --text-6xl: 3.75rem;
+  --text-7xl: 4.5rem;
+  --text-8xl: 6rem;
+  --clampTitle: clamp(clamp(1.1rem, 0.918rem + 0.91vw, 1.5rem));
+  --clampText: clamp(0.875rem, 0.8182rem + 0.2841vw, 1rem);
+  /* border-radiusの値に使用 */
+  --borderR: 0.5rem;
+  /* 文字にふんわりした影をつける */
+  --textShadowWhite: 0 0 3px #aaa;
+  --textShadowBlack: 0 0 3px #777;
+  /* headerとfooterの高さの指定。 */
+  --headerFooterHeight: 5rem;
+  /* ドロワーメニューの変数 */
+  --drawerColor: #393f4c; /* ドロワーボタンとMENUの色。藍鉄色 */
+  --barColor: #eaf4fc; /* ドロワーボタンのアニメーションするバーの色。月白色 */
+  --menuColor: radial-gradient(
+      farthest-corner circle at 100% 0% in oklab,
+      oklch(100% 0 178 / 80%) 0%,
+      oklch(75% 0 196 / 80%) 100%
+  );
+}
+
+@layer template {
+  body {
+    font-family: "Sono", "Kosugi Maru", sans-serif;
+    font-size: var(--clampText);
+    color: #333;
+    text-shadow: var(--textShadowWhite);
+    background-image: url(../images/background.jpg);
+    background-size: cover;
+  }
+  header {
+    height: var(--headerFooterHeight);
+    background-color: var(--baseBackground);
+    padding: var(--innerMiddle) var(--innerSmall);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .header__inner {
+    width: 64rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    padding: var(--innerSmall);
+  }
+  header h1 {
+    width: fit-content;
+    height: auto;
+    font-size: var(--text-2xl);
+  }
+  .toggleButton {
+    display: none;
+  }
+  #drawerMenu ul {
+    width: 100%;
+    height: 40px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+  #drawerMenu li {
+    width: fit-content;
+    text-align: center;
+  }
+  #drawerMenu a {
+    display: block;
+    padding: 1rem; /* マウスが反応する範囲を少し広げている*/
+    opacity: 1;
+    transition: all 0.4s ease-in-out;
+  }
+  #drawerMenu a:last-child {
+    padding-right: 0;
+  }
+  /* アンカーリンクにマウスが乗ると、他のアンカーリンクが少し薄くなる指定 */
+  #drawerMenu ul:has(a:hover) a:not(:hover) {
+    opacity: 0.3;
+  }
+  main {
+    width: 100%;
+    height: 100%;
+    min-height: calc(100svh - var(--headerFooterHeight) * 2); /* 要素がどれだけ少なくてもフッターが画面下部に表示されるようにするための指定 */
+    padding: var(--innerLarge) var(--innerSmall);
+  }
+  section {
+    max-width: 64rem; /* 1024px */
+    height: auto;
+    background-color: var(--baseBackground);
+    padding: var(--innerMiddle) var(--innerSmall);
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: var(--marginLarge);
+    border-radius: var(--borderR);
+  }
+  section .questionHeader {
+    width: fit-content;
+    margin: 0 auto;
+    border-radius: var(--borderR);
+    font-size: var(--text-xl);
+    margin-block-end: 2rem;
+  }
+  footer {
+    height: var(--headerFooterHeight);
+    background-color: var(--dMain);
+    background-size: cover;
+    padding: 2rem 0;
+    background-position: top;
+    color: var(--bBase);
+    text-align: center;
+    text-shadow: var(--textShadowBlack);
+  }
+  @media (width <= 800px) {
+    /* メディアクエリの値はお好みで */
+    header {
+      padding-right: 3.5rem;
+    }
+    .toggleButton {
+      position: fixed;
+      top: 8px;
+      right: 8px;
+      width: 40px;
+      height: 40px;
+      display: block; /* display:none;を解除するために入れている */
+      background: var(--drawerColor);
+      border-radius: 5px;
+      z-index: 100;
+    }
+    .toggleButton::after {
+      content: "MENU";
+      position: absolute;
+      bottom: -1rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: var(--text-xs);
+      font-weight: bold;
+      color: var(--drawerColor);
+    }
+    .toggleButton span {
+      width: 60%;
+      height: 4px;
+      display: block;
+      position: absolute;
+      left: 20%;
+      background-color: var(--dBase);
+      border-radius: 5px;
+      transition: all 0.2s linear;
+    }
+    .toggleButton span:nth-of-type(1) {
+      top: 10px;
+      transform: rotate(0);
+    }
+    .toggleButton span:nth-of-type(2) {
+      top: 18px;
+      transform: scale(1);
+    }
+    .toggleButton span:nth-of-type(3) {
+      bottom: 10px;
+      transform: rotate(0);
+    }
+    .close span:nth-of-type(1) {
+      top: 18px;
+      transform: rotate(-45deg);
+    }
+    .close span:nth-of-type(2) {
+      transform: scale(0);
+    }
+    .close span:nth-of-type(3) {
+      bottom: 18px;
+      transform: rotate(45deg);
+    }
+    #drawerMenu {
+      position: fixed;
+      top: -240px;
+      right: -240px;
+      transition: all 0.3s linear;
+    }
+    #drawerMenu.open {
+      top: 0;
+      right: 0;
+    }
+    #drawerMenu ul {
+      display: block;
+      width: 200px;
+      height: 100%;
+      padding: 80px 20px 20px 20px;
+      background-image: var(--menuColor);
+      backdrop-filter: blur(3px);
+      box-shadow: -2px 2px 10px 2px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+      text-align: center;
+      list-style-type: none;
+      border-radius: 0 0 0 var(--borderR);
+    }
+    #drawerMenu li {
+      width: 100%;
+    }
+  } /* width <= 800px */
+} /* @rayer template */
