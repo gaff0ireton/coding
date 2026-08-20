@@ -23,7 +23,11 @@
 
                 @include mq(tab) {
                     grid-template-columns: repeat(2, 1fr);
-                    gap: .5rem;
+                    gap: .5rem 7rem;
+                }
+
+                @include mq() {
+                    column-gap: 5rem;
                 }
             }
         }
