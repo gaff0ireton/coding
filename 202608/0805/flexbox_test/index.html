@@ -20,8 +20,8 @@
     <!-- header -->
     <header class="header">
         <div class="header__inner flex-row">
-            <h1>FLEXBOX <br class="sp-only">LAYOUT</h1>
-            <picture>
+            <h1>FLEXBOX LAYOUT</h1>
+            <picture class="pc-only">
                 <img src="images/cat_logo.svg" alt="吾輩は猫">
             </picture>
             <button class="header__btn sp-only" for="menu-toggle">
@@ -30,6 +30,9 @@
                 <span></span>
             </button>
             <nav class="header__nav">
+                <span class="sp-only header__nav--icon"><img src="images/cat_logo.svg" alt=""></span>
+                <span class="sp-only header__nav--icon"><img src="images/cat_logo.svg" alt=""></span>
+                <span class="sp-only header__nav--icon"><img src="images/cat_logo.svg" alt=""></span>
                     <ul class="flex-row">
                         <li><a href="#">MENU</a></li>
                         <li><a href="#">ABOUT</a></li>
