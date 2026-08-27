@@ -1,0 +1,10 @@
+/*
+  2-4 @import の実物です。
+  css/style.css の先頭から、このファイルが読み込まれます。
+  background-colorは要素の背景色を指定するプロパティです。
+  TRY: background-color を #F5DED3 に変え、ページ最下部を確認しましょう。
+*/
+
+.import-proof {
+  background-color: #eef6f5;
+}

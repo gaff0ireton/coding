@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @font-face {
+            font-family: "LINE";
+            src: url(fonts/LINESeedJP-Regular.ttf);
+            font-weight: 400;
+        }
+
+        @font-face {
+            font-family: "LINE";
+            src: url(fonts/LINESeedJP-Bold.ttf);
+            font-weight: 700;
+        }
+
+        body {
+            font-family: "LINE";
+        }
+
+        h2 {
+            /* font-style: italic; */
+            font-weight: 900;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        .imgbox {
+            width: 200px;
+            float: left;
+        }
+
+        p {
+            text-indent: 1rem;
+            line-height: 1.7;
+        }
+
+        .sec01 p:nth-of-type(2) {
+            clear: both;
+        }
+
+        .sec01 p:nth-of-type(3) {
+            width: 200px;
+            height: 150px;
+            border: 1px solid black;
+            overflow: scroll;
+        }
+
+        .sec02 {
+            column-width: 200px;
+            column-count: 3;
+            column-gap: 3rem;
+            column-rule-width: 5px;
+            column-rule-color: brown;
+            column-rule-style: solid;
+        }
+
+        .sec02 h2 {
+            column-span: all;
+        }
+
+        .sec03 h2 {
+            text-transform: capitalize;
+            text-indent: 1rem;
+            letter-spacing: 6px;
+        }
+
+        .sec03 p {
+            letter-spacing: 4px;
+            word-spacing: 1rem;
+            /* text-decoration: solid blue line-through; */
+            /* text-decoration-line: underline;
+            text-decoration-color: aqua;
+            text-decoration-style: double; */
+            text-shadow: 1px 1px 10px rgb(230, 119, 119);
+        }
+    </style>
+</head>
+
+<body>
+    <section class="sec01">
+        <div class="imgbox">
+            <img src="assets/animal-friends.png" alt="けものフレンズ">
+        </div>
+
+        <p>
+            float: leftを指定した画像は左へ寄り、後続の文章が右側へ回り込みます。clearは、その回り込みの影響を終わらせるプロパティです。このデモの親はoverflow:
+            autoで、浮動した画像を含む高さを扱っています。
+        </p>
+        <p>
+            float: leftを指定した画像は左へ寄り、後続の文章が右側へ回り込みます。clearは、その回り込みの影響を終わらせるプロパティです。このデモの親はoverflow:
+            autoで、浮動した画像を含む高さを扱っています。
+        </p>
+        <p>
+            float:
+            leftを指定した画像は左へ寄り、後続の文章が右側へ回り込みます。clearは、その回り込みの影響を終わらせるプロパティです。このデモの親はoverflow:
+            autoで、浮動した画像を含む高さを扱っています。
+        </p>
+
+        <p>ここは次の要素だよー</p>
+
+    </section>
+
+    <section class="sec02">
+        <h2>マルチカラムレイアウト実験中です。</h2>
+        <p>float:
+            leftを指定した画像は左へ寄り、後続の文章が右側へ回り込みます。clearは、その回り込みの影響を終わらせるプロパティです。このデモの親はoverflow:
+            autoで、浮動した画像を含む高さを扱っています。float:
+            leftを指定した画像は左へ寄り、後続の文章が右側へ回り込みます。clearは、その回り込みの影響を終わらせるプロパティです。このデモの親はoverflow:
+            autoで、浮動した画像を含む高さを扱っています。</p>
+    </section>
+
+    <secion class="sec03">
+        <h2>chiikawa</h2>
+        <p>hachiware usagi rakkosisho</p>
+        <p>everyday is a spacial day</p>
+    </secion>
+</body>
+
+</html>

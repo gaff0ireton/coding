@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @font-face {
+            font-family: 'LINE Seed JP';
+            src: url(fonts/LINESeedJP-Regular.ttf);
+            font-weight: 400;
+        }
+
+        @font-face {
+            font-family: 'LINE Seed JP';
+            src: url(fonts/LINESeedJP-Bold.ttf);
+            font-weight: 700;
+        }
+
+        body {
+            font-family: 'LINE Seed JP';
+        }
+        img {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+        }
+
+        .sec01 {
+            .imgbox {
+                width: 200px;
+                float: left;
+                padding-right: 1rem;
+
+                img {
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+
+            p{
+                /* writing-mode: vertical-rl; */
+                line-height: 1.6;
+
+
+                &:nth-of-type(2) {
+                    clear: both;
+                }
+
+                &:nth-of-type(3) {
+                    border: 1px solid #000;
+                    width: 200px;
+                    height: 150px;
+                    overflow: scroll;
+                    padding: 1rem;
+                }
+            }
+        }
+
+        .sec02 {
+            column-width: 200px;
+            column-gap: 3rem;
+            column-count: 3;
+            column-rule-width: 5px;
+            column-rule-color: aqua;
+            column-rule-style: solid;
+
+            h2 {
+                column-span: all;
+                /* font-style: italic; */
+                font-weight: 700;
+            }
+
+            p{
+                line-height: 1.6;
+                text-indent: 1rem;
+            }
+        }
+
+        .sec03 {
+            h2 {
+                text-transform: lowercase;
+                text-indent: 1rem;
+                letter-spacing: .15em;
+            }
+
+            p{
+                word-spacing: 1rem;
+                letter-spacing: .1rem;
+                /* text-decoration: wavy #6a6ac2 underline;
+                 */
+                 color: rgb(73, 100, 123);
+                 text-shadow: 4px 4px 3px  #e69f9f;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <section class="sec01">
+        <div class="imgbox">
+            <img src="assets/animal-friends.png" alt="けものフレンズ">
+        </div>
+        <p>float: leftを指定した画像は左へ寄り、後続の文章が右側へ回り込みます。clearは、その回り込みの影響を終わらせるプロパティです。このデモの親はoverflow:
+            autoで、浮動した画像を含む高さを扱っています。</p>
+        <p>float: leftを指定した画像は左へ寄り、後続の文章が右側へ回り込みます。clearは、その回り込みの影響を終わらせるプロパティです。このデモの親はoverflow:
+            autoで、浮動した画像を含む高さを扱っています。</p>
+        <p>float: leftを指定した画像は左へ寄り、後続の文章が右側へ回り込みます。clearは、その回り込みの影響を終わらせるプロパティです。このデモの親はoverflow:
+            autoで、浮動した画像を含む高さを扱っています。</p>
+        <p>ここは次の要素だよ</p>
+    </section>
+
+    <section class="sec02">
+        <h2>マルチカラムレイアウト実験中です</h2>
+        <p>
+            float: leftを指定した画像は左へ寄り、後続の文章が右側へ回り込みます。clearは、その回り込みの影響を終わらせるプロパティです。このデモの親はoverflow:
+            autoで、浮動した画像を含む高さを扱っています。float: leftを指定した画像は左へ寄り、後続の文章が右側へ回り込みます。clearは、その回り込みの影響を終わらせるプロパティです。このデモの親はoverflow:
+            autoで、浮動した画像を含む高さを扱っています。
+        </p>
+    </section>
+
+    <section class="sec03">
+        <h2>chiikawa</h2>
+        <p>hachiware usagi rakkoshisho</p>
+        <p>everyday is a spacial day.</p>
+    </section>
+</body>
+</html>

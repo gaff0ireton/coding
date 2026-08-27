@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webデザインの授業で行ったCSS</title>
+    <meta name="description" content="Webデザインの授業で行ったCSS">
+    <style>
+        #sec01 {
+            .sec01box {
+                width: 300px;
+                aspect-ratio: 1/1;
+                background-color: rgba(49, 113, 113, .75);
+                /* transform: translateX(100px); */
+            }
+        }
+
+        .sec01box {
+            background-color: hsl(60, 70%, 80%,.5);
+            transition: .5s ease-in;
+
+            &:hover {
+                transform: scale(1) translate(50px ,-50px) skewX(30deg);
+            }
+        }
+
+        #sec02 {
+            h2 {
+                font-size: small;
+            }
+            .sec02box {
+                width: 300px;
+                aspect-ratio: 4/2;
+                padding: 1rem;
+                border: 2px solid #000;
+                margin: 0 2rem;
+                box-sizing: border-box;
+                transform-origin: right top;
+                transition: .5s;
+
+                &:hover {
+                    transform: rotate(30deg);
+                }
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Webデザインの授業で行ったCSS</h1>
+    </header>
+
+    <main>
+        <section id="sec01">
+            <h2>変形</h2>
+            <div class="sec01box"></div>
+        </section>
+
+        <section id="sec02">
+            <h2>ボックスモデル</h2>
+            <div class="sec02box"></div>
+        </section>
+    </main>
+</body>
+</html>

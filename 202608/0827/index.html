@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>３章_HTML</title>
+    <meta name="description" content="３章_HTML">
+    <style>
+        img {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+        }
+
+        figure {
+            max-width: 250px;
+            aspect-ratio: 1/1;
+
+            img {
+                height: 100%;
+                object-fit: cover;
+                object-position: right;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>３章_HTML</h1>
+    </header>
+
+    <main>
+        <section>
+            <h2>ここからは要素（タグ）を書いて覚えましょう</h2>
+            <p>3-6 <bdi>書式方向を隔離する</bdi></p>
+            <p><ruby>大熊猫<rp><rt>ジャイアントパンダ</rt></rp></ruby></p>
+            <p><ruby>熟<rt>じゅく</rt>語<rt>ご</rt></ruby></p>
+            <p>3-9 <del>喉がガラガラする</del><ins>のど飴もらった</ins></p>
+            <figure>
+                <img src="images/img_flower_01.jpg" alt="">
+                <figcaption>慌てて用意した花</figcaption>
+            </figure>
+            <ul>
+                <li>Webページの構成要素
+                    <ol>
+                        <li>HTML</li>
+                        <li>CSS</li>
+                        <li>JavaScript</li>
+                        <li>その他</li>
+                    </ol>
+                </li>
+            </ul>
+
+            <!-- !説明リスト -->
+            <dl>
+                <dt>HTML</dt>
+                <dd>Webページの文書構造</dd>
+            </dl>
+
+            <p>3-17 <em>強調</em> <strong>重要・申告・緊急</strong> <small>著作権表記・法的規則・免責・ライセンス</small> <q><mark>引用</mark>テキスト</q><cite>引用元</cite></p>
+            <p><s>大人8000円</s><strong>期間限定！500円</strong></p>
+            <p>子供<data value="200">200円</data></p>
+            <!-- !3-21 -->
+             <time datetime="2026-08-27T16:02">2026年8月27日16時2分</time>
+             <dfn><abbr title="HyperText Markup Language">HTML</abbr></dfn>
+             <p><code>p{color:red;}</code><samp>他のプログラムから引用された出力テキスト</samp></p>
+             <P>画面上で<kbd>hello</kbd>と入力してください</P>
+             <p><b>注意</b>だけを引きたい、そんな時はbタグ</p>
+             <p>3-37 <i lang="en">engineer</i></p>
+             <p>3-28 CO<sub>2</sub> X<sup>2</sup></p>
+             <p>3-29 <span>インラインボックス</span>における意味のない<span>タグ</span>。</p>
+             <p>3-30 ここで、<br>改行</p>
+             <p><wbr>qwertyiopasdfghjklzxxcvbnm,</wbr><wbr>qwertyuiopsdfghjxzcvbnm,</wbr><wbr>qwqrertyuop[@asdgfhghjkzxcvbnm,,</wbr></p>
+        </section>
+    </main>
+</body>
+</html>

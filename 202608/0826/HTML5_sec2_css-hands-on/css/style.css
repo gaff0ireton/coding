@@ -1,0 +1,1580 @@
+/* ================================================================
+  CSSを触って覚える — 完成済み教材CSS
+
+  検索の目印
+  EXAM: 試験で区別したい点
+  TRY:  値を変更して見た目を比べる実験
+
+  色はPANTONE 11-4201 Cloud Dancerの空気感ある白を起点にした
+  教材用Web近似色です。Pantone公式のデジタル変換値ではありません。
+================================================================ */
+
+/* 2-4 @import：ほかの@規則や通常のルールより前に書きます。 */
+@import url("./imported-theme.css");
+
+/* ================================================================
+  2-18 @font-face：LINE Seed JPをローカルから読み込む
+  font-family：CSS内で使う書体名を決めるプロパティ。
+  src：フォントファイルの場所と形式を示す記述子。
+  font-style：normalは通常体、italicはイタリック体。
+  font-weight：400は標準、700は太字に相当する値。
+  TRY: bodyのfont-family先頭を serif に変えて、書体を比較しましょう。
+================================================================ */
+@font-face {
+  font-family: "LINE Seed JP";
+  src: url("../fonts/LINESeedJP-Regular.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "LINE Seed JP";
+  src: url("../fonts/LINESeedJP-Bold.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 700;
+}
+
+/* ================================================================
+  2-5 全称セレクタ
+  EXAM: * はすべての要素を選択します。
+================================================================ */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  /* margin: 0 はブラウザー既定のbody外側余白を取り除きます。 */
+  margin: 0;
+  /* colorは文字色、background-colorは背景色です。 */
+  color: #344d59;
+  background-color: #f7f5f0;
+  /* 左から順に、利用できる最初のフォントを使います。 */
+  font-family: "LINE Seed JP", sans-serif;
+  /* font-sizeは文字サイズ、line-heightは行ボックスの高さです。 */
+  font-size: 17px;
+  line-height: 1.9;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: #397c80;
+}
+
+a:hover {
+  color: #bd6f58;
+}
+
+code,
+pre {
+  font-family: Consolas, monospace;
+}
+
+code {
+  padding: .12em .35em;
+  color: #8f503d;
+  background-color: #fff2e9;
+  border-radius: 5px;
+  font-size: .92em;
+}
+
+pre {
+  overflow: auto;
+  margin: 22px 0;
+  padding: 22px 24px;
+  color: #f7f5f0;
+  background-color: #344d59;
+  border-left: 7px solid #e8c989;
+  border-radius: 10px;
+  font-size: 14px;
+  line-height: 1.7;
+  white-space: pre;
+}
+
+pre code {
+  padding: 0;
+  color: inherit;
+  background: none;
+  border-radius: 0;
+  font-size: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+p {
+  margin-top: 0;
+}
+
+/* ================================================================
+  ページ上部
+================================================================ */
+.hero {
+  overflow: auto;
+  min-height: 620px;
+  padding: 72px 7%;
+  background-color: #f0eee9;
+  background-image: linear-gradient(135deg, #f7f5f0 0%, #e8f2f2 52%, #f5ded3 100%);
+  border-bottom: 1px solid #d9d4c9;
+}
+
+.hero-copy {
+  float: left;
+  width: 55%;
+  max-width: 760px;
+  padding: 42px 4% 20px 0;
+}
+
+.eyebrow,
+.lesson-number,
+.book-no {
+  margin-bottom: 8px;
+  color: #397c80;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  margin-bottom: 24px;
+  color: #344d59;
+  font-size: 58px;
+  line-height: 1.22;
+  letter-spacing: -.03em;
+}
+
+.hero-lead {
+  max-width: 680px;
+  font-size: 20px;
+  line-height: 1.9;
+}
+
+.scope-note {
+  padding: 16px 18px;
+  background-color: rgba(255, 255, 255, .7);
+  border: 1px solid #cfddd9;
+  border-radius: 12px;
+  font-size: 15px;
+}
+
+.hero-visual {
+  float: right;
+  width: 41%;
+  max-width: 560px;
+  margin: 0;
+  padding: 18px;
+  background-color: rgba(255, 255, 255, .82);
+  border: 1px solid #d9d4c9;
+  border-radius: 44px 12px 44px 12px;
+  box-shadow: 0 20px 48px rgba(52, 77, 89, .14);
+}
+
+.hero-visual img {
+  display: block;
+  border-radius: 32px 8px 32px 8px;
+}
+
+.hero-visual figcaption {
+  padding: 12px 4px 0;
+  color: #647984;
+  font-size: 13px;
+  text-align: center;
+}
+
+main {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 56px 24px 100px;
+}
+
+.start-card,
+.contents,
+.finish {
+  margin: 0 0 40px;
+  padding: 32px 36px;
+  border: 1px solid #d9d4c9;
+  border-radius: 18px;
+}
+
+.start-card h2,
+.contents h2,
+.finish h2 {
+  margin-bottom: 16px;
+  font-size: 28px;
+  line-height: 1.45;
+}
+
+.learning-steps {
+  margin: 0 0 24px;
+  padding-left: 1.7em;
+}
+
+.learning-steps li {
+  padding: 4px 0 4px 8px;
+}
+
+.inline-demo {
+  padding: 12px 16px;
+  border-radius: 8px;
+}
+
+.importance-legend {
+  padding-top: 10px;
+}
+
+.star {
+  display: inline-block;
+  margin: 4px 8px 4px 0;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.star-3 {
+  color: #fff;
+  background-color: #bd6f58;
+}
+
+.star-2 {
+  color: #fff;
+  background-color: #397c80;
+}
+
+.star-1 {
+  color: #344d59;
+  background-color: #e8c989;
+}
+
+.contents {
+  background-color: #eef6f5;
+}
+
+.contents ol {
+  margin: 0;
+  padding-left: 1.6em;
+  columns: 2;
+  column-gap: 56px;
+}
+
+.contents li {
+  margin-bottom: 8px;
+}
+
+/* ================================================================
+  共通の教材セクション
+================================================================ */
+.lesson {
+  margin-top: 96px;
+}
+
+.lesson-heading {
+  padding: 0 8px 30px;
+  border-bottom: 3px solid #7baeb0;
+}
+
+.lesson-heading h2 {
+  margin-bottom: 12px;
+  color: #344d59;
+  font-size: 40px;
+  line-height: 1.4;
+}
+
+.lesson-heading > p:last-child {
+  max-width: 800px;
+  margin-bottom: 0;
+  color: #647984;
+  font-size: 18px;
+}
+
+.topic {
+  margin-top: 36px;
+  padding: 42px;
+  background-color: #fff;
+  border: 1px solid #ddd8ce;
+  border-radius: 24px;
+  box-shadow: 0 10px 30px rgba(52, 77, 89, .06);
+}
+
+.topic-title {
+  /* flexで星バッジと見出しを横に並べ、上下中央を揃えます。 */
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.topic-title > * {
+  min-width: 0;
+}
+
+.topic-title > .star {
+  /*
+    widthとheightを同じ72pxにすると正方形になります。
+    border-radius: 50%で正円にし、flexの中央揃えで星を中心へ置きます。
+  */
+  display: inline-flex;
+  flex: 0 0 72px;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  margin: 0;
+  padding: 0;
+  border-radius: 50%;
+  font-size: 18px;
+  line-height: 1;
+  text-align: center;
+}
+
+.topic-title > div {
+  padding-left: 0;
+}
+
+.topic-title h3 {
+  margin: 0;
+  color: #344d59;
+  font-size: 30px;
+  line-height: 1.45;
+}
+
+.topic > p {
+  max-width: 900px;
+}
+
+.exam-point,
+.book-caution {
+  margin-top: 24px;
+  padding: 18px 20px;
+  border-radius: 12px;
+}
+
+.exam-point {
+  background-color: #eef6f5;
+  border-left: 6px solid #7baeb0;
+}
+
+.book-caution {
+  background-color: #fff8e3;
+  border-left: 6px solid #e8c989;
+}
+
+.study-table {
+  width: 100%;
+  margin: 28px 0;
+  border-collapse: collapse;
+  table-layout: auto;
+}
+
+.study-table caption {
+  padding: 10px;
+  color: #647984;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.study-table th,
+.study-table td {
+  padding: 14px 16px;
+  border: 1px solid #cfddd9;
+  text-align: left;
+  vertical-align: top;
+}
+
+.study-table thead th,
+.study-table tbody th {
+  background-color: #eef6f5;
+}
+
+.study-table.compact th {
+  width: 25%;
+}
+
+/* ================================================================
+  SECTION 1：セレクタとカスケード
+
+  selector：装飾するHTML要素を選ぶ部分。
+  background-color：要素の背景色。
+  border：線の太さ・種類・色をまとめる短縮形。
+  border-radius：角の丸み。50%は正方形を正円にできます。
+  !important：通常の宣言より優先する重要宣言。
+================================================================ */
+.selector-lab {
+  margin: 28px 0;
+  padding: 28px;
+  background-color: #eef6f5;
+  border-radius: 18px;
+}
+
+.habitat {
+  padding: 20px;
+  background-color: #fff;
+  border: 2px solid #7baeb0;
+  border-radius: 14px;
+}
+
+/* 2-10 子結合子：.habitat の「直接の子」である .animal */
+.habitat > .animal {
+  display: inline-block;
+  margin: 6px;
+  padding: 10px 14px;
+  background-color: #f7f5f0;
+  border: 1px solid #d9d4c9;
+  border-radius: 999px;
+}
+
+/* 2-6 属性セレクタ：data-kindの値がrabbitと等しい要素 */
+[data-kind="rabbit"] {
+  background-color: #f5ded3 !important;
+}
+
+/* 2-7/2-8 疑似クラス：同じp要素の最初 */
+.habitat p:first-of-type {
+  color: #bd6f58;
+  font-weight: 700;
+}
+
+/* 2-9 疑似要素：HTMLにない仮想部分を先頭へ生成 */
+[data-kind="bear"]::before {
+  content: "★ ";
+  color: #d4a833;
+}
+
+/* 2-10 隣接兄弟結合子：.habitatの直後のpだけ */
+.habitat + p {
+  margin-top: 14px;
+  color: #397c80;
+  font-weight: 700;
+}
+
+/* 2-10 一般兄弟結合子：.habitatより後ろのpすべて */
+.habitat ~ p {
+  padding-left: 14px;
+  border-left: 3px solid #e8c989;
+}
+
+.selector-notes {
+  margin: 26px 0;
+  padding: 24px;
+  border: 1px dashed #7baeb0;
+  border-radius: 14px;
+}
+
+.selector-notes dl {
+  margin-bottom: 0;
+}
+
+.selector-notes dt {
+  margin-top: 14px;
+  font-weight: 700;
+}
+
+.selector-notes dd {
+  margin-left: 0;
+  color: #647984;
+}
+
+.cascade-river {
+  margin: 26px 0;
+  text-align: center;
+}
+
+.rule-card {
+  display: inline-block;
+  width: 27%;
+  min-height: 112px;
+  padding: 20px 10px;
+  border: 1px solid #d9d4c9;
+  border-radius: 12px;
+  vertical-align: middle;
+}
+
+.rule-card.low { background-color: #f7f5f0; }
+.rule-card.mid { background-color: #eef6f5; }
+.rule-card.high { background-color: #f5ded3; border-color: #d88f78; }
+
+.river-arrow {
+  display: inline-block;
+  width: 7%;
+  color: #7baeb0;
+  font-size: 28px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.inheritance-demo {
+  padding: 24px;
+  background-color: #f7f5f0;
+  border-radius: 14px;
+}
+
+.parent-box {
+  padding: 18px;
+  color: #bd6f58;
+  background-color: #fff;
+  border: 4px solid #e8c989;
+  font-size: 19px;
+}
+
+.parent-box p {
+  margin: 10px 0 0;
+  /* colorとfont-sizeは親の指定を継承します。 */
+}
+
+.priority-list {
+  margin: 24px 0;
+  padding-left: 1.5em;
+}
+
+.priority-list li {
+  padding: 6px 0 6px 8px;
+}
+
+.error-demo {
+  margin-top: 26px;
+  padding: 24px;
+  background-color: #fff3ef;
+  border-radius: 14px;
+}
+
+/* ================================================================
+  SECTION 2：色と見た目
+
+  color：文字色。background-color：単色の背景。
+  background：背景色・画像・グラデーションなどの短縮形。
+  box-shadow：横位置、縦位置、ぼかし、広がり、色の順。
+  opacity：0が透明、1が不透明。透明でも要素の場所は残ります。
+  clip: rect(上, 右, 下, 左)：絶対配置した要素を矩形に切り抜きます。
+================================================================ */
+.color-swatches,
+.effect-row,
+.overflow-row,
+.list-types,
+.generic-families,
+.font-specimens,
+.motion-compare {
+  margin: 26px -1% 20px;
+  font-size: 0;
+}
+
+.swatch {
+  display: inline-block;
+  width: 31.33%;
+  min-height: 145px;
+  margin: 1%;
+  padding: 24px 14px;
+  border: 1px solid rgba(52, 77, 89, .15);
+  border-radius: 14px;
+  font-size: 16px;
+  text-align: center;
+  vertical-align: top;
+}
+
+.swatch span {
+  display: block;
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+
+.swatch.keyword { color: white; background-color: teal; }
+.swatch.hex { background-color: #d88f78; }
+.swatch.rgb { background-color: rgb(168, 205, 215); }
+.swatch.rgba { background-color: rgba(216, 143, 120, .55); }
+.swatch.hsl { background-color: hsl(45, 60%, 72%); }
+.swatch.hsla { background-color: hsla(181, 25%, 59%, .55); }
+
+.effect-card {
+  display: inline-block;
+  width: 23%;
+  min-height: 170px;
+  margin: 1%;
+  padding: 40px 18px 20px;
+  border: 1px solid #d9d4c9;
+  font-size: 15px;
+  text-align: center;
+  vertical-align: top;
+}
+
+.effect-card strong,
+.effect-card span {
+  display: block;
+}
+
+.effect-card strong {
+  margin-bottom: 12px;
+  font-size: 18px;
+}
+
+/* TRY: 36px 8px 36px 8px を 50% に変えて比べましょう。 */
+.radius-card {
+  background-color: #eef6f5;
+  border-radius: 36px 8px 36px 8px;
+}
+
+/* EXAM: insetを先頭に追加すると内側の影になります。 */
+.shadow-card {
+  background-color: #fff;
+  box-shadow: 0 14px 28px 0 rgba(52, 77, 89, .2);
+  border-radius: 12px;
+}
+
+/* TRY: linear-gradient を radial-gradient に変えて比べましょう。 */
+.gradient-card {
+  background: linear-gradient(135deg, #eef6f5, #f5d8cd);
+  border-radius: 12px;
+}
+
+/* TRY: .45 を 0、1 に変える。要素の場所が残ることも確認。 */
+.opacity-card {
+  background-color: #e8c989;
+  border-radius: 12px;
+  opacity: .45;
+}
+
+.clip-stage {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  min-height: 330px;
+  margin: 26px 0;
+  background-color: #344d59;
+  border-radius: 16px;
+}
+
+.clip-source {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 700px;
+  max-width: none;
+  margin-left: -350px;
+  /* EXAM: clipにはabsoluteまたはfixedのpositionが必要です。 */
+  /* TRY: rect(40px, 600px, 290px, 100px) の数値を1つずつ変更。 */
+  clip: rect(40px, 600px, 290px, 100px);
+}
+
+.clip-window {
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  width: 500px;
+  height: 250px;
+  margin-left: -250px;
+  color: white;
+  border: 3px dashed #e8c989;
+  font-size: 13px;
+  text-align: center;
+}
+
+/* ================================================================
+  SECTION 3：動き
+
+  transition-property：滑らかに変化させるプロパティ名。
+  transition-duration：変化にかける時間。sは秒、msはミリ秒。
+  transition-timing-function：変化の速度曲線。easeはゆっくり始まり終わる値。
+  animation-name：使用する@keyframesの名前。
+  animation-iteration-count：繰り返し回数。infiniteは無限。
+================================================================ */
+.transition-button {
+  display: block;
+  margin: 34px auto;
+  padding: 18px 30px;
+  color: #fff;
+  background-color: #397c80;
+  border: 0;
+  border-radius: 999px;
+  box-shadow: 0 8px 16px rgba(52, 77, 89, .18);
+  font: 700 17px/1.4 "LINE Seed JP", sans-serif;
+  cursor: pointer;
+  /* TRY: .6sを2sへ変えると、ゆっくりになります。 */
+  transition-property: background-color, transform, box-shadow;
+  transition-duration: .6s;
+  transition-timing-function: ease;
+  transition-delay: 0s;
+}
+
+.transition-button:hover {
+  background-color: #bd6f58;
+  box-shadow: 0 14px 26px rgba(52, 77, 89, .24);
+  transform: translateY(-5px);
+}
+
+.animation-stage {
+  position: relative;
+  overflow: hidden;
+  height: 180px;
+  margin: 30px 0;
+  background-color: #dbeef2;
+  background-image: linear-gradient(#dbeef2, #f7f5f0);
+  border-bottom: 20px solid #b8d0ad;
+  border-radius: 18px;
+}
+
+.moving-cloud {
+  position: absolute;
+  top: 38px;
+  left: 4%;
+  color: #fff;
+  font-size: 72px;
+  line-height: 1;
+  text-shadow: 0 8px 15px rgba(52, 77, 89, .12);
+  animation-name: cloud-trip;
+  animation-duration: 6s;
+  animation-timing-function: ease-in-out;
+  animation-delay: 0s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-fill-mode: both;
+}
+
+/* TRY: 50%のtopを80pxへ変え、雲の道を観察。 */
+@keyframes cloud-trip {
+  0% { left: 4%; top: 38px; }
+  50% { left: 72%; top: 20px; }
+  100% { left: 4%; top: 38px; }
+}
+
+.motion-compare > div {
+  display: inline-block;
+  width: 48%;
+  min-height: 140px;
+  margin: 1%;
+  padding: 20px;
+  background-color: #eef6f5;
+  border-radius: 14px;
+  font-size: 16px;
+  vertical-align: top;
+}
+
+.motion-compare strong {
+  color: #397c80;
+  font-size: 20px;
+}
+
+/* ================================================================
+  SECTION 4：配置、表、段組み
+
+  float：要素を左右へ寄せ、後続内容を回り込ませます。
+  clear：指定方向のfloatによる回り込みを解除します。
+  overflow：箱からはみ出した内容の扱い。hiddenは切り取り、autoは必要時スクロール。
+  column-count：段数。column-gap：段の間隔。column-rule：段間の線。
+  column-span: all：すべての段をまたぐ値。
+================================================================ */
+.float-demo {
+  overflow: auto;
+  margin: 28px 0;
+  padding: 24px;
+  background-color: #eef6f5;
+  border-radius: 16px;
+}
+
+/* TRY: leftをrightへ変更し、文章の回り込み方向を確認。 */
+.float-demo img {
+  float: left;
+  width: 220px;
+  margin: 0 24px 12px 0;
+  border: 8px solid #fff;
+  border-radius: 18px;
+}
+
+.clear-note {
+  clear: both;
+  margin-bottom: 0;
+  padding-top: 16px;
+  border-top: 1px dashed #7baeb0;
+}
+
+.overflow-box {
+  display: inline-block;
+  overflow: visible;
+  width: 23%;
+  height: 120px;
+  margin: 1%;
+  padding: 12px;
+  background-color: #f7f5f0;
+  border: 2px solid #7baeb0;
+  border-radius: 10px;
+  font-size: 14px;
+  vertical-align: top;
+}
+
+.overflow-box strong,
+.overflow-box span {
+  display: block;
+}
+
+.overflow-box span {
+  width: 240px;
+  margin-top: 10px;
+  white-space: nowrap;
+}
+
+.overflow-row {
+  overflow: hidden;
+  padding: 0 10px 26px;
+}
+
+.overflow-box.hidden { overflow: hidden; }
+.overflow-box.scroll { overflow: scroll; }
+.overflow-box.auto { overflow: auto; }
+
+.animal-table {
+  width: 90%;
+  margin: 24px auto 54px;
+  border-collapse: separate;
+  border-spacing: 5px;
+  table-layout: fixed;
+  empty-cells: show;
+}
+
+.animal-table caption {
+  caption-side: bottom;
+  padding: 12px;
+  color: #647984;
+  font-size: 14px;
+}
+
+.animal-table th,
+.animal-table td {
+  padding: 14px;
+  background-color: #eef6f5;
+  border: 1px solid #b9cfca;
+  text-align: center;
+}
+
+.animal-table th {
+  background-color: #7baeb0;
+  color: white;
+}
+
+.table-property-list {
+  margin: 24px 0;
+  padding: 22px;
+  background-color: #f7f5f0;
+  border-radius: 14px;
+}
+
+.table-property-list p {
+  margin-bottom: 8px;
+}
+
+.vertical-writing {
+  height: 210px;
+  margin: 24px auto;
+  padding: 18px;
+  background-color: #fff8e3;
+  border: 1px solid #e8c989;
+  border-radius: 12px;
+  writing-mode: vertical-rl;
+}
+
+.vertical-writing span {
+  margin-top: 12px;
+  font-weight: 700;
+}
+
+.column-demo {
+  margin: 26px 0;
+  padding: 28px;
+  background-color: #eef6f5;
+  border-radius: 16px;
+  /* TRY: 3を2へ変え、段数を比較。 */
+  column-count: 3;
+  column-width: 210px;
+  column-gap: 34px;
+  column-rule: 2px solid #7baeb0;
+}
+
+.column-demo h4 {
+  column-span: all;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #7baeb0;
+  font-size: 23px;
+}
+
+/* ================================================================
+  SECTION 5：フォント
+
+  font-weight：文字の太さ。400はnormal、700はboldに相当します。
+  font-style：normal、italic、obliqueなどの字形。
+  font短縮形：太さなどの後に「必須のサイズ／行高」と「必須の書体」を書きます。
+  総称ファミリ：serif、sans-serif、cursive、fantasy、monospace。
+================================================================ */
+.font-specimens > p,
+.generic-families > p {
+  display: inline-block;
+  width: 48%;
+  min-height: 78px;
+  margin: 1%;
+  padding: 18px;
+  background-color: #f7f5f0;
+  border-radius: 10px;
+  font-size: 17px;
+  vertical-align: top;
+}
+
+.weight-400 { font-weight: 400; }
+.weight-700 { font-weight: 700; }
+.italic { font-style: italic; }
+.oblique { font-style: oblique; }
+
+.generic-families > p {
+  width: 31.33%;
+}
+
+.generic-families .serif { font-family: serif; }
+.generic-families .sans { font-family: sans-serif; }
+.generic-families .cursive { font-family: cursive; }
+.generic-families .fantasy { font-family: fantasy; }
+.generic-families .mono { font-family: monospace; }
+
+/* ================================================================
+  SECTION 6：文字
+
+  text-transform：英字の大文字・小文字表示を変換します。
+  text-indent：段落の1行目の字下げ。emは現在の文字サイズを基準にする単位。
+  letter-spacing：文字と文字、word-spacing：単語と単語の間隔。
+  line-height：行ボックスの高さ。単位なしの値は文字サイズに掛ける倍率。
+  direction：文字方向。ltrは左から右、rtlは右から左。
+================================================================ */
+.transform-examples,
+.text-tuning,
+.direction-demo {
+  margin: 26px 0;
+  padding: 24px;
+  background-color: #f7f5f0;
+  border-radius: 14px;
+}
+
+.transform-examples p,
+.text-tuning p,
+.direction-demo p {
+  margin-bottom: 12px;
+  padding: 10px 14px;
+  background-color: #fff;
+  border-left: 5px solid #7baeb0;
+}
+
+.capitalize { text-transform: capitalize; }
+.uppercase { text-transform: uppercase; }
+.lowercase { text-transform: lowercase; }
+.transform-none { text-transform: none; }
+
+/* TRY: 2emを-1emにし、方向を確認。 */
+.indent-sample { text-indent: 2em; }
+
+/* TRY: .18emを.5em、0、-.05emへ変更。 */
+.letter-sample { letter-spacing: .18em; }
+
+/* TRY: .45emを1emへ変更。英単語間だけが広がります。 */
+.word-sample { word-spacing: .45em; }
+
+.decoration-sample {
+  text-decoration-line: underline;
+  text-decoration-style: wavy;
+  text-decoration-color: #d88f78;
+}
+
+.shadow-text {
+  color: #397c80;
+  text-shadow: 2px 3px 3px rgba(52, 77, 89, .22);
+}
+
+/* TRY: 2.2を1、3へ変えて行間を比較。 */
+.line-height-sample { line-height: 2.2; }
+
+.vertical-align-sample {
+  color: #bd6f58;
+  font-size: 12px;
+  vertical-align: super;
+}
+
+.direction-demo .ltr {
+  direction: ltr;
+}
+
+.direction-demo .rtl {
+  direction: rtl;
+  unicode-bidi: bidi-override;
+}
+
+/* ================================================================
+  SECTION 7：リスト、カウンタ、引用符
+
+  list-style-type：リストマーカーの種類。
+  counter-reset：カウンタを用意し、開始値へ戻します。
+  counter-increment：カウンタを指定数だけ増やします。省略時は1。
+  content: counter(名前)：疑似要素へ現在の番号を生成します。
+  quotes：外側・内側で使う引用符の組を定義します。
+================================================================ */
+.list-types > ul,
+.list-types > ol {
+  display: inline-block;
+  width: 23%;
+  min-height: 112px;
+  margin: 1%;
+  padding: 16px 16px 16px 42px;
+  background-color: #eef6f5;
+  border-radius: 12px;
+  font-size: 15px;
+  vertical-align: top;
+}
+
+.list-types .disc { list-style-type: disc; }
+.list-types .circle { list-style-type: circle; }
+.list-types .decimal { list-style-type: decimal; }
+.list-types .upper-roman { list-style-type: upper-roman; }
+.list-types .upper-latin { list-style-type: upper-latin; }
+.list-types .lower-greek { list-style-type: lower-greek; }
+.list-types .hiragana { list-style-type: hiragana; }
+.list-types .none { list-style-type: none; }
+
+.counter-demo {
+  margin: 24px 0;
+  padding: 22px;
+  background-color: #f7f5f0;
+  border-radius: 14px;
+  counter-reset: step;
+}
+
+.counter-demo h4 {
+  margin-bottom: 12px;
+  padding: 12px 16px;
+  background-color: #fff;
+  border-left: 4px solid #7baeb0;
+  counter-increment: step;
+}
+
+.counter-demo h4::before {
+  content: "STEP " counter(step) "  ";
+  color: #bd6f58;
+}
+
+.quote-demo {
+  margin: 28px 0;
+  padding: 28px;
+  background-color: #eef6f5;
+  border-left: 8px solid #7baeb0;
+  border-radius: 0 16px 16px 0;
+  font-size: 20px;
+  quotes: "「" "」" "『" "』";
+}
+
+.quote-demo q::before { content: open-quote; }
+.quote-demo q::after { content: close-quote; }
+
+/* ブラウザ既定のq引用符と重ならないようにしています。 */
+.quote-demo q { quotes: inherit; }
+
+/* ================================================================
+  各セクションの練習問題
+
+  ここからは未完成の問題用CSSです。
+  各「解答記入欄 START」と「END」の間へ自分の宣言を書き、完成例と比べてください。
+  正解の宣言はこのファイルにはなく、css/answer.cssに分離しています。
+================================================================ */
+.practice {
+  margin-top: 48px;
+  padding: 38px;
+  background-color: #fffaf2;
+  border: 3px dashed #d7a95a;
+  border-radius: 22px;
+}
+
+.practice-label {
+  margin-bottom: 8px;
+  color: #a45f49;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .12em;
+}
+
+.practice h3 {
+  margin-bottom: 12px;
+  color: #344d59;
+  font-size: 28px;
+  line-height: 1.45;
+}
+
+.exercise-canvas {
+  min-height: 220px;
+  margin: 26px 0 34px;
+  padding: 34px;
+  background-color: #f2f0eb;
+  border: 1px solid #d9d4c9;
+  border-radius: 16px;
+}
+
+.write-guide {
+  margin: 22px 0;
+  padding: 20px 22px;
+  background-color: #fff;
+  border-left: 6px solid #d7a95a;
+  border-radius: 10px;
+}
+
+.write-guide h4,
+.write-guide p {
+  margin-bottom: 8px;
+}
+
+.live-answer {
+  margin-top: 34px;
+  padding: 24px;
+  background-color: #eef6f5;
+  border: 2px solid #7baeb0;
+  border-radius: 18px;
+}
+
+.live-answer-label {
+  margin-bottom: 4px;
+  color: #397c80;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: .08em;
+}
+
+.live-answer .exercise-canvas {
+  margin-top: 18px;
+  margin-bottom: 14px;
+}
+
+.live-answer-note {
+  margin-bottom: 0;
+  color: #647984;
+  font-size: 14px;
+}
+
+/* PRACTICE 01：属性セレクタ
+  [属性名="値"] は、指定した属性値と完全一致する要素を選びます。
+  TODO：data-featured="true"だけにbackground-color、color、border、border-radiusを指定。
+*/
+.practice-animal {
+  margin: 8px 0;
+  padding: 14px 18px;
+  background-color: #fff;
+  border: 1px solid #d9d4c9;
+}
+
+/* ================================================================
+  ▼▼▼ PRACTICE 01 解答記入欄 START ▼▼▼
+  対象：data-featured="true"のp要素
+  使用するセレクタ：.practice-selector [data-featured="true"]
+================================================================ */
+
+/* ↓ この行の下へCSSを書いてください ↓ */
+
+.practice-selector [data-featured="true"] {
+  background-color: #397c80;
+  border: #344d59 3px solid;
+  color: #fff;
+  border-radius: 5rem;
+  transition: .5s;
+  
+
+  &:hover {
+    color: #7baeb0;
+    box-shadow: 4px 4px 10px 0 #73848c;
+  }
+  
+}
+
+/* .practice-selector [data-featured="false"] {
+  background-color: #803939;
+  border: #593434 3px solid;
+  color: #fff;
+  border-radius: 5rem;
+} */
+
+
+/* ↑ この行の上までにCSSを書いてください ↑ */
+
+/* ================================================================
+  ▲▲▲ PRACTICE 01 解答記入欄 END ▲▲▲
+================================================================ */
+
+/* PRACTICE 02：色・角丸・影
+  linear-gradient(方向, 開始色, 終了色) は直線状のグラデーション。
+  border-radius: 50%は、同じ幅と高さの画像を正円にします。
+  box-shadowは「横位置 縦位置 ぼかし 広がり 色」の順です。
+  TODO：.practice-visual-cardと、そのimgをページ内の完成例へ近づける。
+*/
+.practice-visual-card img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+}
+
+.practice-mini-label {
+  margin-bottom: 4px;
+  color: #397c80;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .1em;
+}
+
+/* ================================================================
+  ▼▼▼ PRACTICE 02 解答記入欄 START ▼▼▼
+  カード：.practice-visual-card
+  画像：.practice-visual-card img
+================================================================ */
+
+/* ↓ この行の下へCSSを書いてください ↓ */
+.exercise-canvas.practice-visual-card {
+  display: flex;
+  gap: 2rem;
+  border-radius: 2rem;
+  border: 2px solid #cfddd9;
+  background: linear-gradient(135deg, rgb(238, 246, 245), rgb(245, 216, 205));
+  box-shadow: rgba(52, 77, 89, 0.2) 0px 14px 28px 0px;
+
+  img {
+    border-radius: 50%;
+    border: .5rem solid #fff;
+    box-shadow: rgba(52, 77, 89, 0.2) 0px 14px 28px 0px;
+  }
+}
+
+
+/* ↑ この行の上までにCSSを書いてください ↑ */
+
+/* ================================================================
+  ▲▲▲ PRACTICE 02 解答記入欄 END ▲▲▲
+================================================================ */
+
+/* PRACTICE 03：transition
+  transitionの短縮形は「対象 時間 速度曲線 遅延」の順で書けます。
+  transform: translateY(-値)は、要素を現在位置より上へ動かします。
+  TODO：通常状態へtransition、:hoverへ背景色とtransformを指定。
+*/
+.practice-motion-stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.practice-motion-button {
+  padding: 16px 26px;
+  color: #fff;
+  background-color: #397c80;
+  border: 0;
+  border-radius: 999px;
+  font: 700 16px/1.4 "LINE Seed JP", sans-serif;
+  cursor: pointer;
+}
+
+/* ================================================================
+  ▼▼▼ PRACTICE 03 解答記入欄 START ▼▼▼
+  通常状態：.practice-motion-button
+  ホバー状態：.practice-motion-button:hover
+================================================================ */
+
+/* ↓ この行の下へCSSを書いてください ↓ */
+.practice-motion-button{
+  transition: .4s;
+  &:hover {
+    background-color: #a45f49;
+    transform: translateY(-.5rem);
+  }
+}
+
+
+/* ↑ この行の上までにCSSを書いてください ↑ */
+
+/* ================================================================
+  ▲▲▲ PRACTICE 03 解答記入欄 END ▲▲▲
+================================================================ */
+
+/* PRACTICE 04：マルチカラム
+  column-countは段数、column-gapは段の間隔、column-ruleは段間の線。
+  column-span: allは、指定要素を全段にまたがせます。
+  TODO：.practice-columnsを2段にし、h4を全段へまたがせる。
+*/
+.practice-columns p {
+  margin-bottom: 0;
+}
+
+/* ================================================================
+  ▼▼▼ PRACTICE 04 解答記入欄 START ▼▼▼
+  段組み全体：.practice-columns
+  見出し：.practice-columns h4
+================================================================ */
+
+/* ↓ この行の下へCSSを書いてください ↓ */
+.exercise-canvas.practice-columns {
+  column-count: 2;
+  column-width: 250px;
+  column-gap: 3rem;
+  /* column-rule-width: 2px;
+  column-rule-color: #397c80;
+  column-rule-style: solid; */
+  column-rule: 2px solid #397c80;
+  background: linear-gradient(135deg, #eef6f5, #f5ded3);
+
+  h4 {
+    column-span: all;
+    font-size: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #397c80;
+  }
+}
+
+
+/* ↑ この行の上までにCSSを書いてください ↑ */
+
+/* ================================================================
+  ▲▲▲ PRACTICE 04 解答記入欄 END ▲▲▲
+================================================================ */
+
+/* PRACTICE 05：font短縮形
+  記述順は「font-style等 font-weight font-size/line-height font-family」。
+  font-sizeとfont-familyは省略できません。
+  TODO：h4へ「700 32px/1.4 LINE Seed JP, sans-serif」を短縮形で指定。
+*/
+.practice-font-card {
+  background-color: #fff;
+}
+
+.practice-font-card > p,
+.practice-font-card > span {
+  color: #647984;
+  font-size: 13px;
+}
+
+/* ================================================================
+  ▼▼▼ PRACTICE 05 解答記入欄 START ▼▼▼
+  対象：practice-font-card内のh4要素
+  使用するセレクタ：.practice-font-card h4
+================================================================ */
+
+/* ↓ この行の下へCSSを書いてください ↓ */
+
+
+
+/* ↑ この行の上までにCSSを書いてください ↑ */
+
+/* ================================================================
+  ▲▲▲ PRACTICE 05 解答記入欄 END ▲▲▲
+================================================================ */
+
+/* PRACTICE 06：文字の調整
+  text-transform: uppercaseは英字を大文字表示します。
+  letter-spacingは文字間、text-indentは1行目の字下げ、line-heightは行高です。
+  TODO：h4とpへ、問題文で指定された4プロパティを書く。
+*/
+.practice-text-card {
+  background-color: #fff;
+}
+
+/* ================================================================
+  ▼▼▼ PRACTICE 06 解答記入欄 START ▼▼▼
+  見出し：.practice-text-card h4
+  本文：.practice-text-card p
+================================================================ */
+
+/* ↓ この行の下へCSSを書いてください ↓ */
+.exercise-canvas.practice-text-card {
+  h4 {
+    text-transform: uppercase;
+    letter-spacing: .25rem;
+    color: #397c80;
+  }
+
+  p {
+    text-indent: 1rem;
+    line-height: 2;
+  }
+}
+
+
+/* ↑ この行の上までにCSSを書いてください ↑ */
+
+/* ================================================================
+  ▲▲▲ PRACTICE 06 解答記入欄 END ▲▲▲
+================================================================ */
+
+/* PRACTICE 07：CSSカウンタ
+  counter-resetで名前付きカウンタを用意します。
+  counter-incrementで増やし、content: counter(名前)で番号を表示します。
+  TODO：.practice-counter、子のp、p::beforeへ3段階の指定を書く。
+*/
+.practice-counter p {
+  margin: 10px 0;
+  padding: 14px 18px;
+  background-color: #fff;
+  border-left: 4px solid #d9d4c9;
+}
+
+/* ================================================================
+  ▼▼▼ PRACTICE 07 解答記入欄 START ▼▼▼
+  親要素：.practice-counter
+  各項目：.practice-counter p
+  番号生成：.practice-counter p::before
+================================================================ */
+
+/* ↓ この行の下へCSSを書いてください ↓ */
+
+
+
+/* ↑ この行の上までにCSSを書いてください ↑ */
+
+/* ================================================================
+  ▲▲▲ PRACTICE 07 解答記入欄 END ▲▲▲
+================================================================ */
+
+/* ================================================================
+  終了カードとフッター
+================================================================ */
+.finish {
+  margin-top: 90px;
+  border-width: 3px;
+  border-style: solid;
+}
+
+footer {
+  padding: 38px 24px;
+  color: #e8f2f2;
+  background-color: #344d59;
+  font-size: 13px;
+  text-align: center;
+}
+
+footer p {
+  margin-bottom: 5px;
+}
+
+/* ================================================================
+  2-19 @media：画面が狭い場合だけ適用する条件付きの@規則
+  教材の本文では@規則の一つとして扱っています。
+================================================================ */
+@media screen and (max-width: 820px) {
+  .hero {
+    padding: 42px 24px;
+  }
+
+  .hero-copy,
+  .hero-visual {
+    float: none;
+    width: 100%;
+    max-width: none;
+  }
+
+  .hero h1 {
+    font-size: 42px;
+  }
+
+  .hero-visual {
+    margin-top: 24px;
+  }
+
+  .contents ol {
+    columns: 1;
+  }
+
+  .lesson-heading h2 {
+    font-size: 32px;
+  }
+
+  .topic {
+    padding: 26px 20px;
+  }
+
+  .topic-title > .star {
+    display: inline-flex;
+    flex-basis: 64px;
+    width: 64px;
+    height: 64px;
+    padding: 0;
+  }
+
+  .topic-title h3 {
+    font-size: 25px;
+  }
+
+  .swatch,
+  .effect-card,
+  .overflow-box,
+  .list-types > ul,
+  .list-types > ol,
+  .generic-families > p {
+    width: 48%;
+  }
+
+  .rule-card {
+    display: block;
+    width: 100%;
+    min-height: 0;
+  }
+
+  .river-arrow {
+    display: block;
+    width: 100%;
+    transform: rotate(90deg);
+  }
+
+  .float-demo img {
+    width: 160px;
+  }
+
+  .clip-stage {
+    min-height: 260px;
+  }
+
+  .practice {
+    padding: 28px 22px;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  body {
+    font-size: 16px;
+  }
+
+  .hero h1 {
+    font-size: 35px;
+  }
+
+  main {
+    padding-right: 14px;
+    padding-left: 14px;
+  }
+
+  .start-card,
+  .contents,
+  .finish {
+    padding: 24px 20px;
+  }
+
+  .swatch,
+  .effect-card,
+  .overflow-box,
+  .list-types > ul,
+  .list-types > ol,
+  .font-specimens > p,
+  .generic-families > p,
+  .motion-compare > div {
+    width: 98%;
+  }
+
+  .float-demo img {
+    float: none;
+    width: 100%;
+    margin-right: 0;
+  }
+
+  .study-table {
+    font-size: 13px;
+  }
+
+  .study-table th,
+  .study-table td {
+    padding: 9px;
+  }
+}

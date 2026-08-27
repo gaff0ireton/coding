@@ -1,0 +1,742 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSSを触って覚える｜HTML5 Level.1 第2章</title>
+
+  <!-- 2-2 外部スタイルシート：本教材の中心となるCSSです。 -->
+  <link rel="stylesheet" href="css/style.css" type="text/css">
+
+  <!--
+    練習問題の完成例だけに使うCSSです。
+    answer.cssの宣言は.answer-liveの内側へ限定し、未完成の問題には適用しません。
+  -->
+  <link rel="stylesheet" href="css/answer.css" type="text/css">
+
+  <!--
+    2-2 内部スタイルシート：style要素の中にCSSを書きます。
+    EXAM: type="text/css" はCSSのMIMEタイプを示します。
+    HTML5では省略できますが、教科書の記述例と試験語彙を確認するため残しています。
+  -->
+  <style type="text/css">
+    .internal-style-sample {
+      border-left: 8px solid #d88f78;
+      background-color: #fff8f3;
+    }
+  </style>
+</head>
+<body>
+  <!-- ページ上部：教材の目的と使い方 -->
+  <header class="hero">
+    <div class="hero-copy">
+      <p class="eyebrow">HTML5プロフェッショナル認定試験 Level.1｜第2章 CSS</p>
+      <h1>CSSを、見る・触る・比べる。</h1>
+      <p class="hero-lead">
+        このページ自体が完成見本です。説明を読み、<code>css/style.css</code> の
+        <strong>TRY:</strong> コメントを探して値を変え、再読み込みしてください。
+        「何を指定すると、どこが、どう変わるか」を一つずつ確かめます。
+      </p>
+      <p class="scope-note">
+        掲載範囲は授業の教科書と資格試験に合わせています。新機能を広く紹介する教材ではなく、
+        <strong>合格に必要な語句を実際のコードで理解する教材</strong>です。
+      </p>
+    </div>
+    <figure class="hero-visual">
+      <img src="assets/animal-friends.png" alt="机でCSSを学ぶ、くま・うさぎ・きつねのやさしいイラスト">
+      <figcaption>動物たちと、1プロパティずつ実験しましょう。</figcaption>
+    </figure>
+  </header>
+
+  <main>
+    <section class="start-card internal-style-sample" id="start">
+      <h2>学び方は「1か所だけ変える」</h2>
+      <ol class="learning-steps">
+        <li><strong>読む：</strong>ページの説明とコード例を読む</li>
+        <li><strong>探す：</strong><code>css/style.css</code> で <code>TRY:</code> を検索する</li>
+        <li><strong>変える：</strong>最初は値を1つだけ変更する</li>
+        <li><strong>比べる：</strong>再読み込みし、変化を言葉にする</li>
+        <li><strong>戻す：</strong>元へ戻してから次へ進む</li>
+      </ol>
+      <!-- 2-3 インラインスタイル：style属性で、この要素だけを装飾します。 -->
+      <p class="inline-demo" style="background-color: #e8c989; color: #344d59;">
+        この黄色い帯だけは <code>style</code> 属性で色を指定しています（2-3 インラインスタイル）。
+      </p>
+      <div class="importance-legend">
+        <span class="star star-3">★★★ 最優先</span>
+        <span class="star star-2">★★ よく出る</span>
+        <span class="star star-1">★ 関連して覚える</span>
+      </div>
+    </section>
+
+    <nav class="contents" aria-label="学習セクション">
+      <h2>上から順に学ぶ7セクション</h2>
+      <ol>
+        <li><a href="#selectors">CSSを置く場所とセレクタ</a></li>
+        <li><a href="#visuals">色と見た目</a></li>
+        <li><a href="#motion">時間による変化</a></li>
+        <li><a href="#layout">配置・表・段組み</a></li>
+        <li><a href="#fonts">フォント</a></li>
+        <li><a href="#text">文字の装飾</a></li>
+        <li><a href="#lists">リスト・カウンタ・引用符</a></li>
+      </ol>
+    </nav>
+
+    <!-- ============================================================
+      SECTION 1：CSSを置く場所、セレクタ、カスケード
+      星3「結合子・全称セレクタ・!important」を核に関連項目をまとめます。
+    ============================================================= -->
+    <section class="lesson" id="selectors">
+      <header class="lesson-heading">
+        <p class="lesson-number">SECTION 01</p>
+        <h2>CSSを「どこに書き、どこへ当てるか」</h2>
+        <p>CSSの最初の仕事は、装飾したいHTML要素を正しく選ぶことです。適用先と優先順位を一続きで理解します。</p>
+      </header>
+
+      <article class="topic" id="css-placement">
+        <div class="topic-title">
+          <span class="star star-2">★★</span>
+          <div><p class="book-no">2-2・2-3・2-4</p><h3>3つの記述場所と <code>@import</code></h3></div>
+        </div>
+        <p>CSSは、外部ファイル・<code>style</code>要素・<code>style</code>属性に書けます。この教材は3種類すべてを実際に使っています。</p>
+        <table class="study-table">
+          <caption>CSSを記述する3つの方法</caption>
+          <thead><tr><th>方法</th><th>書く場所</th><th>この教材の実例</th></tr></thead>
+          <tbody>
+            <tr><th>外部</th><td>別のCSSファイル</td><td><code>&lt;link rel="stylesheet" href="css/style.css"&gt;</code></td></tr>
+            <tr><th>内部</th><td>HTMLの<code>&lt;style&gt;</code>内</td><td>このページ上部のオレンジ線のカード</td></tr>
+            <tr><th>インライン</th><td>開始タグの<code>style</code>属性</td><td>「この黄色い帯だけは…」の帯</td></tr>
+          </tbody>
+        </table>
+        <pre><code>/* css/style.css の一番上 */
+@import url("./imported-theme.css");</code></pre>
+        <p class="exam-point"><strong>試験で見抜く：</strong><code>text/css</code> はCSSのMIMEタイプです。<code>@import</code> は別のスタイルシートを読み込む@規則です。</p>
+      </article>
+
+      <article class="topic" id="selectors-demo">
+        <div class="topic-title">
+          <span class="star star-3">★★★</span>
+          <div><p class="book-no">2-5〜2-10</p><h3>全称・属性・疑似クラス・疑似要素・結合子</h3></div>
+        </div>
+        <p><strong>セレクタ</strong>は「どのHTML要素へ宣言を適用するか」を選ぶ部分です。下の小さな動物園が、そのままセレクタ実験場です。</p>
+
+        <div class="selector-lab">
+          <div class="habitat forest">
+            <h4>森エリア</h4>
+            <p class="animal" data-kind="bear">くま</p>
+            <p class="animal special" data-kind="rabbit">うさぎ</p>
+            <p class="animal" data-kind="fox">きつね</p>
+          </div>
+          <p class="after-habitat">森エリアの直後にいる案内係</p>
+          <p class="after-habitat">その後ろにいる飼育係</p>
+        </div>
+
+        <div class="selector-notes">
+          <h4>同じHTMLを、選び方だけ変えて観察</h4>
+          <dl>
+            <dt><code>*</code> 全称セレクタ</dt><dd>すべての要素を選びます。この教材では全要素の<code>box-sizing</code>を揃えています。</dd>
+            <dt><code>[data-kind="rabbit"]</code> 属性セレクタ</dt><dd>特定の属性、または属性値を持つ要素を選びます。</dd>
+            <dt><code>:first-of-type</code> 疑似クラス</dt><dd>同じ種類の要素のうち最初を選びます。<code>:first-child</code>は「親の最初の子」なので基準が違います。</dd>
+            <dt><code>::before</code> 疑似要素</dt><dd>要素の一部分・仮想部分を選びます。くまの前の「★」はHTMLにありません。</dd>
+          </dl>
+        </div>
+
+        <h4>属性セレクタの一致方法</h4>
+        <table class="study-table compact">
+          <thead><tr><th>書式</th><th>選ぶ属性</th></tr></thead>
+          <tbody>
+            <tr><td><code>[attr]</code></td><td>attr属性を持つ</td></tr>
+            <tr><td><code>[attr="value"]</code></td><td>値が完全一致</td></tr>
+            <tr><td><code>[attr~="value"]</code></td><td>空白区切りの値のどれかが一致</td></tr>
+            <tr><td><code>[attr|="value"]</code></td><td>値が一致、または直後がハイフン</td></tr>
+            <tr><td><code>[attr^="value"]</code></td><td>値が指定文字列で始まる（前方一致）</td></tr>
+            <tr><td><code>[attr$="value"]</code></td><td>値が指定文字列で終わる（後方一致）</td></tr>
+            <tr><td><code>[attr*="value"]</code></td><td>値の途中に指定文字列を含む（部分一致）</td></tr>
+          </tbody>
+        </table>
+
+        <h4>教科書に掲載される主な疑似クラス</h4>
+        <table class="study-table pseudo-table">
+          <thead><tr><th>目的</th><th>疑似クラス</th><th>選ぶ状態・位置</th></tr></thead>
+          <tbody>
+            <tr><th>リンク・操作</th><td><code>:link</code> <code>:visited</code> <code>:hover</code> <code>:active</code> <code>:focus</code></td><td>未訪問、訪問済み、ポインタが重なる、操作中、入力可能な状態</td></tr>
+            <tr><th>子の位置</th><td><code>:nth-child(n)</code> <code>:nth-last-child(n)</code> <code>:first-child</code> <code>:last-child</code></td><td>別の種類も含む、親の子全体の中で数える</td></tr>
+            <tr><th>同じ種類の位置</th><td><code>:nth-of-type(n)</code> <code>:nth-last-of-type(n)</code> <code>:first-of-type</code> <code>:last-of-type</code></td><td>同じ要素型だけを数える。nには整数、odd、evenや式を指定できる</td></tr>
+            <tr><th>個数・空</th><td><code>:only-child</code> <code>:only-of-type</code> <code>:empty</code></td><td>唯一の子、同じ型が唯一、子要素も内容もない</td></tr>
+            <tr><th>文書の状態</th><td><code>:target</code> <code>:lang(言語)</code></td><td>URLフラグメントとIDが一致、言語が一致</td></tr>
+            <tr><th>フォーム</th><td><code>:enabled</code> <code>:disabled</code> <code>:checked</code></td><td>有効、無効、チェック済み</td></tr>
+            <tr><th>除外</th><td><code>:not(セレクタ)</code></td><td>括弧内のセレクタに一致しない</td></tr>
+          </tbody>
+        </table>
+
+        <h4>教科書に掲載される主な疑似要素</h4>
+        <table class="study-table compact">
+          <tbody>
+            <tr><th><code>::before</code></th><td>指定要素の先頭に内容を生成</td></tr>
+            <tr><th><code>::after</code></th><td>指定要素の末尾に内容を生成</td></tr>
+            <tr><th><code>::first-letter</code></th><td>指定要素の先頭文字</td></tr>
+            <tr><th><code>::first-line</code></th><td>指定要素の先頭行</td></tr>
+          </tbody>
+        </table>
+
+        <table class="study-table compact">
+          <caption>4つの結合子</caption>
+          <thead><tr><th>書き方</th><th>名前</th><th>選ぶ範囲</th></tr></thead>
+          <tbody>
+            <tr><td><code>A B</code></td><td>子孫結合子</td><td>Aの内側にあるB（何階層下でも）</td></tr>
+            <tr><td><code>A &gt; B</code></td><td>子結合子</td><td>Aの直接の子Bだけ</td></tr>
+            <tr><td><code>A + B</code></td><td>隣接兄弟結合子</td><td>Aの直後にある同じ親のB</td></tr>
+            <tr><td><code>A ~ B</code></td><td>一般兄弟結合子</td><td>Aより後ろにある同じ親のB</td></tr>
+          </tbody>
+        </table>
+        <p class="exam-point"><strong>試験で見抜く：</strong><code>:first-child</code>と<code>:first-of-type</code>の違い、空白・<code>&gt;</code>・<code>+</code>・<code>~</code>が選ぶ関係を、HTMLの親子・兄弟関係から判断します。</p>
+      </article>
+
+      <article class="topic" id="cascade">
+        <div class="topic-title">
+          <span class="star star-3">★★★</span>
+          <div><p class="book-no">2-35・2-64〜2-66</p><h3>カスケード、継承、優先順位、<code>!important</code></h3></div>
+        </div>
+        <p><strong>カスケード</strong>とは、同じ要素へ複数の宣言が届いたときに、どれを採用するか決める仕組みです。「CSSが効かない」ときは、まずこの順序を確認します。</p>
+        <div class="cascade-river">
+          <div class="rule-card low">弱い候補<br><code>p { color: gray; }</code></div>
+          <span class="river-arrow">→</span>
+          <div class="rule-card mid">より具体的<br><code>.note { color: teal; }</code></div>
+          <span class="river-arrow">→</span>
+          <div class="rule-card high">重要宣言<br><code>color: coral !important;</code></div>
+        </div>
+        <div class="inheritance-demo">
+          <div class="parent-box">
+            親：文字色と文字サイズを指定
+            <p>子：<code>color</code>と<code>font-size</code>を継承</p>
+          </div>
+          <p>一方、<code>margin</code>や<code>padding</code>は通常、子へ継承されません。</p>
+        </div>
+        <table class="study-table compact">
+          <caption>セレクタの詳細度（教科書の高い順）</caption>
+          <tbody>
+            <tr><th>1</th><td>インラインスタイル</td></tr>
+            <tr><th>2</th><td>IDセレクタ</td></tr>
+            <tr><th>3</th><td>クラス・属性セレクタ・疑似クラス</td></tr>
+            <tr><th>4</th><td>タイプセレクタ・疑似要素</td></tr>
+          </tbody>
+        </table>
+        <ol class="priority-list">
+          <li><strong>まず重要宣言か：</strong><code>!important</code>の有無</li>
+          <li><strong>次に適用元：</strong>教科書の優先関係を確認</li>
+          <li><strong>次に詳細度：</strong>ID、class・属性・疑似クラス、要素などの具体性</li>
+          <li><strong>同点なら後：</strong>同じ優先度なら、後に書かれた宣言</li>
+        </ol>
+        <p class="book-caution"><strong>教科書基準：</strong>通常宣言はインライン → 外部・内部 → ユーザースタイル → ブラウザ既定の順で扱います。<code>!important</code>を多用すると上書き関係が読みにくくなるため、必要な場面に限定します。</p>
+        <table class="study-table compact">
+          <caption><code>!important</code>を含む適用元の順序（教科書掲載順）</caption>
+          <tbody>
+            <tr><th>1</th><td>ユーザースタイル（<code>!important</code>付き）</td></tr>
+            <tr><th>2</th><td>外部・内部スタイル（<code>!important</code>付き）</td></tr>
+            <tr><th>3</th><td>インラインスタイル</td></tr>
+            <tr><th>4</th><td>外部・内部スタイル</td></tr>
+            <tr><th>5</th><td>ユーザースタイル</td></tr>
+            <tr><th>6</th><td>ユーザエージェント（ブラウザ既定）スタイル</td></tr>
+          </tbody>
+        </table>
+        <div class="error-demo">
+          <p><strong>2-35 エラー処理：</strong>値やプロパティ名が不正な宣言は、その宣言が無視され、読める後続のCSSまで全部止まるわけではありません。</p>
+          <pre><code>.error-sample {
+  color: #344d59;
+  color: not-a-color; /* この無効な宣言は無視 */
+  font-weight: 700;   /* こちらは処理される */
+}</code></pre>
+        </div>
+      </article>
+
+      <article class="practice" id="practice-selectors">
+        <p class="practice-label">PRACTICE 01｜セレクタ</p>
+        <h3>おすすめ動物だけを選んで目立たせよう</h3>
+        <p><code>data-featured="true"</code>を持つ動物だけに背景色・文字色・枠線・角丸を指定してください。</p>
+        <div class="write-guide">
+          <h4>CSSを書く場所</h4>
+          <p><strong>対象HTML：</strong><code>&lt;p class="practice-animal" data-featured="true"&gt;</code></p>
+          <p><strong>使用するセレクタ：</strong><code>.practice-selector [data-featured="true"]</code></p>
+          <p><strong>記入先：</strong><code>css/style.css</code>の「PRACTICE 01 解答記入欄 START」から「END」まで</p>
+        </div>
+        <div class="exercise-canvas practice-selector" aria-label="セレクタの練習問題">
+          <p class="practice-animal" data-featured="false">くま</p>
+          <p class="practice-animal" data-featured="true">うさぎ｜今日のおすすめ</p>
+          <p class="practice-animal" data-featured="false">きつね</p>
+        </div>
+        <div class="live-answer">
+          <p class="live-answer-label">完成例｜HTML＋css/answer.css</p>
+          <div class="exercise-canvas answer-live practice-selector">
+            <p class="practice-animal" data-featured="false">くま</p>
+            <p class="practice-animal" data-featured="true">うさぎ｜今日のおすすめ</p>
+            <p class="practice-animal" data-featured="false">きつね</p>
+          </div>
+          <p class="live-answer-note">属性セレクタに一致した「うさぎ」だけが変化します。</p>
+        </div>
+      </article>
+    </section>
+
+    <!-- ============================================================
+      SECTION 2：色・角丸・影・透明度・切り抜き
+    ============================================================= -->
+    <section class="lesson" id="visuals">
+      <header class="lesson-heading">
+        <p class="lesson-number">SECTION 02</p>
+        <h2>色と形で「見た目」を作る</h2>
+        <p>同じ色でも書き方は複数あります。角丸・影・グラデーション・透明度を一つのカードで比較します。</p>
+      </header>
+
+      <article class="topic" id="colors">
+        <div class="topic-title"><span class="star star-3">★★★</span><div><p class="book-no">2-22</p><h3>色の指定方法</h3></div></div>
+        <div class="color-swatches">
+          <div class="swatch keyword"><span>色名</span><code>teal</code></div>
+          <div class="swatch hex"><span>16進数</span><code>#d88f78</code></div>
+          <div class="swatch rgb"><span>RGB</span><code>rgb(168,205,215)</code></div>
+          <div class="swatch rgba"><span>RGBA</span><code>rgba(216,143,120,.55)</code></div>
+          <div class="swatch hsl"><span>HSL</span><code>hsl(45,60%,72%)</code></div>
+          <div class="swatch hsla"><span>HSLA</span><code>hsla(181,25%,59%,.55)</code></div>
+        </div>
+        <p><strong>RGB</strong>は赤・緑・青、<strong>HSL</strong>は色相・彩度・明度で表します。末尾のAは<strong>アルファ値（透明度）</strong>です。</p>
+      </article>
+
+      <article class="topic" id="shape-effects">
+        <div class="topic-title"><span class="star star-3">★★★</span><div><p class="book-no">2-59〜2-61、2-13</p><h3>角丸、影、グラデーション、透明度</h3></div></div>
+        <div class="effect-row">
+          <div class="effect-card radius-card"><strong>border-radius</strong><span>左上 → 右上 → 右下 → 左下</span></div>
+          <div class="effect-card shadow-card"><strong>box-shadow</strong><span>横・縦・ぼかし・広がり・色</span></div>
+          <div class="effect-card gradient-card"><strong>gradient</strong><span>linear / radial</span></div>
+          <div class="effect-card opacity-card"><strong>opacity: .45</strong><span>場所は残ったまま透明に</span></div>
+        </div>
+        <ul>
+          <li><code>border-radius: 50%</code>を同じ幅・高さの正方形へ指定すると円になります。</li>
+          <li><code>box-shadow</code>は横方向、縦方向、ぼかし、広がり、色の順。<code>inset</code>で内側の影です。</li>
+          <li><code>linear-gradient</code>は直線状。角度は上が0deg、右へ進む向きが90deg、下が180degです。</li>
+          <li><code>radial-gradient</code>は中心から外側へ円形に変化します。</li>
+        </ul>
+        <pre><code>.card {
+  border-radius: 36px 8px 36px 8px;
+  box-shadow: 0 14px 28px 0 rgba(52, 77, 89, .18);
+  background: linear-gradient(135deg, #eef6f5, #f5d8cd);
+  opacity: 1;
+}</code></pre>
+        <p class="exam-point"><strong>試験で見抜く：</strong>4値の角丸は左上から時計回り。<code>box-shadow</code>の<code>inset</code>は内側の影です。<code>opacity: 0</code>でも要素の場所は残ります。</p>
+        <table class="study-table compact">
+          <caption>見えなくしたとき、場所が残るか</caption>
+          <tbody><tr><th><code>opacity: 0</code></th><td>透明になる。場所は残る</td></tr><tr><th><code>visibility: hidden</code></th><td>非表示になる。場所は残る</td></tr><tr><th><code>display: none</code></th><td>表示されず、場所も詰められる</td></tr></tbody>
+        </table>
+      </article>
+
+      <article class="topic" id="clip">
+        <div class="topic-title"><span class="star star-1">★</span><div><p class="book-no">2-12</p><h3><code>clip</code>による矩形の切り抜き</h3></div></div>
+        <p><code>clip: rect(上, 右, 下, 左)</code>は、<code>position: absolute</code>または<code>fixed</code>の要素を矩形に切り抜きます。値は要素の上・左を基準にします。</p>
+        <div class="clip-stage">
+          <img class="clip-source" src="assets/cloud-dancer-landscape.png" alt="やさしい草原と湖の風景イラスト">
+          <div class="clip-window" aria-hidden="true">表示する矩形</div>
+        </div>
+        <p class="book-caution"><strong>教科書上の注意：</strong>教科書は<code>clip</code>を試験対象として説明したうえで、CSS Masking Module Level 1では非推奨になったことも記しています。本教材では置き換え構文へ話を広げず、出題範囲の<code>clip</code>を読めることに絞ります。</p>
+      </article>
+
+      <article class="practice" id="practice-visuals">
+        <p class="practice-label">PRACTICE 02｜色と形</p>
+        <h3>やさしいプロフィールカードを完成させよう</h3>
+        <p>「PRACTICE 02」で、カードにグラデーション、角丸、影を指定し、写真を正円にしてください。色はこのセクションで扱ったRGB・HSL・16進数のどれを使っても構いません。</p>
+        <div class="write-guide">
+          <h4>CSSを書く場所</h4>
+          <p><strong>カード：</strong><code>&lt;div class="exercise-canvas practice-visual-card"&gt;</code> → <code>.practice-visual-card</code></p>
+          <p><strong>画像：</strong><code>&lt;img&gt;</code> → <code>.practice-visual-card img</code></p>
+          <p><strong>記入先：</strong><code>css/style.css</code>の「PRACTICE 02 解答記入欄 START」から「END」まで</p>
+        </div>
+        <div class="exercise-canvas practice-visual-card">
+          <img src="assets/animal-friends.png" alt="CSSを学ぶ動物たち">
+          <div><p class="practice-mini-label">FOREST CLASS</p><h4>動物たちのCSS教室</h4><p>色・角丸・影の3つを組み合わせます。</p></div>
+        </div>
+        <div class="live-answer">
+          <p class="live-answer-label">完成例｜HTML＋css/answer.css</p>
+          <div class="exercise-canvas answer-live practice-visual-card">
+            <img src="assets/animal-friends.png" alt="CSSを学ぶ動物たち">
+            <div><p class="practice-mini-label">FOREST CLASS</p><h4>動物たちのCSS教室</h4><p>色・角丸・影の3つを組み合わせます。</p></div>
+          </div>
+          <p class="live-answer-note">背景、輪郭、奥行き、画像の形が実際のCSSで変化しています。</p>
+        </div>
+      </article>
+    </section>
+
+    <!-- ============================================================
+      SECTION 3：transition と animation
+    ============================================================= -->
+    <section class="lesson" id="motion">
+      <header class="lesson-heading"><p class="lesson-number">SECTION 03</p><h2>時間を加えて「変化」を作る</h2><p>状態AからBへ滑らかに変えるtransitionと、複数の場面を繰り返せるanimationを比較します。</p></header>
+
+      <article class="topic" id="transition">
+        <div class="topic-title"><span class="star star-3">★★★</span><div><p class="book-no">2-30</p><h3><code>transition</code> — きっかけで変わる</h3></div></div>
+        <p>下のボタンへマウスを重ねてください。<code>:hover</code>が変化のきっかけで、<code>transition</code>が途中経過を滑らかにします。</p>
+        <button class="transition-button" type="button">そっと触れてみる</button>
+        <pre><code>.transition-button {
+  transition-property: background-color, transform;
+  transition-duration: .6s;
+  transition-timing-function: ease;
+  transition-delay: 0s;
+}</code></pre>
+        <p><strong>短縮形：</strong><code>transition: 対象 時間 変化の仕方 遅延;</code></p>
+      </article>
+
+      <article class="topic" id="animation">
+        <div class="topic-title"><span class="star star-3">★★★</span><div><p class="book-no">2-31〜2-34</p><h3><code>@keyframes</code> と <code>animation</code></h3></div></div>
+        <p><code>@keyframes</code>は変化の節目を定義し、<code>animation-name</code>で要素と結びます。0%と100%だけでなく、途中の場面も作れます。</p>
+        <div class="animation-stage" aria-label="雲が往復するアニメーション">
+          <span class="moving-cloud">☁</span>
+        </div>
+        <div class="motion-compare">
+          <div><strong>transition</strong><p>通常はhoverなど、状態が変わるきっかけが必要。</p></div>
+          <div><strong>animation</strong><p>読み込み直後から再生でき、複数の節目や繰り返しを設定できる。</p></div>
+        </div>
+        <pre><code>@keyframes cloud-trip {
+  0%   { left: 4%; }
+  50%  { left: 72%; }
+  100% { left: 4%; }
+}
+
+.moving-cloud {
+  animation-name: cloud-trip;
+  animation-duration: 6s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}</code></pre>
+        <table class="study-table pseudo-table">
+          <caption>教科書に掲載される主なanimation関連プロパティ</caption>
+          <tbody>
+            <tr><th><code>animation</code></th><td>関連指定の短縮形</td></tr>
+            <tr><th><code>animation-name</code></th><td>@keyframesの名前</td></tr>
+            <tr><th><code>animation-delay</code></th><td>開始までの待ち時間</td></tr>
+            <tr><th><code>animation-duration</code></th><td>1回の実行時間</td></tr>
+            <tr><th><code>animation-iteration-count</code></th><td>繰り返し回数。<code>infinite</code>は無限</td></tr>
+            <tr><th><code>animation-timing-function</code></th><td>変化のタイミング。ease-in、ease-outなども使える</td></tr>
+            <tr><th><code>animation-direction</code></th><td>normal、reverse、alternateなどの実行方向</td></tr>
+            <tr><th><code>animation-play-state</code></th><td>running（実行）またはpaused（停止）</td></tr>
+            <tr><th><code>animation-fill-mode</code></th><td>実行前後のスタイル。forwards、backwards、bothなど</td></tr>
+          </tbody>
+        </table>
+        <p class="exam-point"><strong>試験で見抜く：</strong><code>iteration-count</code>は回数（<code>infinite</code>は無限）、<code>direction</code>は再生方向です。<code>alternate</code>は奇数回を順方向、偶数回を逆方向にします。</p>
+      </article>
+
+      <article class="practice" id="practice-motion">
+        <p class="practice-label">PRACTICE 03｜時間による変化</p>
+        <h3>ホバーで動く「つぎへ」ボタンを作ろう</h3>
+        <p>「PRACTICE 03」で、通常状態から<code>:hover</code>状態へ、背景色と<code>transform</code>が0.4秒で滑らかに変化するよう指定してください。</p>
+        <div class="write-guide">
+          <h4>CSSを書く場所</h4>
+          <p><strong>対象HTML：</strong><code>&lt;button class="practice-motion-button"&gt;</code></p>
+          <p><strong>通常状態：</strong><code>.practice-motion-button</code></p>
+          <p><strong>ホバー状態：</strong><code>.practice-motion-button:hover</code></p>
+          <p><strong>記入先：</strong><code>css/style.css</code>の「PRACTICE 03 解答記入欄 START」から「END」まで</p>
+        </div>
+        <div class="exercise-canvas practice-motion-stage">
+          <button class="practice-motion-button" type="button">つぎのセクションへ →</button>
+        </div>
+        <div class="live-answer">
+          <p class="live-answer-label">完成例｜実際にボタンへマウスを重ねてください</p>
+          <div class="exercise-canvas answer-live practice-motion-stage">
+            <button class="practice-motion-button" type="button">つぎのセクションへ →</button>
+          </div>
+          <p class="live-answer-note">完成例のボタンには、<code>answer.css</code>の<code>:hover</code>と0.4秒の<code>transition</code>が実際に適用されています。</p>
+        </div>
+      </article>
+    </section>
+
+    <!-- ============================================================
+      SECTION 4：float、overflow、table、multi-column
+    ============================================================= -->
+    <section class="lesson" id="layout">
+      <header class="lesson-heading"><p class="lesson-number">SECTION 04</p><h2>文章と箱の「配置」を制御する</h2><p>画像への回り込み、はみ出し、表、段組みを実物で確認します。</p></header>
+
+      <article class="topic" id="float-overflow">
+        <div class="topic-title"><span class="star star-3">★★★</span><div><p class="book-no">2-53・2-54</p><h3><code>float</code> と <code>overflow</code></h3></div></div>
+        <div class="float-demo">
+          <img src="assets/animal-friends.png" alt="CSSを勉強する動物たち">
+          <p><code>float: left</code>を指定した画像は左へ寄り、後続の文章が右側へ回り込みます。<code>clear</code>は、その回り込みの影響を終わらせるプロパティです。このデモの親は<code>overflow: auto</code>で、浮動した画像を含む高さを扱っています。</p>
+          <p class="clear-note"><code>clear: both</code>を指定したこの行から、画像の下へ進みます。</p>
+        </div>
+        <div class="overflow-row">
+          <div class="overflow-box visible"><strong>visible</strong><span>はみ出しを表示する長い長いテキスト</span></div>
+          <div class="overflow-box hidden"><strong>hidden</strong><span>はみ出しを切り取る長い長いテキスト</span></div>
+          <div class="overflow-box scroll"><strong>scroll</strong><span>はみ出しをスクロールできる長い長いテキスト</span></div>
+          <div class="overflow-box auto"><strong>auto</strong><span>必要ならスクロールできる長い長いテキスト</span></div>
+        </div>
+      </article>
+
+      <article class="topic" id="tables">
+        <div class="topic-title"><span class="star star-2">★★</span><div><p class="book-no">2-27・2-28</p><h3>表のCSSと <code>caption-side</code>・<code>writing-mode</code></h3></div></div>
+        <table class="animal-table">
+          <caption>森の観察メモ（caption-side: bottom）</caption>
+          <thead><tr><th>動物</th><th>好きなもの</th><th>活動時間</th></tr></thead>
+          <tbody><tr><td>くま</td><td>はちみつ</td><td>昼</td></tr><tr><td>うさぎ</td><td>にんじん</td><td>朝夕</td></tr></tbody>
+        </table>
+        <div class="table-property-list">
+          <p><code>border-collapse</code>：隣接するセルの境界線を重ねるか分離するか</p>
+          <p><code>border-spacing</code>：分離したセル間の間隔</p>
+          <p><code>empty-cells</code>：空セルの境界や背景を表示するか</p>
+          <p><code>table-layout</code>：列幅の計算方法</p>
+          <p><code>caption-side</code>：captionを表の上か下に置く</p>
+        </div>
+        <p class="vertical-writing"><code>writing-mode: vertical-rl</code><span>縦書き</span></p>
+        <table class="study-table compact">
+          <caption>writing-modeとcaption-sideの位置関係</caption>
+          <tbody>
+            <tr><th><code>horizontal-tb</code></th><td>横書き。captionのtopは上、bottomは下</td></tr>
+            <tr><th><code>vertical-rl</code></th><td>縦書きで右から左へ流れる。topは右、bottomは左</td></tr>
+            <tr><th><code>vertical-lr</code></th><td>縦書きで左から右へ流れる。topは左、bottomは右</td></tr>
+          </tbody>
+        </table>
+      </article>
+
+      <article class="topic" id="columns">
+        <div class="topic-title"><span class="star star-2">★★</span><div><p class="book-no">2-62・2-63</p><h3>マルチカラム（段組み）</h3></div></div>
+        <div class="column-demo">
+          <h4>森から届いた小さな新聞</h4>
+          <p>マルチカラムは文章を新聞のような複数段に流します。<code>column-count</code>で段数、<code>column-width</code>で理想の段幅、<code>column-gap</code>で段の間隔を指定します。<code>column-rule</code>は段の間に引く線です。見出しには<code>column-span: all</code>を指定し、すべての段をまたがせています。文章が長いと、上から下へ流れ、次の段へ続きます。</p>
+        </div>
+        <p class="exam-point"><strong>試験で見抜く：</strong><code>columns</code>は<code>column-width</code>と<code>column-count</code>の短縮形です。<code>column-span: all</code>は段をまたぐ指定です。</p>
+      </article>
+
+      <article class="practice" id="practice-layout">
+        <p class="practice-label">PRACTICE 04｜配置・段組み</p>
+        <h3>森のニュースを2段組みにしよう</h3>
+        <p>「PRACTICE 04」で、本文を2段に分け、段の間隔と区切り線を指定してください。見出しは<code>column-span: all</code>ですべての段をまたがせます。</p>
+        <div class="write-guide">
+          <h4>CSSを書く場所</h4>
+          <p><strong>段組み全体：</strong><code>&lt;div class="exercise-canvas practice-columns"&gt;</code> → <code>.practice-columns</code></p>
+          <p><strong>見出し：</strong><code>&lt;h4&gt;森のニュース&lt;/h4&gt;</code> → <code>.practice-columns h4</code></p>
+          <p><strong>記入先：</strong><code>css/style.css</code>の「PRACTICE 04 解答記入欄 START」から「END」まで</p>
+        </div>
+        <div class="exercise-canvas practice-columns">
+          <h4>森のニュース</h4>
+          <p>今日は動物たちがCSSの段組みを勉強しました。column-countは段数を決めます。column-gapは段と段の空間です。column-ruleは中央の区切り線を作ります。文章は上から下へ進み、次の段へ続きます。見出しだけはすべての段をまたいで表示します。</p>
+        </div>
+        <div class="live-answer">
+          <p class="live-answer-label">完成例｜HTML＋css/answer.css</p>
+          <div class="exercise-canvas answer-live practice-columns">
+            <h4>森のニュース</h4>
+            <p>今日は動物たちがCSSの段組みを勉強しました。column-countは段数を決めます。column-gapは段と段の空間です。column-ruleは中央の区切り線を作ります。文章は上から下へ進み、次の段へ続きます。見出しだけはすべての段をまたいで表示します。</p>
+          </div>
+          <p class="live-answer-note">本文は2段に流れ、見出しは全段を横断しています。</p>
+        </div>
+      </article>
+    </section>
+
+    <!-- ============================================================
+      SECTION 5：Webフォント、font関連
+    ============================================================= -->
+    <section class="lesson" id="fonts">
+      <header class="lesson-heading"><p class="lesson-number">SECTION 05</p><h2>フォントを読み込み、まとめて指定する</h2><p>このページで実際に表示しているLINE Seed JPを教材として、@font-faceから短縮形までつなげます。</p></header>
+
+      <article class="topic" id="webfonts">
+        <div class="topic-title"><span class="star star-2">★★</span><div><p class="book-no">2-18・2-19</p><h3><code>@font-face</code> とWebフォント、@規則</h3></div></div>
+        <p>Webフォントは、利用者の端末に最初から入っていないフォントをWebから読み込み、同じ書体で表示しやすくする仕組みです。本教材はフォントファイルを<code>fonts/</code>から読み込みます。教科書では主な形式としてTrueTypeとWOFFを挙げています。</p>
+        <pre><code>@font-face {
+  font-family: "LINE Seed JP";
+  src: url("../fonts/LINESeedJP-Regular.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+}
+
+body {
+  font-family: "LINE Seed JP", sans-serif;
+}</code></pre>
+        <table class="study-table compact">
+          <caption>教科書で扱う@規則</caption>
+          <tbody>
+            <tr><th><code>@import</code></th><td>別のスタイルシートを読み込む</td></tr>
+            <tr><th><code>@font-face</code></th><td>Webフォントを定義する</td></tr>
+            <tr><th><code>@media</code></th><td>メディアの条件ごとにスタイルを分ける</td></tr>
+            <tr><th><code>@keyframes</code></th><td>アニメーションの節目を定義する</td></tr>
+          </tbody>
+        </table>
+        <p class="book-caution">教科書が例として名前を挙げつつ試験範囲外と明記する@規則は、この合格用教材では扱いません。</p>
+      </article>
+
+      <article class="topic" id="font-properties">
+        <div class="topic-title"><span class="star star-2">★★</span><div><p class="book-no">2-37・2-39・2-40</p><h3>太さ・斜体・<code>font</code>短縮形・総称ファミリ</h3></div></div>
+        <div class="font-specimens">
+          <p class="weight-400">font-weight: 400（normalと同等）</p>
+          <p class="weight-700">font-weight: 700（boldと同等）</p>
+          <p class="italic">font-style: italic（イタリック体）</p>
+          <p class="oblique">font-style: oblique（斜体表示）</p>
+        </div>
+        <p><code>font-weight</code>は100〜900で指定でき、<code>normal</code>は400、<code>bold</code>は700に相当します。<code>italic</code>はフォントに用意されたイタリック体、<code>oblique</code>は文字を傾けて見せる指定です。</p>
+        <p><code>font</code>短縮形は順番が重要です。<code>font-style</code>・<code>font-variant</code>・<code>font-weight</code>の後に、必須の<code>font-size</code>、必要なら<code>/ line-height</code>、最後に必須の<code>font-family</code>を書きます。</p>
+        <pre><code>.sample {
+  font: italic small-caps 700 100%/1.8 "LINE Seed JP", sans-serif;
+}</code></pre>
+        <div class="generic-families">
+          <p class="serif">serif：明朝系</p><p class="sans">sans-serif：ゴシック系</p><p class="cursive">cursive：筆記体</p><p class="fantasy">fantasy：装飾体</p><p class="mono">monospace：等幅</p>
+        </div>
+        <p class="exam-point"><strong>試験で見抜く：</strong><code>font-family</code>の最後に総称ファミリを書くと、指定書体がない場合の大きな分類をブラウザへ伝えられます。</p>
+      </article>
+
+      <article class="practice" id="practice-fonts">
+        <p class="practice-label">PRACTICE 05｜フォント</p>
+        <h3><code>font</code>短縮形で見出しを整えよう</h3>
+        <p>「PRACTICE 05」で、<code>font</code>短縮形を使い、太さ700、32px、行高1.4、LINE Seed JPの順で指定してください。最後には総称ファミリも書きます。</p>
+        <div class="write-guide">
+          <h4>CSSを書く場所</h4>
+          <p><strong>対象HTML：</strong><code>&lt;div class="practice-font-card"&gt;</code>内の<code>&lt;h4&gt;</code></p>
+          <p><strong>使用するセレクタ：</strong><code>.practice-font-card h4</code></p>
+          <p><strong>記入先：</strong><code>css/style.css</code>の「PRACTICE 05 解答記入欄 START」から「END」まで</p>
+        </div>
+        <div class="exercise-canvas practice-font-card">
+          <p>FONT PRACTICE</p><h4>読みやすい見出し</h4><span>書体・太さ・大きさ・行高をまとめて指定</span>
+        </div>
+        <div class="live-answer">
+          <p class="live-answer-label">完成例｜HTML＋css/answer.css</p>
+          <div class="exercise-canvas answer-live practice-font-card">
+            <p>FONT PRACTICE</p><h4>読みやすい見出し</h4><span>書体・太さ・大きさ・行高をまとめて指定</span>
+          </div>
+          <p class="live-answer-note">短縮形の必須値は<code>font-size</code>と<code>font-family</code>です。</p>
+        </div>
+      </article>
+    </section>
+
+    <!-- ============================================================
+      SECTION 6：文字の大小、字下げ、間隔、装飾、方向
+    ============================================================= -->
+    <section class="lesson" id="text">
+      <header class="lesson-heading"><p class="lesson-number">SECTION 06</p><h2>文字の読みやすさと意味を整える</h2><p>装飾は見た目だけでなく、行の読みやすさや文字方向にも関わります。</p></header>
+
+      <article class="topic" id="text-transform">
+        <div class="topic-title"><span class="star star-2">★★</span><div><p class="book-no">2-41</p><h3><code>text-transform</code> — 英字の大小文字</h3></div></div>
+        <div class="transform-examples">
+          <p class="capitalize"><code>capitalize</code>：welcome to css</p>
+          <p class="uppercase"><code>uppercase</code>：Welcome to CSS</p>
+          <p class="lowercase"><code>lowercase</code>：Welcome TO CSS</p>
+          <p class="transform-none"><code>none</code>：Welcome TO CSS</p>
+        </div>
+        <p class="exam-point"><strong>試験で見抜く：</strong><code>capitalize</code>は各単語の先頭を大文字にしますが、それ以外の大文字を自動で小文字にする指定ではありません。</p>
+      </article>
+
+      <article class="topic" id="spacing-decoration">
+        <div class="topic-title"><span class="star star-1">★</span><div><p class="book-no">2-42・2-44・2-45・2-47</p><h3>字下げ・文字間隔・装飾・影・行高・縦位置</h3></div></div>
+        <div class="text-tuning">
+          <p class="indent-sample"><strong>text-indent:</strong> 段落の1行目だけを字下げします。正の値は右、負の値は左へ動きます。</p>
+          <p class="letter-sample"><strong>letter-spacing:</strong> 文 字 と 文 字 の 間 隔</p>
+          <p class="word-sample"><strong>word-spacing:</strong> space between English words</p>
+          <p class="decoration-sample"><strong>text-decoration:</strong> 線の種類・スタイル・色</p>
+          <p class="shadow-text"><strong>text-shadow:</strong> 文字に影をつける</p>
+          <p class="line-height-sample"><strong>line-height:</strong> 行ボックスの高さを調整し、複数行を読みやすくします。<br>行間が狭すぎると、上下の文字が近づいて読みにくくなります。</p>
+          <p>通常の文字 <span class="vertical-align-sample">vertical-align: super</span> 通常の文字</p>
+        </div>
+        <pre><code>text-decoration: underline wavy #d88f78;
+/* text-decoration-line / -style / -color の短縮形 */</code></pre>
+      </article>
+
+      <article class="topic" id="bidi">
+        <div class="topic-title"><span class="star star-1">★</span><div><p class="book-no">2-46</p><h3><code>direction</code> と <code>unicode-bidi</code></h3></div></div>
+        <p><code>direction</code>は文字方向を示し、<code>ltr</code>は左から右、<code>rtl</code>は右から左です。<code>unicode-bidi: bidi-override</code>と組み合わせると、指定方向を強制できます。</p>
+        <div class="direction-demo">
+          <p class="ltr"><strong>ltr：</strong>CSS 123 ABC</p>
+          <p class="rtl"><strong>rtl + bidi-override：</strong>CSS 123 ABC</p>
+        </div>
+        <p class="book-caution">文字の見た目の順序とHTML内の文字列順序が異なることがあるため、コードを読んで結果を判断します。</p>
+      </article>
+
+      <article class="practice" id="practice-text">
+        <p class="practice-label">PRACTICE 06｜文字の調整</p>
+        <h3>お知らせ文を読みやすく調整しよう</h3>
+        <p>「PRACTICE 06」で、見出しの英字を大文字へ変換して文字間隔を広げ、本文へ字下げと行高を指定してください。</p>
+        <div class="write-guide">
+          <h4>CSSを書く場所</h4>
+          <p><strong>見出し：</strong><code>&lt;h4&gt;forest workshop&lt;/h4&gt;</code> → <code>.practice-text-card h4</code></p>
+          <p><strong>本文：</strong><code>&lt;p&gt;次回のCSS教室では…&lt;/p&gt;</code> → <code>.practice-text-card p</code></p>
+          <p><strong>記入先：</strong><code>css/style.css</code>の「PRACTICE 06 解答記入欄 START」から「END」まで</p>
+        </div>
+        <div class="exercise-canvas practice-text-card">
+          <h4>forest workshop</h4>
+          <p>次回のCSS教室では、文字の間隔と行の高さを調整します。値を少しずつ変え、読みやすさがどのように変わるか観察しましょう。</p>
+        </div>
+        <div class="live-answer">
+          <p class="live-answer-label">完成例｜HTML＋css/answer.css</p>
+          <div class="exercise-canvas answer-live practice-text-card">
+            <h4>forest workshop</h4>
+            <p>次回のCSS教室では、文字の間隔と行の高さを調整します。値を少しずつ変え、読みやすさがどのように変わるか観察しましょう。</p>
+          </div>
+          <p class="live-answer-note">見出しと本文へ別々のセレクタで指定しています。</p>
+        </div>
+      </article>
+    </section>
+
+    <!-- ============================================================
+      SECTION 7：リスト、CSSカウンタ、引用符
+    ============================================================= -->
+    <section class="lesson" id="lists">
+      <header class="lesson-heading"><p class="lesson-number">SECTION 07</p><h2>繰り返す項目と引用符を自動で整える</h2><p>最後は、ブラウザが番号や記号を生成する仕組みです。</p></header>
+
+      <article class="topic" id="list-style">
+        <div class="topic-title"><span class="star star-1">★</span><div><p class="book-no">2-15</p><h3><code>list-style-type</code></h3></div></div>
+        <div class="list-types">
+          <ul class="disc"><li>disc</li><li>黒丸</li></ul>
+          <ul class="circle"><li>circle</li><li>白丸</li></ul>
+          <ol class="decimal"><li>decimal</li><li>10進数</li></ol>
+          <ol class="upper-roman"><li>upper-roman</li><li>大文字ローマ数字</li></ol>
+          <ol class="upper-latin"><li>upper-latin</li><li>大文字ラテン文字</li></ol>
+          <ol class="lower-greek"><li>lower-greek</li><li>小文字ギリシャ文字</li></ol>
+          <ol class="hiragana"><li>hiragana</li><li>ひらがな</li></ol>
+          <ul class="none"><li>none</li><li>マーカーなし</li></ul>
+        </div>
+      </article>
+
+      <article class="topic" id="counters">
+        <div class="topic-title"><span class="star star-1">★</span><div><p class="book-no">2-16</p><h3>CSSカウンタ</h3></div></div>
+        <p><code>counter-reset</code>でカウンタを用意し、<code>counter-increment</code>で増やし、<code>content: counter(名前)</code>で表示します。</p>
+        <div class="counter-demo">
+          <h4>セレクタを選ぶ</h4><h4>宣言を書く</h4><h4>ブラウザで確認する</h4>
+        </div>
+        <pre><code>.counter-demo { counter-reset: step; }
+.counter-demo h4 { counter-increment: step; }
+.counter-demo h4::before {
+  content: "STEP " counter(step) " ";
+}</code></pre>
+      </article>
+
+      <article class="topic" id="quotes">
+        <div class="topic-title"><span class="star star-1">★</span><div><p class="book-no">2-71</p><h3><code>quotes</code> と生成する引用符</h3></div></div>
+        <p><code>quotes</code>は引用符の組を定義し、疑似要素の<code>content</code>で<code>open-quote</code>・<code>close-quote</code>を出力します。組を複数書くと、入れ子の深さで使い分けられます。<code>initial</code>を指定した場合は、HTMLの<code>lang</code>属性で示された言語に応じた初期引用符が使われます。</p>
+        <blockquote class="quote-demo"><q>CSSは、HTMLへ見た目のルールを与えます。<q>小さく変えて比べる</q>ことが理解への近道です。</q></blockquote>
+      </article>
+
+      <article class="practice" id="practice-lists">
+        <p class="practice-label">PRACTICE 07｜カウンタ</p>
+        <h3>3つの手順へ自動で番号を付けよう</h3>
+        <p>「PRACTICE 07」で、親要素にカウンタを用意し、各項目で1ずつ増やし、疑似要素へ「STEP 番号」を表示してください。</p>
+        <div class="write-guide">
+          <h4>CSSを書く場所</h4>
+          <p><strong>親要素：</strong><code>&lt;div class="practice-counter"&gt;</code> → <code>.practice-counter</code></p>
+          <p><strong>各項目：</strong><code>&lt;p&gt;</code> → <code>.practice-counter p</code></p>
+          <p><strong>番号の生成：</strong><code>.practice-counter p::before</code></p>
+          <p><strong>記入先：</strong><code>css/style.css</code>の「PRACTICE 07 解答記入欄 START」から「END」まで</p>
+        </div>
+        <div class="exercise-canvas practice-counter">
+          <p>セレクタを選ぶ</p><p>宣言を書く</p><p>ブラウザーで確認する</p>
+        </div>
+        <div class="live-answer">
+          <p class="live-answer-label">完成例｜HTML＋css/answer.css</p>
+          <div class="exercise-canvas answer-live practice-counter">
+            <p>セレクタを選ぶ</p><p>宣言を書く</p><p>ブラウザーで確認する</p>
+          </div>
+          <p class="live-answer-note">番号はHTMLへ直接書かず、CSSカウンタと<code>::before</code>で生成しています。</p>
+        </div>
+      </article>
+    </section>
+
+    <section class="finish import-proof">
+      <p class="eyebrow">FINISH</p>
+      <h2>一周したら、値を戻さず「自分のデザイン」にしてみよう</h2>
+      <p>色、角丸、影、文字間隔、動きの時間などを少しずつ変更してください。ただし試験勉強では、作品の美しさよりも「どのプロパティが、何を変えたか」を説明できることが大切です。</p>
+      <p>このカードの背景色は、<code>@import</code>された<code>css/imported-theme.css</code>から来ています。</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>CSSを触って覚える｜教科書第2章・HTML5プロフェッショナル認定試験 Level.1 対応</p>
+    <p>Design palette inspired by PANTONE 11-4201 Cloud Dancer. Web colors are educational approximations.</p>
+  </footer>
+</body>
+</html>

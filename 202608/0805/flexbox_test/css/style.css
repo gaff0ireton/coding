@@ -448,7 +448,7 @@ main {
                 }
 
                 .blogSection__txt {
-                    gap: clamp(21px, clamp(24 / 1200 * 100vw), 24px);
+                    gap: clamp(21px, calc(24 / 1200 * 100vw), 24px);
                 }
 
                 .blogSection__time {
