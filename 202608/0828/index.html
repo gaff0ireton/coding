@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3章_HTML 3-31から</title>
+    <meta name="description" content="3章_HTML 3-31から">
+    <style>
+        img {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        th,td {
+            border: 1px solid #000;
+            padding: 4px;
+        }
+
+        picture {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <h1>3章_HTML 3-31から</h1>
+    
+    <!-- ?問題3-31 -->
+    <table>
+        <caption>2026年8月 商品別売上表</caption>
+        <colgroup>
+            <col>
+            <col span="2">
+        </colgroup>
+        <thead>
+            <tr>
+                <th scope="col">商品名</th>
+                <th scope="col">販売数</th>
+                <th scope="col">売上金額</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">商品A</th>
+                <td>10個</td>
+                <td>10,000円</td>
+            </tr>
+            <tr>
+                <th scope="row">商品B</th>
+                <td>20個</td>
+                <td>30,000円</td>
+            </tr>
+            <tr>
+                <th scope="row">商品A</th>
+                <td>15個</td>
+                <td>20,000円</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <th scope="row">合計</th>
+                <td>45個</td>
+                <td>60,000円</td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <!-- ?問題3-36 -->
+    <picture>
+        <source media="(min-width: 1024px)" srcset="images/kobe_pc.jpg">
+        <source media="(min-width: 600px)" srcset="images/kobe_sp.jpg">
+        <img src="images/kobe_sp.jpg" alt="神戸の風景">
+    </picture>
+</body>
+</html>
