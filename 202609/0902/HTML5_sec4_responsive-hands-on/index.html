@@ -1,0 +1,1046 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <!--
+    4-6〜4-9 viewport
+    width=device-width：レイアウト用の表示幅を端末幅へ合わせます。
+    initial-scale=1：最初の表示倍率を1倍にします。
+  -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- 4-22：数字列を電話番号へ自動変換する機能を抑えます。 -->
+  <meta name="format-detection" content="telephone=no, email=no, address=no" id="formatDetectionMeta">
+
+  <!-- 4-26・4-27：教科書に登場するApple向け設定です。 -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+
+  <!-- 4-25：ブラウザーのタブなどに使うファビコンです。 -->
+  <link rel="icon" href="assets/site-icon.svg" type="image/svg+xml">
+
+  <title>レスポンシブWebデザインを触って覚える｜HTML5 Level.1 第4章</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">本文へ移動</a>
+
+  <header class="hero" id="top">
+    <div class="hero__copy">
+      <p class="eyebrow">HTML5プロフェッショナル認定試験 Level.1｜第4章</p>
+      <h1>画面を狭くして、<br>レスポンシブを理解する。</h1>
+      <p class="hero__lead">
+        このページ自体が実験教材です。説明を上から読み、ブラウザーの横幅を変えながら、
+        同じHTMLがどのように並び替わり、画像を選び直すか観察してください。
+      </p>
+      <div class="hero__actions">
+        <a class="button button--primary" href="#roadmap">学習を始める</a>
+        <span class="viewport-readout" aria-live="polite">
+          現在のviewport幅：<strong id="viewportWidth">--</strong>px
+        </span>
+      </div>
+    </div>
+
+    <!--
+      4-24 pictureによるアートディレクション。
+      640px以下では、横長写真を単に縮めず、被写体を大きく見せる縦構図へ切り替えます。
+    -->
+    <figure class="hero__visual">
+      <picture>
+        <source media="(max-width: 639px)" srcset="assets/fox-rabbit-mobile-800.jpg">
+        <img src="assets/fox-rabbit-desktop-1600.jpg"
+             alt="朝の高原にいるきつねとうさぎ"
+             width="1600" height="900">
+      </picture>
+      <figcaption>
+        639px以下では構図が変わります。これはCSSの切り抜きではなく、
+        <code>&lt;picture&gt;</code>が別画像を選んだ結果です。
+      </figcaption>
+    </figure>
+  </header>
+
+  <main id="main">
+    <section class="start-card" id="roadmap">
+      <p class="section-kicker">LEARNING MAP</p>
+      <h2>6つの段階で「なぜ必要か」からつなげる</h2>
+      <p>
+        教科書の重要度順ではなく、初めて学ぶ人が仕組みを組み立てられる順です。
+        ただし、問題4-1〜4-27のキーワードはすべて対応しています。
+      </p>
+      <ol class="roadmap">
+        <li><a href="#foundation"><span>01</span>レスポンシブの全体像</a></li>
+        <li><a href="#viewport"><span>02</span>viewportというものさし</a></li>
+        <li><a href="#fluid"><span>03</span>伸び縮みする箱と画像</a></li>
+        <li><a href="#media-query"><span>04</span>条件でCSSを切り替える</a></li>
+        <li><a href="#responsive-images"><span>05</span>画面に合う画像を届ける</a></li>
+        <li><a href="#mobile-details"><span>06</span>モバイル向けの仕上げ</a></li>
+      </ol>
+      <div class="learning-tip">
+        <strong>おすすめの操作：</strong>
+        開発者ツールのデバイス表示、またはブラウザーの横幅変更を使い、
+        375px・768px・1200px付近で見た目を比べてください。
+      </div>
+      <div class="official-scope">
+        <h3>公式出題範囲との対応</h3>
+        <div>
+          <p><strong>1.4.1 マルチデバイス対応｜重要度7</strong><span>配置、画像、モバイル固有設定、低速回線を考えた性能</span></p>
+          <p><strong>1.4.2 メディアクエリ｜重要度5</strong><span>メディアタイプ、メディア特性、構文、エラー処理</span></p>
+        </div>
+        <p class="official-scope__note">どちらも、知識問題・コードリーディング問題・記述問題の対象です。</p>
+      </div>
+    </section>
+
+    <!-- =========================================================
+      SECTION 01：全体像
+      教科書 4-1、4-2、4-5、4-10、4-11
+    ========================================================== -->
+    <section class="lesson" id="foundation">
+      <header class="lesson__heading">
+        <p class="lesson__number">SECTION 01</p>
+        <div>
+          <h2>まず「何を同じにして、何を変えるか」</h2>
+          <p>HTMLは共通のまま、CSSと画像の選び方を画面に合わせるのが基本です。</p>
+        </div>
+      </header>
+
+      <article class="topic">
+        <div class="topic__title">
+          <span class="importance importance--3" aria-label="重要度3">★★★</span>
+          <div><p class="book-number">教科書 4-1・4-2</p><h3>レスポンシブWebデザインの全体像</h3></div>
+        </div>
+        <p>
+          レスポンシブWebデザインは、原則として<strong>共通のHTMLとURL</strong>を使い、
+          viewport、フルードグリッド、フルードイメージ、メディアクエリを組み合わせて、
+          複数の画面へ対応する考え方です。
+        </p>
+        <div class="concept-flow" aria-label="1つのHTMLから3つの画面へ対応する図">
+          <div class="concept-flow__source">共通HTML<br><small>内容と意味</small></div>
+          <div class="concept-flow__arrow" aria-hidden="true">→</div>
+          <div class="device-set">
+            <div class="device device--phone">スマートフォン</div>
+            <div class="device device--tablet">タブレット</div>
+            <div class="device device--pc">PC</div>
+          </div>
+        </div>
+        <table class="study-table">
+          <caption>2つの構築方法の違い</caption>
+          <thead><tr><th>方法</th><th>ページ</th><th>特徴</th></tr></thead>
+          <tbody>
+            <tr><th>レスポンシブ方式</th><td>共通HTML・共通URL</td><td>保守しやすい一方、最初の設計や画像容量に注意する</td></tr>
+            <tr><th>端末別サイト方式</th><td>端末ごとに別ページ</td><td>User-Agentなどで振り分ける。更新対象が増えやすい</td></tr>
+          </tbody>
+        </table>
+        <p class="exam-point"><strong>試験で見抜く：</strong>レスポンシブは「端末ごとに別HTMLを必ず作る方法」ではありません。</p>
+      </article>
+
+      <article class="topic">
+        <div class="topic__title">
+          <span class="importance importance--2" aria-label="重要度2">★★</span>
+          <div><p class="book-number">教科書 4-5</p><h3>固定レイアウトと可変レイアウト</h3></div>
+        </div>
+        <div class="compare-layouts">
+          <div class="compare-card">
+            <h4>固定レイアウト</h4>
+            <div class="fixed-demo"><span>960px</span></div>
+            <p><code>width: 960px</code>のように幅を固定。狭い画面でははみ出すことがあります。</p>
+          </div>
+          <div class="compare-card">
+            <h4>可変レイアウト</h4>
+            <div class="fluid-demo"><span>90%</span></div>
+            <p><code>width: 90%</code>のように基準に合わせて伸縮します。</p>
+          </div>
+        </div>
+        <pre><code>.page {
+  width: 90%;
+  max-width: 960px;
+  margin: 0 auto;
+}</code></pre>
+        <p>
+          教科書では画面ライブラリの例としてBootstrapも登場します。
+          ライブラリ名を覚えるだけでなく、「画面幅に応じた配置を助けるもの」と位置づけてください。
+        </p>
+      </article>
+
+      <article class="topic">
+        <div class="topic__title">
+          <span class="importance importance--3" aria-label="重要度3">★★★</span>
+          <div><p class="book-number">教科書 4-10・4-11</p><h3>ユーザーエージェントスタイルとリセットCSS</h3></div>
+        </div>
+        <p>
+          HTMLだけでも見出しが太くなり、bodyの周囲に余白が付くのは、ブラウザーが
+          <strong>ユーザーエージェントスタイルシート</strong>という既定CSSを持つためです。
+          リセットCSSは、この差を小さくするCSS宣言の集まりです。
+        </p>
+        <pre><code>/* リセットの小さな例 */
+body, h1, h2, p, ul {
+  margin: 0;
+  padding: 0;
+}</code></pre>
+        <div class="note-grid">
+          <p><strong>初期値</strong><br>CSS仕様が各プロパティに定める最初の値。</p>
+          <p><strong>ブラウザー既定スタイル</strong><br>ブラウザーがHTMLを読みやすくするために用意するCSS。</p>
+          <p><strong>リセットCSS</strong><br>既定差を小さくし、制作側の出発点をそろえる宣言群。</p>
+        </div>
+      </article>
+
+      <form class="quiz" data-answer="A,D" data-hint="レスポンシブ方式ではHTMLとURLを共通化できます。ブラウザー既定の見た目はユーザーエージェントスタイルです。" data-explanation="正解はA・Dです。レスポンシブ方式は共通HTML・共通URLで見せ方を調整し、ブラウザーはユーザーエージェントスタイルを持っています。">
+        <p class="quiz__label">SECTION 01｜模擬問題</p>
+        <h3>レスポンシブWebデザインに関する説明として、正しいものを2つ選びなさい。</h3>
+        <fieldset>
+          <legend>2つ選択</legend>
+          <label><input type="checkbox" name="q1" value="A"><span><b>A.</b> 1つのHTMLとURLを使い、画面条件に応じて見せ方を調整できる。</span></label>
+          <label><input type="checkbox" name="q1" value="B"><span><b>B.</b> viewportを1行指定すれば、CSSがなくてもすべての配置が自動調整される。</span></label>
+          <label><input type="checkbox" name="q1" value="C"><span><b>C.</b> 固定レイアウトは表示領域に合わせて常に同じ割合で伸縮する。</span></label>
+          <label><input type="checkbox" name="q1" value="D"><span><b>D.</b> ブラウザーはユーザーエージェントスタイルシートを持っている。</span></label>
+          <label><input type="checkbox" name="q1" value="E"><span><b>E.</b> リセットCSSは未対応機能を検出するJavaScriptライブラリである。</span></label>
+        </fieldset>
+        <button class="button button--answer" type="submit">回答する</button>
+      </form>
+    </section>
+
+    <!-- =========================================================
+      SECTION 02：viewport
+      教科書 4-6〜4-9
+    ========================================================== -->
+    <section class="lesson" id="viewport">
+      <header class="lesson__heading">
+        <p class="lesson__number">SECTION 02</p>
+        <div><h2>viewportで「画面を測るものさし」を合わせる</h2><p>スマートフォンがページをどの幅として扱うかを整えます。</p></div>
+      </header>
+
+      <article class="topic">
+        <div class="topic__title">
+          <span class="importance importance--3" aria-label="重要度3">★★★</span>
+          <div><p class="book-number">教科書 4-6〜4-9</p><h3>meta viewportの基本</h3></div>
+        </div>
+        <p>
+          viewportは、ブラウザーがWebページを表示する領域です。モバイルブラウザーは指定がないと、
+          PC向けの広いページを仮定して全体を縮小する場合があります。
+        </p>
+        <pre><code>&lt;meta name="viewport"
+      content="width=device-width, initial-scale=1"&gt;</code></pre>
+        <dl class="term-list">
+          <div><dt><code>width=device-width</code></dt><dd>viewportの幅を端末の画面幅へ合わせます。</dd></div>
+          <div><dt><code>initial-scale=1</code></dt><dd>ページを開いたときの倍率を1倍にします。</dd></div>
+          <div><dt><code>minimum-scale</code></dt><dd>最小の拡大率を指定します。</dd></div>
+          <div><dt><code>maximum-scale</code></dt><dd>最大の拡大率を指定します。</dd></div>
+          <div><dt><code>user-scalable</code></dt><dd><code>yes/1</code>は拡大縮小を許可、<code>no/0</code>は禁止する指定です。</dd></div>
+        </dl>
+        <aside class="accessibility-note">
+          <strong>制作上の注意：</strong>試験では<code>user-scalable=no</code>の意味を問われますが、
+          利用者が文字を拡大できなくなるため、この教材の実装例ではズームを禁止していません。
+        </aside>
+      </article>
+
+      <article class="topic">
+        <div class="topic__title">
+          <span class="importance importance--1" aria-label="重要度1">★</span>
+          <div><p class="book-number">教科書 4-7</p><h3>CSSのviewport単位</h3></div>
+        </div>
+        <p>meta viewportの設定値と、CSSで長さを表す<code>vw</code>などは別物です。</p>
+        <div class="viewport-units">
+          <div><b>1vw</b><span>viewport幅の1%</span></div>
+          <div><b>1vh</b><span>viewport高さの1%</span></div>
+          <div><b>1vmin</b><span>幅・高さの小さい方の1%</span></div>
+          <div><b>1vmax</b><span>幅・高さの大きい方の1%</span></div>
+        </div>
+        <div class="vw-ruler" aria-hidden="true"><span>この帯は幅 80vw</span></div>
+        <pre><code>.vw-ruler {
+  width: 80vw;
+  max-width: 100%;
+}</code></pre>
+      </article>
+
+      <form class="quiz" data-answer="B" data-hint="device-widthは端末幅、initial-scaleは初期倍率です。CSSプロパティのwidthとは別です。" data-explanation="正解はBです。width=device-widthでviewport幅を端末幅へ合わせ、initial-scale=1で初期倍率を1倍にします。">
+        <p class="quiz__label">SECTION 02｜模擬問題</p>
+        <h3>次の指定の説明として、最も適切なものを1つ選びなさい。</h3>
+        <pre><code>&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;</code></pre>
+        <fieldset>
+          <legend>1つ選択</legend>
+          <label><input type="radio" name="q2" value="A"><span><b>A.</b> すべての要素のCSS widthを端末幅へ変更する。</span></label>
+          <label><input type="radio" name="q2" value="B"><span><b>B.</b> viewportを端末幅に合わせ、初期倍率を1倍にする。</span></label>
+          <label><input type="radio" name="q2" value="C"><span><b>C.</b> 利用者によるズームを禁止する。</span></label>
+          <label><input type="radio" name="q2" value="D"><span><b>D.</b> 画面幅にかかわらず960pxで表示する。</span></label>
+          <label><input type="radio" name="q2" value="E"><span><b>E.</b> HTMLを端末別のページへ自動転送する。</span></label>
+        </fieldset>
+        <button class="button button--answer" type="submit">回答する</button>
+      </form>
+    </section>
+
+    <!-- =========================================================
+      SECTION 03：フルードレイアウト
+      教科書 4-3〜4-5
+    ========================================================== -->
+    <section class="lesson" id="fluid">
+      <header class="lesson__heading">
+        <p class="lesson__number">SECTION 03</p>
+        <div><h2>箱と画像を、まず柔らかくする</h2><p>条件分岐の前に、普段の幅指定だけで自然に伸縮できる土台を作ります。</p></div>
+      </header>
+
+      <article class="topic">
+        <div class="topic__title">
+          <span class="importance importance--2" aria-label="重要度2">★★</span>
+          <div><p class="book-number">教科書 4-3</p><h3>フルードグリッド</h3></div>
+        </div>
+        <p>
+          <strong>フルードグリッド（Fluid Grid）</strong>とは、ページ幅を格子状の単位に分け、
+          ブラウザーの表示幅に応じて、各領域の幅や使用する列数を変化させるレイアウト手法です。
+          「fluid」は液体のように形を変えるという意味で、固定された<code>px</code>だけでなく、
+          <code>%</code>などの<strong>相対値</strong>で横幅を考えます。
+        </p>
+        <aside class="grid-caution">
+          <strong>CSS Gridとの違い：</strong>
+          ここでいう「グリッド」はレイアウト設計上の格子です。
+          CSSの<code>display: grid</code>を必ず使う、という意味ではありません。
+          教科書の中心は「幅や列数が画面に合わせて変化するか」です。
+        </aside>
+
+        <h4>画面幅に応じて「4列 ⇄ 12列」を切り替える例</h4>
+        <p>
+          Webページの幅を12列へ均等に分ける設計はよく使われます。
+          ただし、<strong>12列は代表例であり必須ではありません</strong>。
+          8列や16列など、設計に合う列数を選べます。
+          この模型は<strong>640px未満で4列、640px以上で12列</strong>へ切り替わるため、
+          ブラウザーの幅を変えながら列数と配置の変化を観察してください。
+        </p>
+        <div class="fluid-grid-switch" aria-label="画面幅に応じて4列と12列が切り替わるフルードグリッド模型">
+          <p class="fluid-grid-switch__status">
+            現在の模型：<strong class="grid-status grid-status--mobile">スマートフォン用・4列</strong>
+            <strong class="grid-status grid-status--desktop">タブレット／PC用・12列</strong>
+          </p>
+
+          <div class="grid-model grid-model--mobile">
+            <div class="grid-track grid-track--4" aria-hidden="true">
+              <i>1</i><i>2</i><i>3</i><i>4</i>
+            </div>
+            <div class="grid-content grid-content--4">
+              <div class="grid-content__mobile-main">メイン：4列すべて<br><b>4 ÷ 4 = 100%</b></div>
+              <div class="grid-content__mobile-side">サイド：4列すべて<br><b>次の行へ移動</b></div>
+            </div>
+            <p>狭い画面では4列へ減らし、メインとサイドをそれぞれ横幅100%で縦に並べます。</p>
+          </div>
+
+          <div class="grid-model grid-model--desktop">
+            <div class="grid-track grid-track--12" aria-hidden="true">
+              <i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i>
+              <i>7</i><i>8</i><i>9</i><i>10</i><i>11</i><i>12</i>
+            </div>
+            <div class="grid-content grid-content--12">
+              <div class="grid-content__main">メイン：8列<br><b>8 ÷ 12 = 66.67%</b></div>
+              <div class="grid-content__side">サイド：4列<br><b>4 ÷ 12 = 33.33%</b></div>
+            </div>
+            <p>640px以上では12列を使い、メイン8列とサイド4列を横に並べます。</p>
+          </div>
+        </div>
+
+        <aside class="framework-note">
+          <p class="framework-note__label">補足｜CSSフレームワークとのつながり</p>
+          <h4>BootstrapやTailwind CSSでも使われる考え方</h4>
+          <p>
+            このように「画面を列へ分け、画面幅に応じて列の使い方や並び方を変える」考え方は、
+            CSSフレームワークでも利用されています。ただし、2つのフレームワークでは仕組みが少し異なります。
+          </p>
+          <div class="framework-note__grid">
+            <section>
+              <h5>Bootstrap</h5>
+              <p>
+                Bootstrapの標準グリッドは<strong>1行を12列</strong>として扱い、列幅には割合が使われます。
+                ブレークポイントごとのクラスを組み合わせることで、スマートフォンでは縦並び、
+                広い画面では8列＋4列の横並び、といった変更ができます。
+              </p>
+              <pre><code>&lt;div class="row"&gt;
+  &lt;main class="col-12 col-md-8"&gt;メイン&lt;/main&gt;
+  &lt;aside class="col-12 col-md-4"&gt;サイド&lt;/aside&gt;
+&lt;/div&gt;</code></pre>
+              <p class="framework-note__small">
+                Bootstrapでは各ブレークポイントでも基本の12列は維持されます。
+                このページの「狭いときは4列へ減らす模型」と内部指定まで完全に同じ、という意味ではありません。
+              </p>
+            </section>
+            <section>
+              <h5>Tailwind CSS</h5>
+              <p>
+                Tailwind CSSには、列数を作る<code>grid-cols-*</code>と、要素が使う列数を決める
+                <code>col-span-*</code>があります。レスポンシブ用の接頭辞を付けると、
+                このページの<strong>4列から12列へ変わる模型</strong>を直接表現できます。
+              </p>
+              <pre><code>&lt;div class="grid grid-cols-4 md:grid-cols-12"&gt;
+  &lt;main class="col-span-4 md:col-span-8"&gt;メイン&lt;/main&gt;
+  &lt;aside class="col-span-4 md:col-span-4"&gt;サイド&lt;/aside&gt;
+&lt;/div&gt;</code></pre>
+              <p class="framework-note__small">
+                Tailwind CSSは12列を固定の標準にしているわけではありません。
+                <code>grid-cols-2</code>や<code>grid-cols-6</code>など、必要な列数を制作者が選びます。
+              </p>
+            </section>
+          </div>
+          <p class="framework-note__source">
+            確認資料：
+            <a href="https://getbootstrap.com/docs/5.3/layout/grid/" target="_blank" rel="noopener noreferrer">Bootstrap公式 Grid system</a>・
+            <a href="https://tailwindcss.com/docs/grid-template-columns" target="_blank" rel="noopener noreferrer">Tailwind CSS公式 grid-template-columns</a>
+          </p>
+          <p class="framework-note__exam">この補足は実務とのつながりを理解するための情報です。資格試験では、まずフルードグリッド自体の意味を優先して覚えましょう。</p>
+        </aside>
+
+        <p class="calculation"><strong>割合の求め方：</strong>使用する列数 ÷ 全列数 × 100。親要素が900pxなら約600pxと300px、親要素が600pxなら約400pxと200pxへ一緒に縮みます。</p>
+
+        <h4>フルードグリッドで変えられるもの</h4>
+        <ol class="learning-sequence">
+          <li><strong>領域の幅：</strong><code>%</code>などで親幅に合わせて伸縮させる。</li>
+          <li><strong>使用する列数：</strong>広い画面では12列、狭い画面では4列のように設計を変えられる。</li>
+          <li><strong>配置：</strong>PCでは横並び、スマートフォンでは縦並びへ変更できる。</li>
+          <li><strong>境界：</strong>メディアクエリのブレークポイントで、列数や配置を切り替える。</li>
+        </ol>
+        <div class="fluid-grid-demo">
+          <div class="fluid-grid-demo__main">main 75%</div>
+          <div class="fluid-grid-demo__side">side 25%</div>
+        </div>
+        <pre><code>/* 広い画面：75%と25%の2列 */
+.main { width: 75%; }
+.side { width: 25%; }
+
+/* 狭い画面：それぞれ100%にして縦へ並べる */
+@media screen and (max-width: 639px) {
+  .main,
+  .side { width: 100%; }
+}</code></pre>
+        <table class="study-table exam-decision-table">
+          <caption>試験の選択肢を判断するための表</caption>
+          <thead><tr><th>説明</th><th>判断</th><th>理由</th></tr></thead>
+          <tbody>
+            <tr><td>ウィンドウ幅に応じてレイアウトを変更する</td><td>正しい</td><td>表示領域に合わせる手法だから</td></tr>
+            <tr><td>幅を均等なグリッド単位に分けて配置する</td><td>正しい</td><td>格子を基準に領域を割り当てるから</td></tr>
+            <tr><td>ウィンドウ幅が変わっても使用するグリッド数は変化しない</td><td>誤り</td><td>画面幅に応じて列数も変更できるから</td></tr>
+            <tr><td>横幅を%などの相対値で指定する</td><td>正しい</td><td>親幅に合わせて伸縮させられるから</td></tr>
+            <tr><td>デバイスサイズに応じたグリッド設定ができる</td><td>正しい</td><td>メディアクエリと組み合わせられるから</td></tr>
+          </tbody>
+        </table>
+      </article>
+
+      <article class="topic">
+        <div class="topic__title">
+          <span class="importance importance--2" aria-label="重要度2">★★</span>
+          <div><p class="book-number">教科書 4-4</p><h3>フルードイメージ</h3></div>
+        </div>
+        <div class="image-rule-demo">
+          <img src="assets/red-panda-960.jpg" alt="苔の枝で休むレッサーパンダ" width="960" height="640">
+          <div>
+            <p><code>max-width: 100%</code>で親要素より大きく表示しません。</p>
+            <p><code>height: auto</code>で横幅に応じて高さを計算し、縦横比を保ちます。</p>
+          </div>
+        </div>
+        <pre><code>img,
+video {
+  max-width: 100%;
+  height: auto;
+}</code></pre>
+        <p>
+          これは<strong>表示寸法</strong>を柔軟にする方法です。大きな画像ファイルの通信量まで減らすには、
+          Section 05の<code>srcset</code>が必要です。
+        </p>
+      </article>
+
+      <article class="topic interactive-layout">
+        <div class="topic__title">
+          <span class="importance importance--2" aria-label="重要度2">★★</span>
+          <div><p class="book-number">体験</p><h3>このカード群を狭くして観察</h3></div>
+        </div>
+        <p>PCでは3列、タブレットでは2列、スマートフォンでは1列です。HTMLのカード数や順番は変えていません。</p>
+        <div class="responsive-card-grid">
+          <article><span>1</span><h4>共通HTML</h4><p>内容と読む順序を保ちます。</p></article>
+          <article><span>2</span><h4>柔軟な幅</h4><p>まず親幅に合わせます。</p></article>
+          <article><span>3</span><h4>条件で変更</h4><p>必要な境界だけ切り替えます。</p></article>
+        </div>
+      </article>
+
+      <form class="quiz" data-answer="C" data-hint="フルードグリッドでは、画面幅に応じて領域が使うグリッド数や列数も変更できます。" data-explanation="正解はCです。フルードグリッドは、ウィンドウ幅に応じてグリッドの幅だけでなく、使用する列数や配置も変更できます。">
+        <p class="quiz__label">SECTION 03｜模擬問題 A</p>
+        <h3>フルードグリッドの説明として、誤っているものを1つ選びなさい。</h3>
+        <fieldset>
+          <legend>1つ選択</legend>
+          <label><input type="radio" name="q3a" value="A"><span><b>A.</b> 表示領域の幅に応じてコンテンツの配置を変更できる。</span></label>
+          <label><input type="radio" name="q3a" value="B"><span><b>B.</b> ページ幅を均等な単位に分け、その格子に沿って領域を配置できる。</span></label>
+          <label><input type="radio" name="q3a" value="C"><span><b>C.</b> ウィンドウ幅が変化しても、各領域が使用するグリッド数は常に変化しない。</span></label>
+          <label><input type="radio" name="q3a" value="D"><span><b>D.</b> 横幅を%などの相対値で指定できる。</span></label>
+          <label><input type="radio" name="q3a" value="E"><span><b>E.</b> デバイスサイズに応じてグリッドの設定を変更できる。</span></label>
+        </fieldset>
+        <button class="button button--answer" type="submit">回答する</button>
+      </form>
+
+      <form class="quiz" data-answer="C" data-hint="親要素より大きくしない指定と、縦横比を保つ指定を組み合わせます。" data-explanation="正解はCです。max-width: 100%で親幅を超えないようにし、height: autoで縦横比を維持します。">
+        <p class="quiz__label">SECTION 03｜模擬問題 B</p>
+        <h3>画像を親要素の幅以内に縮小し、元画像より親が広い場合は無理に拡大せず、縦横比も維持します。最も適切なCSSを1つ選びなさい。</h3>
+        <fieldset>
+          <legend>1つ選択</legend>
+          <label><input type="radio" name="q3" value="A"><span><b>A.</b> <code>width: 100%; height: 300px;</code></span></label>
+          <label><input type="radio" name="q3" value="B"><span><b>B.</b> <code>min-width: 100%; height: auto;</code></span></label>
+          <label><input type="radio" name="q3" value="C"><span><b>C.</b> <code>max-width: 100%; height: auto;</code></span></label>
+          <label><input type="radio" name="q3" value="D"><span><b>D.</b> <code>max-height: 100%; width: 960px;</code></span></label>
+          <label><input type="radio" name="q3" value="E"><span><b>E.</b> <code>width: auto; height: 100%;</code></span></label>
+        </fieldset>
+        <button class="button button--answer" type="submit">回答する</button>
+      </form>
+    </section>
+
+    <!-- =========================================================
+      SECTION 04：メディアクエリ
+      教科書 4-12〜4-17
+    ========================================================== -->
+    <section class="lesson" id="media-query">
+      <header class="lesson__heading">
+        <p class="lesson__number">SECTION 04</p>
+        <div><h2>条件を日本語に直して読む</h2><p>メディアタイプ、メディア特性、論理演算を左から順に読みます。</p></div>
+      </header>
+
+      <article class="topic">
+        <div class="topic__title">
+          <span class="importance importance--3" aria-label="重要度3">★★★</span>
+          <div><p class="book-number">教科書 4-12〜4-15</p><h3>メディアタイプとメディア特性</h3></div>
+        </div>
+        <div class="query-anatomy" aria-label="メディアクエリの構造">
+          <span class="query-part query-part--at">@media</span>
+          <span class="query-part query-part--type">screen<small>メディアタイプ</small></span>
+          <span class="query-part query-part--logic">and<small>かつ</small></span>
+          <span class="query-part query-part--feature">(min-width: 768px)<small>メディア特性</small></span>
+        </div>
+        <h4>教科書に掲載されているメディアタイプ10種</h4>
+        <p>試験では「どの出力先を表す名前か」を問われます。省略せず、次の10種類を区別してください。</p>
+        <table class="study-table media-type-table">
+          <caption>メディアタイプ完全表</caption>
+          <thead><tr><th>メディアタイプ</th><th>対応する出力先・機器</th><th>覚え方</th></tr></thead>
+          <tbody>
+            <tr><th><code>all</code></th><td>すべてのメディアタイプ</td><td>all = 全部</td></tr>
+            <tr><th><code>print</code></th><td>プリンター・印刷プレビュー</td><td>print = 印刷</td></tr>
+            <tr><th><code>screen</code></th><td>一般的なカラーディスプレイ</td><td>PCやスマートフォンの画面</td></tr>
+            <tr><th><code>speech</code></th><td>音声読み上げブラウザー</td><td>speech = 音声</td></tr>
+            <tr><th><code>handheld</code></th><td>携帯電話など、画面が小さい端末</td><td>hand held = 手に持つ機器</td></tr>
+            <tr><th><code>projection</code></th><td>プロジェクター</td><td>projection = 投影</td></tr>
+            <tr><th><code>braille</code></th><td>点字用ディスプレイ</td><td>更新式の点字表示装置</td></tr>
+            <tr><th><code>embossed</code></th><td>点字用プリンター</td><td>紙へ凹凸を印刷する装置</td></tr>
+            <tr><th><code>tv</code></th><td>テレビ</td><td>テレビ画面向け</td></tr>
+            <tr><th><code>tty</code></th><td>固定幅フォントを使用するメディア</td><td>端末・テレタイプ系</td></tr>
+          </tbody>
+        </table>
+        <pre><code>&lt;link rel="stylesheet" href="style.css" media="screen, print"&gt;
+
+@media screen and (min-width: 768px) {
+  /* 画面表示かつ幅768px以上 */
+}</code></pre>
+
+        <h4>教科書に掲載されているメディア特性</h4>
+        <p><strong>メディアタイプ</strong>が機器の種類、<strong>メディア特性</strong>が幅・高さ・向き・解像度などの状態です。</p>
+        <table class="study-table media-feature-table">
+          <caption>メディア特性完全表</caption>
+          <thead><tr><th>メディア特性</th><th>調べるもの</th><th>主な値</th></tr></thead>
+          <tbody>
+            <tr><th><code>width</code><br><code>min-width</code><br><code>max-width</code></th><td>viewportの横幅</td><td>0以上の長さ</td></tr>
+            <tr><th><code>height</code><br><code>min-height</code><br><code>max-height</code></th><td>viewportの縦幅</td><td>0以上の長さ</td></tr>
+            <tr><th><code>device-width</code><br><code>min-device-width</code><br><code>max-device-width</code></th><td>端末スクリーンの横幅</td><td>0以上の長さ</td></tr>
+            <tr><th><code>device-height</code><br><code>min-device-height</code><br><code>max-device-height</code></th><td>端末スクリーンの縦幅</td><td>0以上の長さ</td></tr>
+            <tr><th><code>orientation</code></th><td>viewportの向き</td><td><code>landscape</code> / <code>portrait</code></td></tr>
+            <tr><th><code>aspect-ratio</code><br><code>device-aspect-ratio</code></th><td>viewportまたは端末画面の横幅と縦幅の比</td><td>横幅 / 縦幅の整数比</td></tr>
+            <tr><th><code>resolution</code><br><code>min-resolution</code><br><code>max-resolution</code></th><td>画面の解像度</td><td><code>dpi</code> / <code>dpcm</code> / <code>dppx</code></td></tr>
+          </tbody>
+        </table>
+        <pre><code>@media screen and (min-width: 768px)
+              and (orientation: landscape) {
+  .menu { display: flex; }
+}</code></pre>
+        <p>上の条件は「画面表示で、幅768px以上で、横長なら」と読みます。</p>
+      </article>
+
+      <article class="topic">
+        <div class="topic__title">
+          <span class="importance importance--2" aria-label="重要度2">★★</span>
+          <div><p class="book-number">教科書 4-14・4-15</p><h3>and・カンマ・not・onlyとブレークポイント</h3></div>
+        </div>
+        <div class="logic-cards">
+          <div><code>and</code><strong>両方を満たす</strong><span>A かつ B</span></div>
+          <div><code>,</code><strong>どれかを満たす</strong><span>A または B</span></div>
+          <div><code>not</code><strong>判定を反転</strong><span>A ではない</span></div>
+          <div><code>only</code><strong>古い環境への配慮</strong><span>クエリ対応時のみ</span></div>
+        </div>
+        <p>
+          レイアウトを切り替える境界の幅を<strong>ブレークポイント</strong>と呼びます。
+          <code>min-width: 640px</code>は640px<strong>以上</strong>、
+          <code>max-width: 639px</code>は639px<strong>以下</strong>です。
+        </p>
+        <div class="breakpoint-meter">
+          <span class="range range--small">〜639px</span>
+          <i aria-hidden="true">640px</i>
+          <span class="range range--large">640px〜</span>
+        </div>
+      </article>
+
+      <article class="topic">
+        <div class="topic__title">
+          <span class="importance importance--1" aria-label="重要度1">★</span>
+          <div><p class="book-number">教科書 4-16・4-17</p><h3>解像度の単位とエラー処理</h3></div>
+        </div>
+        <div class="resolution-cards">
+          <p><strong>dpi</strong><span>dots per inch</span></p>
+          <p><strong>dpcm</strong><span>dots per centimeter</span></p>
+          <p><strong>dppx</strong><span>dots per CSS pixel</span></p>
+        </div>
+        <pre><code>@media screen and (max-width: ), print {
+  nav { display: none; }
+}</code></pre>
+        <p>
+          値がない最初のクエリは無効ですが、カンマ後の<code>print</code>は独立して評価されます。
+          不正な1件がCSSファイル全体を止めるわけではありません。
+        </p>
+      </article>
+
+      <div class="current-mode" aria-live="polite">
+        CSSが判定した現在の範囲：<strong></strong>
+      </div>
+
+      <form class="quiz" data-answer="A,C,D" data-hint="orientationはviewportの縦横関係です。カンマは論理和、解像度にはdpi・dpcm・dppxを使えます。" data-explanation="正解はA・C・Dです。landscapeは横長、min-widthは境界値を含む『以上』、解像度にはdpi・dpcm・dppxを使用します。">
+        <p class="quiz__label">SECTION 04｜模擬問題</p>
+        <h3>メディアクエリに関する説明として、正しいものを3つ選びなさい。</h3>
+        <fieldset>
+          <legend>3つ選択</legend>
+          <label><input type="checkbox" name="q4" value="A"><span><b>A.</b> <code>orientation: landscape</code>はviewportが横長の状態を表す。</span></label>
+          <label><input type="checkbox" name="q4" value="B"><span><b>B.</b> 論理和は必ず<code>or</code>と記述する。</span></label>
+          <label><input type="checkbox" name="q4" value="C"><span><b>C.</b> <code>min-width: 768px</code>は幅768pxを含む。</span></label>
+          <label><input type="checkbox" name="q4" value="D"><span><b>D.</b> 解像度の単位には<code>dpi</code>、<code>dpcm</code>、<code>dppx</code>がある。</span></label>
+          <label><input type="checkbox" name="q4" value="E"><span><b>E.</b> 1つのクエリが不正ならCSSファイル全体が必ず無効になる。</span></label>
+        </fieldset>
+        <button class="button button--answer" type="submit">回答する</button>
+      </form>
+    </section>
+
+    <!-- =========================================================
+      SECTION 05：画像
+      教科書 4-20、4-21、4-23、4-24
+    ========================================================== -->
+    <section class="lesson" id="responsive-images">
+      <header class="lesson__heading">
+        <p class="lesson__number">SECTION 05</p>
+        <div><h2>「表示サイズ」と「送る画像」を分けて考える</h2><p>フルードイメージ、密度候補、幅候補、構図切り替えは役割が違います。</p></div>
+      </header>
+
+      <article class="topic">
+        <div class="topic__title">
+          <span class="importance importance--2" aria-label="重要度2">★★</span>
+          <div><p class="book-number">教科書 4-23・4-24</p><h3>高解像度画面とsrcset</h3></div>
+        </div>
+        <p>
+          <strong>srcset属性</strong>は、1つの<code>img</code>要素へ複数の画像候補を登録し、
+          画面のピクセル密度やviewport幅などをもとに、ブラウザーへ適切な候補を選ばせる属性です。
+          画像をCSSで小さく見せるだけでなく、端末に合うファイルを届けられるため、
+          高解像度画面のぼやけと、モバイル回線での過剰な通信量の両方を調整できます。
+        </p>
+        <p>
+          CSSピクセルはレイアウト上の論理的な単位、デバイスピクセルは画面の物理的な点です。
+          DPR（デバイスピクセル比）が2なら、1 CSS pxを縦横2倍、合計4個の物理ピクセルで描けます。
+          公式出題範囲の<code>density</code>は、このような画面密度を表す考え方です。
+        </p>
+        <div class="pixel-demo">
+          <div><strong>1 CSS px</strong><span class="pixel pixel--css"></span></div>
+          <div><strong>DPR 2</strong><span class="pixel pixel--dpr"><i></i><i></i><i></i><i></i></span></div>
+        </div>
+        <h4>srcsetの書式を1つずつ読む</h4>
+        <pre><code>&lt;img src="photo-480.jpg"
+     srcset="photo-480.jpg 1x,
+             photo-960.jpg 2x"
+     alt="森の動物"&gt;</code></pre>
+        <div class="srcset-anatomy">
+          <p><strong>候補1</strong><code>photo-480.jpg 1x</code><span>通常密度向け</span></p>
+          <p><strong>区切り</strong><code>,</code><span>候補同士をカンマで区切る</span></p>
+          <p><strong>候補2</strong><code>photo-960.jpg 2x</code><span>2倍密度向け</span></p>
+        </div>
+        <p>
+          <code>1x</code>と<code>2x</code>を<strong>x記述子（ピクセル密度記述子）</strong>と呼びます。
+          URLだけで記述子を省略した候補は<code>1x</code>として扱われます。
+          ブラウザーは候補をすべて表示したり、必ずすべて読み込んだりするのではなく、通常は状況に合う1つを選びます。
+        </p>
+        <table class="study-table descriptor-compare">
+          <caption>src・x記述子・w記述子の役割</caption>
+          <thead><tr><th>指定</th><th>表すもの</th><th>選択の主な基準</th></tr></thead>
+          <tbody>
+            <tr><th><code>src</code></th><td>基本画像・非対応環境向けの代替</td><td>srcsetが使えない場合など</td></tr>
+            <tr><th><code>1x</code> <code>2x</code></th><td>画像候補の想定ピクセル密度</td><td>端末のDPR・画面密度</td></tr>
+            <tr><th><code>480w</code> <code>960w</code></th><td>画像ファイル本来の横幅</td><td>viewport、表示予定幅、画面密度</td></tr>
+          </tbody>
+        </table>
+      </article>
+
+      <article class="topic">
+        <div class="topic__title">
+          <span class="importance importance--1" aria-label="重要度1">★</span>
+          <div><p class="book-number">教科書 4-24</p><h3>w記述子とsizesを実際に使う</h3></div>
+        </div>
+        <p>
+          <strong>w記述子（幅記述子）</strong>は、候補画像ファイルの<strong>固有の横幅</strong>を表します。
+          <code>480w</code>は「このファイルの元画像は横480px」という意味で、
+          画面上で必ず480px表示する指定ではありません。実際の画像幅と違う数値を書いてはいけません。
+        </p>
+        <p>
+          <strong>sizes属性</strong>は、画像がレイアウト上でどれくらいの幅になる予定かをブラウザーへ伝えます。
+          CSSの代わりに表示幅を設定する属性ではなく、<strong>候補選択のための情報</strong>です。
+          w記述子を使う場合は、ブラウザーが必要な画像サイズを計算できるよう、sizesと組み合わせます。
+        </p>
+        <h4>srcsetには2つの指定方法がある</h4>
+        <div class="srcset-methods">
+          <section>
+            <p class="srcset-methods__label">方法1｜x記述子</p>
+            <h5>画面密度に合わせる</h5>
+            <pre><code>&lt;img src="animal-1x.jpg"
+  srcset="animal-1x.jpg 1x,
+          animal-2x.jpg 2x,
+          animal-3x.jpg 3x"
+  alt="森の動物"&gt;</code></pre>
+            <ul>
+              <li><code>1x</code>：通常密度向け。省略時も1x相当。</li>
+              <li><code>2x</code>：縦横2倍の画素数を持つ候補。</li>
+              <li><code>3x</code>：縦横3倍の画素数を持つ候補。</li>
+            </ul>
+            <p>画像をCSS上で横320px表示するなら、1xは横320px、2xは横640px、3xは横960pxの画像を用意する考え方です。</p>
+          </section>
+          <section>
+            <p class="srcset-methods__label">方法2｜w記述子</p>
+            <h5>画像ファイル本来の幅を伝える</h5>
+            <pre><code>&lt;img src="animal-480.jpg"
+  srcset="animal-480.jpg 480w,
+          animal-960.jpg 960w,
+          animal-1440.jpg 1440w"
+  sizes="(min-width: 768px) 50vw, 92vw"
+  alt="森の動物"&gt;</code></pre>
+            <p>ブラウザーが表示予定幅と画面密度を計算し、必要量に近い候補を選びます。</p>
+          </section>
+        </div>
+        <aside class="grid-caution">
+          <strong>混在させない：</strong>
+          同じ<code>srcset</code>内で<code>2x</code>と<code>960w</code>を一緒に使いません。
+          x記述子方式かw記述子方式のどちらか一方を選びます。
+        </aside>
+        <div class="selection-formula">
+          <p><strong>1.</strong><span>sizesで表示予定幅を調べる</span></p>
+          <p><strong>2.</strong><span>画面密度を考える</span></p>
+          <p><strong>3.</strong><span>必要幅に近いw候補を選ぶ</span></p>
+        </div>
+        <p class="calculation"><strong>例：</strong>表示予定幅が480 CSS pxでDPR 2なら、約960px分の画像が必要になるため、<code>960w</code>候補が選ばれやすくなります。最終判断はブラウザーに任されます。</p>
+        <figure class="srcset-demo">
+          <!--
+            画像の固有幅を480w、960w、1440wで示します。
+            sizesは、768px以上なら表示幅50vw、それ未満なら92vwとブラウザーへ伝えます。
+          -->
+          <img src="assets/red-panda-960.jpg"
+               srcset="assets/red-panda-480.jpg 480w,
+                       assets/red-panda-960.jpg 960w,
+                       assets/red-panda-1440.jpg 1440w"
+               sizes="(min-width: 768px) 50vw, 92vw"
+               alt="霧の森で苔の枝に休むレッサーパンダ"
+               width="1440" height="960"
+               id="srcsetImage">
+          <figcaption>
+            ブラウザーが選んだ候補：<code id="currentSrc">確認中…</code>
+          </figcaption>
+        </figure>
+        <pre><code>&lt;img src="red-panda-960.jpg"
+  srcset="red-panda-480.jpg 480w,
+          red-panda-960.jpg 960w,
+          red-panda-1440.jpg 1440w"
+  sizes="(min-width: 768px) 50vw, 92vw"
+  alt="霧の森のレッサーパンダ"&gt;</code></pre>
+        <ul class="check-list">
+          <li><code>480w</code>などは画像ファイル本来の横幅で、CSSの表示幅ではありません。</li>
+          <li><code>sizes</code>は画像が画面内でどれくらいの幅になる予定かを伝えます。</li>
+          <li>同じ<code>srcset</code>内でx記述子とw記述子を混在させません。</li>
+          <li>候補を全部表示するのではなく、ブラウザーが通常1つを選びます。</li>
+        </ul>
+      </article>
+
+      <article class="topic">
+        <div class="topic__title">
+          <span class="importance importance--1" aria-label="重要度1">★</span>
+          <div><p class="book-number">教科書 4-24関連</p><h3>pictureで構図を切り替える</h3></div>
+        </div>
+        <p>
+          ページ最上部の写真は、狭い画面になると被写体へ寄った縦構図へ切り替わります。
+          <code>source</code>は候補と条件、<code>img</code>は表示の土台とフォールバックです。
+          代替テキストは<code>img</code>の<code>alt</code>へ書きます。
+        </p>
+        <div class="picture-reference-grid">
+          <figure>
+            <img src="assets/fox-rabbit-mobile-800.jpg" alt="きつねとうさぎを大きく見せる縦構図" width="640" height="800">
+            <figcaption><strong>639px以下の候補</strong><br>狭い画面でも顔が見える寄り構図</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/fox-rabbit-desktop-1600.jpg" alt="高原全体を見せる横長構図" width="1600" height="900">
+            <figcaption><strong>640px以上の候補</strong><br>風景全体を見せる横長構図</figcaption>
+          </figure>
+        </div>
+        <figure class="live-picture-demo">
+          <picture>
+            <source media="(max-width: 639px)" srcset="assets/fox-rabbit-mobile-800.jpg">
+            <img src="assets/fox-rabbit-desktop-1600.jpg"
+                 alt="画面幅に応じて構図が切り替わる高原のきつねとうさぎ"
+                 width="1600" height="900"
+                 id="pictureDemoImage">
+          </picture>
+          <figcaption>いま表示している画像：<code id="pictureCurrentSrc">確認中…</code></figcaption>
+        </figure>
+        <pre><code>&lt;picture&gt;
+  &lt;source media="(max-width: 639px)"
+          srcset="fox-rabbit-mobile.jpg"&gt;
+  &lt;img src="fox-rabbit-desktop.jpg"
+       alt="朝の高原にいるきつねとうさぎ"&gt;
+&lt;/picture&gt;</code></pre>
+      </article>
+
+      <article class="topic">
+        <div class="topic__title">
+          <span class="importance importance--2" aria-label="重要度2">★★</span>
+          <div><p class="book-number">教科書 4-20・4-21</p><h3>CSSスプライトとbackground-position</h3></div>
+        </div>
+        <p>
+          複数の小画像を1枚へまとめ、要素を「窓」にして必要部分だけ見せる古典的手法です。
+          通信リクエストを減らせますが、座標管理や差し替えには手間がかかります。
+        </p>
+        <button class="sprite-hover-demo" type="button">
+          <span class="sprite-hover-demo__icon" aria-hidden="true"></span>
+          <span><strong>ここへマウスを重ねる</strong><small>通常は葉、hover・focus時は太陽へ移動</small></span>
+        </button>
+        <p class="interaction-note">
+          HTMLには画像を2枚置いていません。192px幅の1枚のスプライト画像を背景にし、
+          <code>background-position</code>を<code>0 0</code>から<code>-64px 0</code>へ動かして、
+          64px四方の「窓」に見える部分だけを変えています。
+        </p>
+        <div class="sprite-demo">
+          <div><span class="sprite-icon sprite-icon--leaf" aria-hidden="true"></span><code>0 0</code></div>
+          <div><span class="sprite-icon sprite-icon--sun" aria-hidden="true"></span><code>-64px 0</code></div>
+          <div><span class="sprite-icon sprite-icon--drop" aria-hidden="true"></span><code>-128px 0</code></div>
+        </div>
+        <pre><code>.icon {
+  width: 64px;
+  height: 64px;
+  background-image: url("icon-sprite.svg");
+}
+.icon--sun {
+  background-position: -64px 0;
+}</code></pre>
+        <p class="exam-point"><strong>試験で見抜く：</strong><code>background-position</code>の1つ目は水平方向、2つ目は垂直方向です。</p>
+      </article>
+
+      <form class="quiz" data-answer="A,B,D" data-hint="sourceは候補と条件、imgは表示の土台です。代替テキストはimgへ書きます。" data-explanation="正解はA・B・Dです。sourceのmedia条件が成立すると候補を利用でき、2xは密度候補、imgは表示の土台とフォールバックになります。">
+        <p class="quiz__label">SECTION 05｜模擬問題</p>
+        <h3>次のHTMLに関する説明として、正しいものを3つ選びなさい。</h3>
+        <pre><code>&lt;picture&gt;
+  &lt;source media="(max-width: 640px)" srcset="animal-small.jpg 1x, animal-small-2x.jpg 2x"&gt;
+  &lt;img src="animal-wide.jpg" alt="高原の動物"&gt;
+&lt;/picture&gt;</code></pre>
+        <fieldset>
+          <legend>3つ選択</legend>
+          <label><input type="checkbox" name="q5" value="A"><span><b>A.</b> 幅640px以下ならsourceの候補を利用できる。</span></label>
+          <label><input type="checkbox" name="q5" value="B"><span><b>B.</b> <code>2x</code>は2倍密度向けの候補を表す。</span></label>
+          <label><input type="checkbox" name="q5" value="C"><span><b>C.</b> srcsetの候補はページ表示時にすべて必ず読み込まれる。</span></label>
+          <label><input type="checkbox" name="q5" value="D"><span><b>D.</b> imgは表示の土台とフォールバックになる。</span></label>
+          <label><input type="checkbox" name="q5" value="E"><span><b>E.</b> altはsource要素へ指定する。</span></label>
+        </fieldset>
+        <button class="button button--answer" type="submit">回答する</button>
+      </form>
+    </section>
+
+    <!-- =========================================================
+      SECTION 06：モバイル向け仕上げ
+      教科書 4-18、4-19、4-22、4-25〜4-27
+    ========================================================== -->
+    <section class="lesson" id="mobile-details">
+      <header class="lesson__heading">
+        <p class="lesson__number">SECTION 06</p>
+        <div><h2>読み込みとモバイル固有設定を仕上げる</h2><p>外部スクリプト、電話リンク、アイコン、スタンドアロン表示を整理します。</p></div>
+      </header>
+
+      <article class="topic">
+        <div class="topic__title">
+          <span class="importance importance--3" aria-label="重要度3">★★★</span>
+          <div><p class="book-number">教科書 4-18・4-19</p><h3>scriptのsrc・defer・async</h3></div>
+        </div>
+        <p>
+          外部JavaScriptファイルの場所は<code>src</code>属性で指定します。
+          初学者が最初に区別したいのは、<strong>取得（ネットワークからファイルを読む）</strong>と
+          <strong>実行（JavaScriptの命令を動かす）</strong>は別の処理だという点です。
+        </p>
+        <p>
+          ブラウザーはHTMLを上から読み、要素をDOMという木構造へ組み立てます。この作業をここでは
+          <strong>HTMLの解析（パース）</strong>と呼びます。通常の外部scriptに出会うと、
+          ブラウザーは解析をいったん止め、ファイルを取得・実行してから続きを読みます。
+          大きなファイルや遅い回線では、その停止時間がページ表示を遅らせる原因になります。
+        </p>
+        <div class="script-timeline">
+          <div><b>通常</b><span>HTML解析</span><i class="stop">取得・実行</i><span>HTML解析</span></div>
+          <div><b>defer</b><span>HTML解析 ＋ 並行取得</span><i>解析後、記述順に実行</i></div>
+          <div><b>async</b><span>HTML解析 ＋ 並行取得</span><i class="free">準備でき次第実行</i></div>
+        </div>
+        <div class="script-analogy">
+          <p><strong>通常</strong><span>読書を止め、別室から資料を取って読み終えてから本文へ戻る。</span></p>
+          <p><strong>defer</strong><span>誰かに資料を取りに行ってもらい、本文を最後まで読んでから順番に確認する。</span></p>
+          <p><strong>async</strong><span>誰かに資料を取りに行ってもらい、届いた瞬間に本文を止めて確認する。</span></p>
+        </div>
+        <pre><code>&lt;script src="ui.js" defer&gt;&lt;/script&gt;
+&lt;script src="analytics.js" async&gt;&lt;/script&gt;</code></pre>
+        <ul class="check-list">
+          <li>通常：解析を止め、取得・実行してから解析を再開。</li>
+          <li><code>defer</code>：並行取得し、原則として解析後に文書順で実行。</li>
+          <li><code>async</code>：並行取得し、準備できたものから実行。複数ファイルの順序は保証しない。</li>
+        </ul>
+        <table class="study-table script-compare-table">
+          <caption>通常・defer・asyncの比較</caption>
+          <thead><tr><th>指定</th><th>取得中のHTML解析</th><th>実行タイミング</th><th>複数ファイルの順序</th><th>判断のポイント</th></tr></thead>
+          <tbody>
+            <tr><th>指定なし</th><td>停止する</td><td>取得後すぐ</td><td>文書順</td><td>解析を止める</td></tr>
+            <tr><th><code>defer</code></th><td>続ける</td><td>HTML解析完了後、<code>DOMContentLoaded</code>より前</td><td>原則として文書順</td><td>DOMを使う複数スクリプトに向く</td></tr>
+            <tr><th><code>async</code></th><td>取得中は続ける。実行時は止まる</td><td>取得でき次第</td><td>保証されない</td><td>他に依存しない処理に向く</td></tr>
+          </tbody>
+        </table>
+        <aside class="grid-caution">
+          <strong>試験での読み方：</strong>
+          「非同期で取得」はdeferとasyncの共通点です。
+          違いは、deferが解析後に文書順で実行され、asyncは取得できた順にすぐ実行される点です。
+        </aside>
+      </article>
+
+      <article class="topic">
+        <div class="topic__title">
+          <span class="importance importance--3" aria-label="重要度3">★★★</span>
+          <div><p class="book-number">教科書 4-22</p><h3>電話番号の自動認識とtelリンク</h3></div>
+        </div>
+        <pre><code>&lt;meta name="format-detection"
+      content="telephone=no, email=no, address=no"&gt;
+&lt;a href="tel:+81312345678"&gt;03-1234-5678&lt;/a&gt;</code></pre>
+        <p>
+          <code>format-detection</code>は、一部のモバイルブラウザーが文字列を電話番号・メールアドレス・住所として
+          自動認識し、リンクのように扱う機能を制御するmeta設定です。
+          教科書では3種類をまとめて無効化するコードが掲載されています。
+        </p>
+        <table class="study-table format-detection-table">
+          <thead><tr><th>値</th><th>抑える自動認識</th><th>明示的にリンクする例</th></tr></thead>
+          <tbody>
+            <tr><th><code>telephone=no</code></th><td>電話番号</td><td><code>&lt;a href="tel:+81312345678"&gt;</code></td></tr>
+            <tr><th><code>email=no</code></th><td>メールアドレス</td><td><code>&lt;a href="mailto:study@example.com"&gt;</code></td></tr>
+            <tr><th><code>address=no</code></th><td>住所</td><td>必要なリンクを制作者が明示する</td></tr>
+          </tbody>
+        </table>
+        <p class="spelling-note"><strong>スペル注意：</strong><code>adress</code>ではなく、dが2つの<code>address</code>です。</p>
+        <p>
+          これはHTML Standard全体の汎用設定ではなく、対応ブラウザー向けの拡張です。
+          Appleの公式資料が明示している中心は<code>telephone=no</code>で、email・addressの扱いは環境差があります。
+          資格試験では、まず教科書掲載コードの名前と意味を正確に判別してください。
+        </p>
+        <div class="detection-lab" id="detectionLab" data-telephone-disabled="true">
+          <div class="detection-lab__header">
+            <div>
+              <p class="book-number">INTERACTIVE MODEL</p>
+              <h4>telephone=noを付け外しして比較</h4>
+            </div>
+            <button class="button button--detection" type="button" id="toggleTelephoneDetection">
+              telephone=noを外す
+            </button>
+          </div>
+
+          <div class="meta-code-display" aria-live="polite">
+            <span>&lt;meta name="format-detection"</span>
+            <span>content="<strong id="formatDetectionContent">telephone=no, email=no, address=no</strong>"&gt;</span>
+          </div>
+
+          <div class="detection-state detection-state--disabled">
+            <p class="detection-state__badge">telephone=no が有効</p>
+            <p>電話番号らしい文字列でも、自動電話リンクへ変換しない設定です。</p>
+            <span class="phone-plain">03-1234-5678</span>
+          </div>
+
+          <div class="detection-state detection-state--enabled" hidden>
+            <p class="detection-state__badge">telephone=no がない</p>
+            <p>対応ブラウザーが電話番号として自動認識すると、次のようにタップ可能な表示になります。</p>
+            <a class="phone-auto-model" href="tel:+81312345678">03-1234-5678</a>
+          </div>
+
+          <p class="detection-lab__note">
+            このボタンは実際にhead内のmeta要素を書き換え、同時に自動認識後の見た目を模型として再現します。
+            実際のブラウザーによる自動認識は通常ページ読み込み時に行われるため、読み込み後にmetaを書き換えただけで
+            既存テキストが自動的にリンクへ再変換されるとは限りません。
+          </p>
+        </div>
+        <p class="phone-sample">電話で問い合わせ：<a href="tel:+81312345678">03-1234-5678</a>（学習用の例）</p>
+        <p class="phone-sample">メールで問い合わせ：<a href="mailto:study@example.com">study@example.com</a>（学習用の例）</p>
+      </article>
+
+      <article class="topic">
+        <div class="topic__title">
+          <span class="importance importance--3" aria-label="重要度3">★★★</span>
+          <div><p class="book-number">教科書 4-25〜4-27</p><h3>ファビコン・ホーム画面アイコン・スタンドアロン表示</h3></div>
+        </div>
+        <table class="study-table">
+          <thead><tr><th>目的</th><th>指定</th><th>主な場所</th></tr></thead>
+          <tbody>
+            <tr><th>ファビコン</th><td><code>rel="icon"</code></td><td>ブラウザーのタブやブックマーク</td></tr>
+            <tr><th>ホーム画面アイコン</th><td><code>rel="apple-touch-icon"</code></td><td>ホーム画面へ追加したときのアイコン</td></tr>
+            <tr><th>スタンドアロン表示</th><td><code>apple-mobile-web-app-capable</code></td><td>Apple向けにアドレスバーなどのない表示を指定</td></tr>
+          </tbody>
+        </table>
+        <pre><code>&lt;link rel="icon" href="favicon.ico"&gt;
+&lt;link rel="apple-touch-icon" sizes="180x180" href="icon.png"&gt;
+&lt;meta name="apple-mobile-web-app-capable" content="yes"&gt;</code></pre>
+        <p>
+          <code>apple-touch-icon-precomposed</code>は自動装飾を避ける指定として教科書に登場します。
+          また、Web App Manifestは起動画面などに関係する仕組みとして短く触れられますが、
+          この教材では試験範囲を越えて設定方法を広げません。
+        </p>
+      </article>
+
+      <form class="quiz" data-answer="A,C,E" data-hint="deferは解析後に記述順、format-detectionの値はtelephone=no、ファビコンはrel=iconです。" data-explanation="正解はA・C・Eです。deferは並行取得後に解析完了を待って文書順で実行され、telephone=noは自動電話リンクを抑え、apple-touch-iconはホーム画面用です。">
+        <p class="quiz__label">SECTION 06｜模擬問題</p>
+        <h3>モバイル対応と外部スクリプトに関する説明として、正しいものを3つ選びなさい。</h3>
+        <fieldset>
+          <legend>3つ選択</legend>
+          <label><input type="checkbox" name="q6" value="A"><span><b>A.</b> defer付き外部スクリプトは並行取得され、原則としてHTML解析後に記述順で実行される。</span></label>
+          <label><input type="checkbox" name="q6" value="B"><span><b>B.</b> 複数のasyncスクリプトは必ずHTMLの記述順に実行される。</span></label>
+          <label><input type="checkbox" name="q6" value="C"><span><b>C.</b> <code>content="telephone=no"</code>は電話番号の自動リンクを抑える指定である。</span></label>
+          <label><input type="checkbox" name="q6" value="D"><span><b>D.</b> ファビコンはmeta要素のfavicon属性へ指定する。</span></label>
+          <label><input type="checkbox" name="q6" value="E"><span><b>E.</b> <code>rel="apple-touch-icon"</code>はホーム画面用アイコンの指定に使う。</span></label>
+        </fieldset>
+        <button class="button button--answer" type="submit">回答する</button>
+      </form>
+    </section>
+
+    <section class="finish">
+      <p class="section-kicker">FINISH</p>
+      <h2>最後に、4つの役割を言葉で分けられれば合格</h2>
+      <div class="finish-grid">
+        <p><strong>viewport</strong><span>モバイルの表示領域を整える</span></p>
+        <p><strong>フルード</strong><span>箱と画像を柔軟にする</span></p>
+        <p><strong>メディアクエリ</strong><span>条件でCSSを切り替える</span></p>
+        <p><strong>レスポンシブ画像</strong><span>状況に合う画像候補を届ける</span></p>
+      </div>
+      <p>
+        次はCSSを隠した状態でコード例を書き直し、各セクションの問題をもう一度解いてください。
+        「なぜ他の選択肢が違うか」まで説明できれば、第6章の模擬問題へ進めます。
+      </p>
+      <a class="button button--primary" href="#top">ページ上部へ戻る</a>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>HTML5プロフェッショナル認定試験 Level.1｜第4章 レスポンシブWebデザイン 学習教材</p>
+    <p>教科書PDF 211〜239ページ（問題4-1〜4-27）の解説範囲に対応</p>
+  </footer>
+
+  <!-- 回答後に正誤と解説を表示する共通モーダル -->
+  <dialog class="result-dialog" id="resultDialog" aria-labelledby="dialogTitle">
+    <div class="result-dialog__mark" id="dialogMark" aria-hidden="true"></div>
+    <p class="result-dialog__eyebrow">CHECK RESULT</p>
+    <h2 id="dialogTitle">判定</h2>
+    <p id="dialogMessage"></p>
+    <div class="result-dialog__hint" id="dialogHint" hidden>
+      <strong>ヒント</strong>
+      <p></p>
+    </div>
+    <button class="button button--primary" type="button" id="closeDialog">問題へ戻る</button>
+  </dialog>
+
+  <!-- 4-18・4-19：本教材はHTML解析後に実行するためdeferを使います。 -->
+  <script src="js/main.js" defer></script>
+</body>
+</html>
