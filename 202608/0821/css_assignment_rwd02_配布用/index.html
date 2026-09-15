@@ -21,100 +21,128 @@
             </ul>
         </nav>
     </header>
-    <main>
-        <section id="about">
-            <h2>世界遺産とは</h2>
-            <div><img src="images/about.webp" alt="屋久島の豊かな渓流の風景"></div>
-            <p>
-                世界遺産とは、ユネスコにより保護される文化的・自然的に重要な場所です。
-                人類共通の財産として、将来の世代にも伝えていくことが目的とされています。
-                日本には、文化遺産・自然遺産あわせて20件以上が登録されており、それぞれが歴史や自然の豊かさを物語っています。
-            </p>
-        </section>
+    <div class="wrapper">
+        <main>
+            <section id="about">
+                <h2>世界遺産とは</h2>
+                <div><img src="images/about.webp" alt="屋久島の豊かな渓流の風景"></div>
+                <p>
+                    世界遺産とは、ユネスコにより保護される文化的・自然的に重要な場所です。
+                    人類共通の財産として、将来の世代にも伝えていくことが目的とされています。
+                    日本には、文化遺産・自然遺産あわせて20件以上が登録されており、それぞれが歴史や自然の豊かさを物語っています。
+                </p>
+            </section>
+    
+            <section id="list">
+                <h2>登録遺産</h2>
+                <div>
+                    <section>
+                        <div><img src="images/himejijyo.webp" alt="白漆喰の外壁が美しい姫路城の天守"></div>
+                        <h3>姫路城</h3>
+                        <p>
+                            兵庫県姫路市にある国宝・世界遺産の城。白漆喰の美しい外観から「白鷺城」とも呼ばれ、江戸時代初期の姿を今に伝える。天守や櫓など約100棟が現存し、日本屈指の名城として親しまれている。
+                        </p>
+                        <a href="https://whc.unesco.org/en/list/661" target="_blank">UNESCOのページへ</a>
+                    </section>
+                    <section>
+                        <div><img src="images/shirakawagou.webp" alt="茅葺き屋根の合掌造り家屋が並ぶ白川郷の集落"></div>
+                        <h3>白川郷の合掌造り集落</h3>
+                        <p>
+                            岐阜県白川郷と富山県五箇山にある世界遺産。急傾斜の茅葺き屋根が特徴の合掌造り家屋が集落全体で保存されており、日本の伝統的な山村景観を今に伝える。
+                        </p>
+                        <a href="https://whc.unesco.org/en/list/734" target="_blank">UNESCOのページへ</a>
+                    </section>
+                    <section>
+                        <div><img src="images/itsukushima.webp" alt="海に浮かぶ朱色の大鳥居がある厳島神社"></div>
+                        <h3>厳島神社</h3>
+                        <p>
+                            広島県廿日市市の宮島に鎮座する世界遺産の神社。海に浮かぶ大鳥居が象徴的で、潮の満ち引きで異なる表情を見せる。平清盛ゆかりの歴史ある神社としても知られる。
+                        </p>
+                        <a href="https://whc.unesco.org/en/list/776" target="_blank">UNESCOのページへ</a>
+                    </section>
+                </div>
+            </section>
+    
+            <section id="comparison">
+                <h2>世界遺産登録数の比較</h2>
+                <p>
+                    日本と他の国々の世界遺産登録数を比べてみると、文化の多様性や自然の豊かさが数字にも表れています。
+                    登録数が多い国ほど、古代からの文明や広大な自然を有している傾向があります。
+                    こうした表から、世界各国が大切にしている価値観の違いを読み取ることもできますね。
+                </p>
+                <div class="table_wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>国名</th>
+                                <th>文化遺産</th>
+                                <th>自然遺産</th>
+                                <th>複合遺産</th>
+                                <th>合計</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>日本</td>
+                                <td>20</td>
+                                <td>5</td>
+                                <td>0</td>
+                                <td>25</td>
+                            </tr>
+                            <tr>
+                                <td>イタリア</td>
+                                <td>53</td>
+                                <td>5</td>
+                                <td>1</td>
+                                <td>59</td>
+                            </tr>
+                            <tr>
+                                <td>中国</td>
+                                <td>39</td>
+                                <td>14</td>
+                                <td>4</td>
+                                <td>57</td>
+                            </tr>
+                            <tr>
+                                <td>ドイツ</td>
+                                <td>42</td>
+                                <td>3</td>
+                                <td>0</td>
+                                <td>45</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+        <footer>
+            <p><small>&copy; 2025 edu-kitamura</small></p>
+        </footer>
+        <button id="countButton">クリック！</button>
+        <p id="countText">クリック回数：0回</p>
+    </div>
+    <script>
+        const button = document.querySelector("#countButton");
+        const countText = document.querySelector("#countText");
 
-        <section id="list">
-            <h2>登録遺産</h2>
-            <div>
-                <section>
-                    <div><img src="images/himejijyo.webp" alt="白漆喰の外壁が美しい姫路城の天守"></div>
-                    <h3>姫路城</h3>
-                    <p>
-                        兵庫県姫路市にある国宝・世界遺産の城。白漆喰の美しい外観から「白鷺城」とも呼ばれ、江戸時代初期の姿を今に伝える。天守や櫓など約100棟が現存し、日本屈指の名城として親しまれている。
-                    </p>
-                    <a href="https://whc.unesco.org/en/list/661" target="_blank">UNESCOのページへ</a>
-                </section>
-                <section>
-                    <div><img src="images/shirakawagou.webp" alt="茅葺き屋根の合掌造り家屋が並ぶ白川郷の集落"></div>
-                    <h3>白川郷の合掌造り集落</h3>
-                    <p>
-                        岐阜県白川郷と富山県五箇山にある世界遺産。急傾斜の茅葺き屋根が特徴の合掌造り家屋が集落全体で保存されており、日本の伝統的な山村景観を今に伝える。
-                    </p>
-                    <a href="https://whc.unesco.org/en/list/734" target="_blank">UNESCOのページへ</a>
-                </section>
-                <section>
-                    <div><img src="images/itsukushima.webp" alt="海に浮かぶ朱色の大鳥居がある厳島神社"></div>
-                    <h3>厳島神社</h3>
-                    <p>
-                        広島県廿日市市の宮島に鎮座する世界遺産の神社。海に浮かぶ大鳥居が象徴的で、潮の満ち引きで異なる表情を見せる。平清盛ゆかりの歴史ある神社としても知られる。
-                    </p>
-                    <a href="https://whc.unesco.org/en/list/776" target="_blank">UNESCOのページへ</a>
-                </section>
-            </div>
-        </section>
+        let count = 0;
 
-        <section id="comparison">
-            <h2>世界遺産登録数の比較</h2>
-            <p>
-                日本と他の国々の世界遺産登録数を比べてみると、文化の多様性や自然の豊かさが数字にも表れています。
-                登録数が多い国ほど、古代からの文明や広大な自然を有している傾向があります。
-                こうした表から、世界各国が大切にしている価値観の違いを読み取ることもできますね。
-            </p>
-            <table>
-                <thead>
-                    <tr>
-                        <th>国名</th>
-                        <th>文化遺産</th>
-                        <th>自然遺産</th>
-                        <th>複合遺産</th>
-                        <th>合計</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>日本</td>
-                        <td>20</td>
-                        <td>5</td>
-                        <td>0</td>
-                        <td>25</td>
-                    </tr>
-                    <tr>
-                        <td>イタリア</td>
-                        <td>53</td>
-                        <td>5</td>
-                        <td>1</td>
-                        <td>59</td>
-                    </tr>
-                    <tr>
-                        <td>中国</td>
-                        <td>39</td>
-                        <td>14</td>
-                        <td>4</td>
-                        <td>57</td>
-                    </tr>
-                    <tr>
-                        <td>ドイツ</td>
-                        <td>42</td>
-                        <td>3</td>
-                        <td>0</td>
-                        <td>45</td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-    </main>
-    <footer>
-        <p><small>&copy; 2025 edu-kitamura</small></p>
-    </footer>
+        button.addEventListener("click", () => {
+            // ここに処理を書く
+            count += 1;
+            console.log(count);
+
+            if(count === 1) {
+                countText.textContent = "クリック回数：1回";
+            }else if(count === 2){
+                countText.textContent = "クリック回数：2回";
+            }else if(count === 3){
+                countText.textContent = "3回達成！";
+                button.disabled = true;
+            }
+
+        });
+    </script>
 </body>
 
 </html>
