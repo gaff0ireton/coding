@@ -133,6 +133,28 @@ function threeParam2(a, b, c = a + b) {
 
 threeParam2(2, 4);
 
+// 問3
+// 関数 matome を宣言し、引数は3つを受けとる。
+// 関数が実行されると、3つの引数で掛け算を行い、その後、2で割った余りを戻り値として返す。
+
+// この関数を組み立てて、実行した結果をコンソールに出してみましょう
+
+const matome = (a = 1, b = 2, c = 3) => {
+    const result = a * b * c % 2;
+
+    if (result === 0) {
+        return '偶数です';
+    } else if (result === 1) {
+        return '奇数です';
+    } else {
+        return result;
+    }
+};
+
+console.log(matome(17, 7, 13));
+
+
+
 /* ========================
    引数まとめ
 ======================== */
