@@ -88,11 +88,15 @@ function multiParams(...rest) {
 
 multiParams(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 100);
 
-// idea 可変長引数と通常の引数は混在できるので、最低限必要な引数は通常の引数で指定をし、余剰分はスプレット構文で受け取れるようにすることができる。
+// 可変長引数と通常の引数は混在できるので、最低限必要な引数は通常の引数で指定をし、余剰分はスプレット構文で受け取れるようにすることができる。
 // review このように、数を決めないで引数を受け取れるようにする方法を、残余引数という。
 function multiParams2(a, b, ...args) {
     console.log(a + b);
     console.log(args);
+    console.log(...args); // ...をつけると配列を展開して処理
+    for (const element of args) {
+        console.log(element);
+    }
 
 }
 
@@ -115,17 +119,18 @@ threeParam(1, 2);
 
 // 問1
 // twoParamの関数は実行の引数が超過分消えてしまう。残すにはどうするべきか
-function twoParam2(a, b, ...rest) {
-    console.log(a, b, ...rest);
+function twoParam2(a, ...b) {
+    console.log(a, ...b);
+
 }
 
-twoParam2(1, 2, 3);
+twoParam2(1, 2, 3, 4, 5, 6);
 
 // 問2
 // threeParamの関数は実行時に足りない引数分、undefinedが出てしまう。引数は増やさずに、undefinedが出ないようにするにはどうするべきか
 // 例として、Cには6が表示されるようにしてください
 
-function threeParam2(a, b, c = a + b) {
+function threeParam2(a, b, c = 6) {
 
     console.log(a, b, c);
 
@@ -152,6 +157,7 @@ const matome = (a = 1, b = 2, c = 3) => {
 };
 
 console.log(matome(17, 7, 13));
+console.log(matome(1, 1, 1.5));
 
 
 
