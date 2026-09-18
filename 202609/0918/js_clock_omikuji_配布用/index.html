@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>時計 & おみくじ</title>
+    <meta name="description"
+        content="JavaScriptの講義で学んだDateオブジェクト・Mathオブジェクト・DOM操作を使って実装した、デジタル時計とおみくじのページです。">
+    <link rel="stylesheet" href="css/ress.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script type="module" src="js/script.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1>時計 & おみくじ</h1>
+
+        <!-- 時計エリア -->
+        <section class="panel" id="clockPanel">
+            <h2>現在時刻</h2>
+            <p class="date" id="dateText">----年--月--日（-）</p>
+            <p class="clock" id="clockText">--:--:--</p>
+        </section>
+
+        <!-- おみくじエリア -->
+        <section class="panel" id="omikujiPanel">
+            <h2>今日のおみくじ</h2>
+
+            <div class="omikuji_result" id="omikujiResult">
+                <p class="omikuji_placeholder">ボタンを押しておみくじを引いてみよう</p>
+            </div>
+
+            <button id="drawBtn" type="button">おみくじを引く</button>
+        </section>
+    </div>
+</body>
+
+</html>

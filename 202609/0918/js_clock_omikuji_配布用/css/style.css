@@ -1,0 +1,107 @@
+@charset "UTF-8";
+
+/* =========================================================
+   色の設定：ここを変えると画面全体の印象が変わります
+   ========================================================= */
+:root {
+  --bg: #f5f5f5; /* ページの背景（ライトグレー） */
+  --surface: #ffffff; /* パネルやボタンの背景 */
+  --text: #333333; /* 基本の文字色 */
+  --muted: #5f6b73; /* 補足テキストの色（やや青みのグレー） */
+  --border: #dcdfe2; /* 枠線の色 */
+  --accent: #516e88; /* アクセント色（時計や見出しの強調）：くすんだブルー */
+}
+
+body {
+  font-family: sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  padding: 24px 16px;
+}
+
+.container {
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+h1 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  text-align: center;
+}
+
+h2 {
+  margin-bottom: 12px;
+  font-size: 16px;
+  color: var(--muted);
+}
+
+button {
+  padding: 10px 16px;
+  font-size: 14px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background-color: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: var(--bg);
+}
+
+/* ress.css が消したフォーカス枠を復活（キーボード操作で位置が分かるように） */
+button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+/* 時計・おみくじ共通のパネル */
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* =========================================================
+   時計エリア
+   ========================================================= */
+.date {
+  font-size: 14px;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+.clock {
+  font-size: 48px;
+  font-weight: bold;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums; /* 数字の幅を揃えて、切り替わってもガタつかないようにする */
+}
+
+/* =========================================================
+   おみくじエリア
+   ========================================================= */
+.omikuji_result {
+  min-height: 96px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  font-size: 40px;
+  font-weight: bold;
+  color: var(--accent);
+}
+
+.omikuji_placeholder {
+  font-size: 14px;
+  font-weight: normal;
+  color: var(--muted);
+}
+
+#drawBtn {
+  width: 100%;
+}
