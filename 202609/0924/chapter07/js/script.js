@@ -100,10 +100,23 @@ console.log(matchs);
 const word = 'わたしのWebサイトは「https://studio947.net」です。';
 const re01 = /Webサイト/;
 const re02 = /[W|w]ebサイト/; // todo []の中で大文字のWと小文字のwの両方を対象とする
-const re03 = /https?:\/\//; // todo httpでもhttpsでもマッチする
+const re03 = /https?:\/\//g; // todo httpでもhttpsでもマッチする
 // idea \/ = /という文字を探す際に\(バックスラッシュ)を入れることで、記号の/を正しくマッチする対象にする。
 // idea ? = 直前の文字があってもなくてもマッチさせる記号
 
 // note URLにマッチさせる
-const re04 = /https?:\/\/[\w.-]+\.[\w.-]+[\/|\?|#]?/;
+const re04 = /https?:\/\/[\w.-]+\.[\w.-]+[\/|\?|#]?/g;
 // idea この正規表現によって、「https://xxx.com」のような文字列をマッチできるようなパターンになっている
+
+// review 正規表現パターンを使った一致
+// idea test()メソッド
+
+const testResult = re01.test(word);
+console.log(testResult);
+
+// review マッチした文字列を取得する
+// idea match()メソッド
+
+const matchResult = word.match(re04);
+console.log(matchResult);
+
