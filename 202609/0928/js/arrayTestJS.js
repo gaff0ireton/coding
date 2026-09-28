@@ -1,4 +1,8 @@
 /* ========================
+   配列問題A
+======================== */
+
+/* ========================
    一問目
 ======================== */
 // const fruits = ['りんご', 'ばなな', 'みかん'];
@@ -54,64 +58,75 @@ const newColors = [...colors];
 newColors.push('黒');
 console.log(newColors);
 
+
 /* ========================
-   六問目
+   配列問題B
+======================== */
+
+/* ========================
+   一問目
 ======================== */
 // const numbers = [10, 25, 40, 15, 60];
 
 // function getLargeNumbers(numbers, value) {
-//     return numbers.filter((number) => number >= value);
+//     const result = numbers.filter((number) => number >= value);
+//     return console.log(result);
+
 // }
-// console.log(getLargeNumbers(numbers, 20));
+// getLargeNumbers(numbers, 20);
 
 /* ========================
-   七問目
+   二問目
 ======================== */
 const numbers = [30, 5, 80, 20, 10];
 
 function sortDescending(numbers) {
-    return numbers.sort((a, b) => b - a);
+    const result = numbers.sort((a, b) => b - a);
+    return console.log(result);
+
 }
 
-console.log(sortDescending(numbers));
+sortDescending(numbers);
 
 
 /* ========================
-   八問目
+   三問目
 ======================== */
 const fruits = ["apple", "banana", "orange"];
 
 function showItems(items) {
     return items.forEach((item, index) => {
-        return index + '：' + item;
+        console.log(index + '：' + item);
     })
 }
 
-console.log(showItems(fruits));
+showItems(fruits);
 
 
 /* ========================
-   九問目
+   四問目
 ======================== */
 const items = ["HTML", "CSS", "JavaScript", "PHP", "Git"];
 
 function replaceItems(items) {
-    return items.toSpliced(1, 0, 'React', 'Next.js')
+    const result = items.toSpliced(1, 0, 'React', 'Next.js');
+    return console.log(result);
+
 }
 
-console.log(replaceItems(items));
-
+replaceItems(items);
 
 /* ========================
-   十問目
+   五問目
 ======================== */
 
 const names = ["田中", "山田", "佐藤"];
 
 function addHonorific(names) {
-    return names.map((name) => {
+    const result = names.map((name) => {
         return name + 'さん';
     })
+    return console.log(result);
 }
 
-console.log(addHonorific(names));
+addHonorific(names);
