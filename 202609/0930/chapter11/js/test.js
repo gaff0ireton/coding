@@ -79,3 +79,52 @@ console.log(student.graduated);
 
 student.graduated = true;
 console.log(student.graduated);
+
+const copy = { ...student };
+
+
+copy.age += 1;
+console.log(copy);
+console.log(student);
+copy.contact = {
+    email: 'naughty@mojojo-jo.com'
+}
+console.log(student.age);
+console.log(copy.age);
+console.log(student.contact.email);
+console.log(copy.contact.email);
+
+let max = student.scores[0];
+let min = student.scores[0];
+
+student.scores.forEach((num) => {
+    max = Math.max(max, num);
+    min = Math.min(min, num);
+})
+
+console.log(`最大値: ${max}`);
+console.log(`最小値: ${min}`);
+
+const even = student.scores.filter((num) => num % 2 === 0);
+
+console.log(even);
+
+student.addScore = function (newScore) {
+    this.scores = this.scores.toSpliced(this.scores.length, 0, newScore);
+    return this.scores;
+}
+
+console.log(student.addScore(95));
+
+const copy02 = [...student.hobbies];
+
+const item = copy02.toSpliced(copy02.length, 0, '映画鑑賞');
+
+console.log(item);
+
+Object.entries(student.enrolledCourses).map((item) => {
+    console.log(`${item[0]}: ${item[1]}`)
+
+})
+
+

@@ -108,7 +108,7 @@ todos.shift();
 console.log(todos);
 
 // review 新しい配列を作って、追加・削除を行うメソッド
-// idea Splliced()メソッド、もしくはtoSplliced()メソッド
+// idea Splliced()メソッド、もしくはtoSpliced()メソッド
 // ! 第一引数は削除開始のインデックス番号、第二引数は削除する値の数、第三引数は追加する要素
 const arr6 = ['a', 'b', 'c', 'd', 'e'];
 const param1 = arr6.toSpliced(1, 2);
