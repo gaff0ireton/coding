@@ -74,3 +74,8 @@ Object.entries(student.contact).forEach((item) => {
     console.log(`${item[0]}: ${item[1]}`);
 })
 
+student.graduated = false;
+console.log(student.graduated);
+
+student.graduated = true;
+console.log(student.graduated);
