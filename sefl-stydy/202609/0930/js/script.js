@@ -1,4 +1,4 @@
-import { calcPrice } from "./math.js";
+import { calcPrice, tax } from "./math.js";
 
 calcPrice(1000);
 

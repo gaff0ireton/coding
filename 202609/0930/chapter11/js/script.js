@@ -52,6 +52,7 @@ function gamble() {
     }
 
     // idea 例外が発生した際の処理をcatch文に記述する。引数を入れると自動的にErrorオブジェクトが渡される
+    // * 引数のErrorオブジェクトはtry文内で起きたエラー内容のErrorオブジェクト
     catch (err) {
         console.log(err);
     }
@@ -66,5 +67,22 @@ function gamble() {
 };
 
 // gamble();
+
+const content = document.querySelector('#content');
+
+if (!content) {
+    const err = new Error('要素がないワン');
+    err.name = 'ミスってるワン';
+    throw err;
+
+}
+
+// note Errorオブジェクトは3つのプロパティがあるオブジェクト。
+// ? 例
+const error = {
+    name: 'ミスってるワン',
+    message: '要素がないワン',
+    cause: 'エラーの原因',
+}
 
 // ! -------------------------------------------------------------- //

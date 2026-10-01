@@ -1,4 +1,4 @@
-const tax = 1.1;
+export const tax = 1.1;
 
 export function calcPrice(price) {
     const result = Math.floor(price * tax);

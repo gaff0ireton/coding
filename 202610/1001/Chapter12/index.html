@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM操作</title>
+    <meta name="description" content="DOM操作">
+    <script type="module" src="js/script.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <header>
+        <h1>DOM操作</h1>
+    </header>
+
+    <main>
+        <section id="sec01">
+            <h2>要素をCSSセレクタで取得</h2>
+            <ul id="list">
+                <li class="todo">Webサイトのデザイン案を確認</li>
+                <li class="todo">メンバーのプルリクエストを確認</li>
+                <li class="todo">使用していない機材を整理</li>
+            </ul>
+        </section>
+
+        <section id="container" class="container">
+            <h2>要素が取得できなかった場合の処理</h2>
+        </section>
+
+        <section id="sec03">
+            <h2>イベントリスナー・イベントに待機する</h2>
+            <div class="item-box">
+                <div id="box"><span>Event</span></div>
+                <div class="dog-box">
+                    <div class="dog-img">
+                        <img src="https://images.dog.ceo/breeds/terrier-westhighland/n02098286_839.jpg"
+                            alt="random dog">
+                    </div>
+                    <button class="dog-btn">GOOD BOY...</button>
+                </div>
+            </div>
+            <div class="img-box">
+                <img src="res/dom-target-default.png" alt="" id="clickable">
+            </div>
+            <!-- review デフォルト動作をキャンセルする -->
+            <p><a href="#" id="show-alert">クリックしたらアラートダイアログを表示するワン</a></p>
+
+            <div class="container">
+                <div id="fav">
+                    <span id="like"><img src="res/like-on.png" alt="いいね！" class="like-on"></span>
+                    <span id="number">0</span>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="ui">
+                    <button id="btn1">シュークリーム</button>
+                    <button id="btn2">クロワッサン</button>
+                </div>
+
+                <div id="image-box">
+                    <img src="res/square-1.jpg" alt="シュークリーム" id="photo">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p><small>&copy;2026 Imai</small></p>
+    </footer>
+</body>
+
+</html>
