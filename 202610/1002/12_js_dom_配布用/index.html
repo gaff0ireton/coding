@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTMLの操作</title>
+    <meta name="description" content="chapter12：HTMLの操作の講義で使用したページ">
+    <link rel="stylesheet" href="css/style.css">
+    <script type="module" src="js/script.js"></script>
+</head>
+
+<body>
+    <header>
+        <h1>chapter12：HTMLの操作</h1>
+    </header>
+
+    <main>
+
+        <section id="sec03" class="sec">
+            <h2>属性を操作する</h2>
+
+            <!-- review 12-4-1 属性値を取り出す -->
+            <div id="image_box" class="container">
+                <img src="images/square-1.jpg" alt="シュークリーム" id="photo01">
+            </div>
+
+            <!-- review 12-4-2 属性値を書き換える -->
+            <div class="container">
+                <button id="btn_sweets01">シュークリーム</button>
+                <button id="btn_sweets02">クロワッサン</button>
+            </div>
+
+            <!-- review 12-4-3 プロパティやメソッドを利用して属性を操作する -->
+            <!-- note 上記のHTMLを利用する -->
+
+            <div class="container">
+                <p><button id="agree">利用規約を読んで承諾しました。</button></p>
+            </div>
+
+            <div id="agreement" class="center container">
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
+                    et
+                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                    aliquip ex
+                    ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+                    eu fugiat
+                    nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+                    mollit
+                    anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                    ullamco
+                    laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+                    velit
+                    esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occ
+                </p>
+            </div>
+            <div class="center align">
+                <button id="approve" disabled>利用規約を読んで承諾しました。</button>
+            </div>
+
+            <!-- review 12-4-4 class属性を操作する -->
+
+            <div class="container">
+                <p><em class="text highlight important">classListは利用頻度が高いです。</em></p>
+            </div>
+
+            <div class="container">
+                <div class="hamburger"><span></span><span></span><span></span></div>
+            </div>
+
+        </section><!-- #sec03 -->
+
+
+        <section id="sec04" class="sec">
+            <h2>テキストコンテンツを書き換える</h2>
+
+            <!-- review 12-5-1 テキストコンテンツを挿入する -->
+
+            <div class="container">
+                <p id="price">1,980円</p>
+            </div>
+
+        </section><!-- #sec04 -->
+
+
+        <section id="sec05" class="sec">
+            <h2>要素を書き換える・挿入する・削除する</h2>
+
+            <!-- review 12-6-1 新しい要素を特定の場所に挿入する -->
+
+            <div class="container">
+                <table id="table_list">
+                    <thead>
+                        <tr>
+                            <th>送信</th>
+                            <th>日時</th>
+                            <th>メッセージ</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+
+            <!-- review 12-6-2 要素を削除する -->
+
+            <div>
+                <ul id="todo_today">
+                    <li>簡単すぎるパスワードを登録し直す</li>
+                    <li>次回メンテナンスの作業工程表を作る</li>
+                </ul>
+            </div>
+
+            <!-- review 12-6-3 子要素を丸ごと書き換える -->
+
+            <div id="product" class="container">
+                <p>商品情報を読み込み中...</p>
+            </div>
+
+            <!-- review 12-6-4 Elementオブジェクトを作成する -->
+
+            <div class="container">
+                <ul id="item_list">
+                    <li>商品A</li>
+                    <li>商品B</li>
+                </ul>
+            </div>
+
+            <!-- review 12-6-5 既存の要素を移動する -->
+
+            <div class="container">
+                <div id="box1" class="img_box">
+                    <p>BOX1 <a href="#" id="move">画像を移動</a></p>
+                    <img src="images/car2.jpg" id="image">
+                </div>
+                <div id="box2" class="img_box">
+                    <p>BOX2</p>
+                </div>
+            </div>
+
+        </section><!-- #sec05 -->
+
+    </main>
+    <footer class="footer">
+        <div id="gotop">
+            <img src="images/arrow-up.svg" alt="">
+        </div>
+        <div>
+            <a href="intersection-observer.html">Intersection Observerについてはこちら</a>
+        </div>
+        <p><small>&copy; edu-ktmr</small></p>
+    </footer>
+</body>
+
+</html>

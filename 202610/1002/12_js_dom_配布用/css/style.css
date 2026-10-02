@@ -1,0 +1,186 @@
+@charset "UTF-8";
+
+/* ===== 共通設定 ===== */
+.container+.container,
+.sec+.sec {
+    margin-top: 1rem;
+}
+
+.sec {
+    border: 1px solid #ccc;
+    padding: 1rem;
+}
+
+#image_box {
+    width: 200px;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.box {
+    padding: .5rem;
+}
+
+.footer {
+    padding: 16px 0;
+    background: #008ef1;
+    color: white;
+    text-align: center;
+    margin-top: 48px;
+}
+
+.footer p {
+    margin-bottom: 0;
+    text-align: center;
+}
+
+/* ===== イベントに待機する ===== */
+#box01 {
+    display: grid;
+    place-content: center center;
+    border: 5px solid #f9f2cb;
+    width: 100px;
+    height: 100px;
+    background: #ebd045;
+    color: #5c4f2a;
+    cursor: pointer;
+}
+
+.button_list {
+    display: flex;
+    gap: 10px;
+}
+
+.action_button {
+    padding: 10px 20px;
+    color: #fff;
+    background-color: #2563eb;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.action_button:hover {
+    background-color: #1d4ed8;
+}
+
+#box02 {
+    display: grid;
+    place-content: center center;
+    border: 5px solid #f5e3e3;
+    width: 300px;
+    height: 100px;
+    background: #ebc7c8;
+    color: #561a1b;
+    cursor: pointer;
+}
+
+/* ===== 属性を操作する ===== */
+#agreement {
+    overflow: scroll;
+    border: 1px solid black;
+    padding: 0 1rem 1rem;
+    height: 200px;
+}
+
+.center {
+    margin: 0 auto 1rem;
+    max-width: 600px;
+}
+
+.align {
+    text-align: center;
+}
+
+/* ハンバーガーメニュー */
+.hamburger {
+    position: relative;
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    background: steelblue;
+    cursor: pointer;
+}
+
+.hamburger>span {
+    position: absolute;
+    left: 8px;
+    width: 32px;
+    height: 4px;
+    border-radius: 4px;
+    background: #fff;
+    transition: all 0.3s ease;
+}
+
+/* 上 */
+.hamburger>span:nth-of-type(1) {
+    top: 12px;
+}
+
+/* 中央 */
+.hamburger>span:nth-of-type(2) {
+    top: 22px;
+}
+
+/* 下 */
+.hamburger>span:nth-of-type(3) {
+    top: 32px;
+}
+
+/* 開いたとき */
+.hamburger.open>span:nth-of-type(1) {
+    top: 22px;
+    transform: rotate(45deg);
+}
+
+.hamburger.open>span:nth-of-type(2) {
+    opacity: 0;
+}
+
+.hamburger.open>span:nth-of-type(3) {
+    top: 22px;
+    transform: rotate(-45deg);
+}
+
+/* ===== テキストコンテンツを書き換える ===== */
+#table_list {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#table_list th {
+    background-color: #f9f2cb;
+}
+
+#table_list th,
+#table_list td {
+    border: 1px solid #333;
+    text-align: left;
+    padding: 6px;
+}
+
+.img_box {
+    margin-bottom: 1rem;
+    border: 1px solid #008ef1;
+    padding: 8px;
+    max-width: 400px;
+}
+
+.img_box p {
+    margin: 0;
+}
+
+/* ===== その他のDOM操作 ===== */
+#gotop {
+    margin: 0 auto;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+}
+
+/* ========================= 
+idea ここからCSSを記述します
+========================= */
