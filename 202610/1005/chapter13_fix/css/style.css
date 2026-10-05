@@ -1,0 +1,359 @@
+@charset "UTF-8";
+
+:root {
+    --base-color: #F6F9FF;
+    --text-color: #3E4756;
+    --main-color: #97ACCF;
+    --accent-color: #00C6BA;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+}
+
+body {
+    margin: 0;
+    background: var(--base-color);
+    color: var(--text-color);
+    font-family:
+        -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Kaku Gothic ProN",
+        "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+    line-height: 1.7;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+button,
+input,
+textarea,
+select {
+    font: inherit;
+    color: inherit;
+}
+
+.container {
+    width: min(100% - 40px, 960px);
+    margin-inline: auto;
+}
+
+/* header */
+.header {
+    border-bottom: 4px solid var(--accent-color);
+    background: var(--main-color);
+}
+
+.flcon {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    min-height: 110px;
+}
+
+.logo {
+    flex: 0 0 auto;
+}
+
+.logo a {
+    display: block;
+    line-height: 0;
+}
+
+.title h1 {
+    margin: 0;
+    font-size: clamp(1.25rem, 2.5vw, 1.8rem);
+    line-height: 1.4;
+}
+
+/* main */
+main {
+    padding-block: 48px 80px;
+}
+
+form {
+    display: grid;
+    gap: 24px;
+    counter-reset: form-sample;
+}
+
+/* 1つのdlを1つの教材ブロックとして見せる */
+dl {
+    position: relative;
+    margin: 0;
+    padding: 28px;
+    border: 2px solid var(--main-color);
+    border-radius: 14px;
+    background: var(--base-color);
+    box-shadow: 0 8px 20px rgb(62 71 86 / 8%);
+    counter-increment: form-sample;
+}
+
+dl::before {
+    content: "FORM " counter(form-sample, decimal-leading-zero);
+    position: absolute;
+    top: 0;
+    right: 22px;
+    padding: 4px 12px;
+    border-radius: 0 0 8px 8px;
+    background: var(--main-color);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+}
+
+dt {
+    margin: 0 0 16px;
+    padding-right: 90px;
+    font-size: 1.05rem;
+    font-weight: 700;
+}
+
+dd {
+    margin: 0;
+}
+
+dd + dd {
+    margin-top: 16px;
+}
+
+/* 入力欄 */
+input[type="text"],
+input[type="password"],
+input[type="number"],
+input[type="date"],
+textarea,
+select {
+    width: min(100%, 420px);
+    padding: 10px 12px;
+    border: 2px solid var(--main-color);
+    border-radius: 8px;
+    outline: none;
+    background: var(--base-color);
+    transition:
+        border-color 0.2s,
+        box-shadow 0.2s;
+}
+
+textarea {
+    min-height: 150px;
+    resize: vertical;
+    vertical-align: top;
+}
+
+select[multiple] {
+    min-height: 130px;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="number"]:focus,
+input[type="date"]:focus,
+textarea:focus,
+select:focus,
+[contenteditable]:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 4px rgb(0 198 186 / 16%);
+}
+
+/* range */
+input[type="range"] {
+    width: min(100%, 360px);
+    accent-color: var(--accent-color);
+    vertical-align: middle;
+}
+
+/* color */
+input[type="color"] {
+    width: 64px;
+    height: 42px;
+    padding: 3px;
+    border: 2px solid var(--main-color);
+    border-radius: 8px;
+    background: var(--base-color);
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+/* radio / checkbox */
+input[type="radio"],
+input[type="checkbox"] {
+    width: 1.15rem;
+    height: 1.15rem;
+    margin: 0 8px 0 0;
+    accent-color: var(--accent-color);
+    vertical-align: -0.15em;
+    cursor: pointer;
+}
+
+label {
+    cursor: pointer;
+}
+
+input[type="radio"] + *,
+input[type="checkbox"] + * {
+    cursor: pointer;
+}
+
+dl label + label {
+    margin-left: 20px;
+}
+
+/* button */
+button,
+input[type="submit"] {
+    min-height: 42px;
+    padding: 9px 18px;
+    border: 2px solid var(--accent-color);
+    border-radius: 8px;
+    background: var(--accent-color);
+    color: var(--text-color);
+    font-weight: 700;
+    cursor: pointer;
+    transition:
+        transform 0.15s,
+        box-shadow 0.15s;
+}
+
+button {
+    margin-left: 10px;
+}
+
+button:hover,
+input[type="submit"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 0 rgb(62 71 86 / 16%);
+}
+
+button:active,
+input[type="submit"]:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+button:focus-visible,
+input[type="submit"]:focus-visible {
+    outline: 3px solid var(--text-color);
+    outline-offset: 3px;
+}
+
+/* output */
+output {
+    display: block;
+    min-height: 46px;
+    padding: 9px 12px;
+    border-left: 5px solid var(--accent-color);
+    background: rgb(151 172 207 / 18%);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    overflow-wrap: anywhere;
+}
+
+output:empty::before {
+    content: "ここに取得した値が表示されます";
+    opacity: 0.65;
+}
+
+/* file */
+input[type="file"] {
+    width: min(100%, 520px);
+    padding: 8px;
+    border: 2px dashed var(--main-color);
+    border-radius: 8px;
+    background: var(--base-color);
+}
+
+input[type="file"]::file-selector-button {
+    margin-right: 12px;
+    padding: 7px 12px;
+    border: 0;
+    border-radius: 6px;
+    background: var(--main-color);
+    color: var(--text-color);
+    font-weight: 700;
+    cursor: pointer;
+}
+
+/* 選択された画像の確認 */
+#content {
+    min-height: 90px;
+    padding: 12px;
+    border: 2px dashed var(--main-color);
+    border-radius: 8px;
+}
+
+#content img:not([src]) {
+    display: none;
+}
+
+#content img[src] {
+    display: block;
+    max-width: min(100%, 420px);
+    max-height: 280px;
+    object-fit: contain;
+}
+
+/* contenteditable */
+[contenteditable] {
+    width: 100%;
+    min-height: 100px;
+    margin: 0;
+    padding: 14px;
+    border: 2px dashed var(--main-color);
+    border-radius: 8px;
+    outline: none;
+    background: var(--base-color);
+}
+
+
+/* 最後のログインフォーム */
+input[required] {
+    margin-top: 5px;
+}
+
+/* スマートフォン */
+@media (max-width: 640px) {
+    .container {
+        width: min(100% - 24px, 960px);
+    }
+
+    .flcon {
+        gap: 14px;
+        min-height: 90px;
+    }
+
+    .logo img {
+        width: 46px;
+    }
+
+    main {
+        padding-block: 28px 48px;
+    }
+
+    dl {
+        padding: 24px 18px 20px;
+    }
+
+    dt {
+        padding-right: 72px;
+    }
+
+    button {
+        display: block;
+        width: 100%;
+        margin: 12px 0 0;
+    }
+
+    input[type="submit"] {
+        width: 100%;
+    }
+
+    dl label + label {
+        display: block;
+        margin: 10px 0 0;
+    }
+}
