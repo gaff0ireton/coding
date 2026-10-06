@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "name": "ノートパソコン",
+    "price": 120000,
+    "inStock": true
+  },
+  {
+    "id": 2,
+    "name": "ワイヤレスマウス",
+    "price": 3500,
+    "inStock": false
+  }
+]
