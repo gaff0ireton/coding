@@ -1,0 +1,50 @@
+body {
+    text-align: center;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+h1 {
+    font-size: 1.5rem;
+}
+
+h2 {
+    font-size: 1.25rem;
+}
+
+p {
+    text-align: left;
+}
+
+header,
+footer {
+    padding: 1rem 0;
+    background-color: lightgray;
+}
+
+main {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+section {
+    max-width: 40rem;
+    padding: 1rem;
+    margin-inline: auto;
+    margin-block-end: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    flex-basis: 30%;
+
+    @media (width <= 768px) {
+        flex-basis: 100%;
+    }
+}
+
+footer p {
+    text-align: center;
+}
