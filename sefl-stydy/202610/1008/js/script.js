@@ -15,14 +15,23 @@ const getPokemon = async (name_pokemon) => {
         const data = await response.json();
         const { name, height, weight, sprites } = data;
 
-        console.log(data);
-        pokeName.textContent = data.name;
-        pokeHeight.textContent = data.height;
-        pokeWeight.textContent = data.weight;
-        pokeImg.src = sprites.front_default;
+        const { back_default, front_default } = sprites;
+
+        pokeName.textContent = name.toUpperCase();
+        pokeHeight.textContent = height;
+        pokeWeight.textContent = weight;
+        pokeImg.src = front_default;
     } catch (error) {
         console.error(error);
     }
 };
 
-getPokemon("zekrom");
+const form = document.querySelector("#search-form");
+
+form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const searchText = document.querySelector('#search-form input');
+    getPokemon(searchText.value.trim());
+
+})

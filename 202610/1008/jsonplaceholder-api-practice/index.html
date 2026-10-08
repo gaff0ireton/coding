@@ -1,0 +1,1711 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="JSONPlaceholderを使ってJavaScriptのAPI取得を練習する初心者向け教材">
+  <title>JavaScript API Practice | JSONPlaceholder</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <script src="./js/site.js" defer></script>
+  <script src="./js/practice.js" defer></script>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="#top">
+        <span class="brand-mark">API</span>
+        <span>JavaScript API Practice</span>
+      </a>
+      <nav class="site-nav" aria-label="ページ内ナビゲーション">
+        <a href="#lesson-1">単一取得</a>
+        <a href="#lesson-2">配列・map</a>
+        <a href="#lesson-3">find・DOM</a>
+        <a href="#lesson-4">filter</a>
+        <a href="#lesson-5">DOM一覧</a>
+      </nav>
+
+      <button
+        class="menu-button"
+        type="button"
+        aria-label="メニューを開く"
+        aria-controls="drawer-menu"
+        aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="drawer-overlay" data-drawer-overlay hidden></div>
+
+  <aside class="drawer-menu" id="drawer-menu" aria-hidden="true">
+    <div class="drawer-header">
+      <p>MENU</p>
+    </div>
+
+    <nav class="drawer-nav" aria-label="モバイル用ページ内ナビゲーション">
+      <a href="#lesson-1">01 単一取得</a>
+      <a href="#lesson-2">02 配列・map</a>
+      <a href="#lesson-3">03 find・DOM</a>
+      <a href="#lesson-4">04 filter</a>
+      <a href="#lesson-5">05 DOM一覧</a>
+      <a href="#final-practice">06 仕上げ課題</a>
+    </nav>
+  </aside>
+
+  <div class="copy-toast" role="status" aria-live="polite" aria-atomic="true">
+    コピーできました！
+  </div>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-inner">
+        <div>
+          <p class="eyebrow">JavaScript / Fetch API / async & await</p>
+          <h1>JSONPlaceholderで学ぶ<br>API取得の基本</h1>
+          <p class="hero-copy">
+            実際にAPIへアクセスしながら、データの取得、配列・オブジェクトの処理、
+            filter、DOM操作、async / await、try...catchまでを順番に練習します。
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#lesson-1">練習を始める</a>
+            <a class="button secondary" href="https://jsonplaceholder.typicode.com/" target="_blank" rel="noreferrer">
+              JSONPlaceholderを開く
+            </a>
+          </div>
+        </div>
+
+        <div class="flow-card" aria-label="API取得の流れ">
+          <p class="flow-title">今回の基本の流れ</p>
+          <ol class="flow-list">
+            <li><span>1</span>fetch() でAPIへアクセス</li>
+            <li><span>2</span>await でレスポンスを待つ</li>
+            <li><span>3</span>response.json() でJSONへ変換</li>
+            <li><span>4</span>配列・オブジェクトとして処理</li>
+            <li><span>5</span>必要に応じてDOMへ表示</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section class="section intro-section">
+      <div class="section-heading">
+        <p class="section-number">00</p>
+        <div>
+          <h2>この教材の使い方</h2>
+          <p>
+            CSSは完成済みです。基本的には <code>js/practice.js</code> だけを編集します。
+            各レッスンのコードをコピーして貼り付け、URLやID、条件式、表示内容を少しずつ変更して動作を確認してください。
+          </p>
+        </div>
+      </div>
+
+      <div class="notice">
+        <strong>最初に確認</strong>
+        <p>
+          API取得の結果は、まずブラウザの開発者ツールの「Console」で確認します。
+          DOM操作のレッスンでは、このページ内の結果表示エリアにもデータを表示します。
+        </p>
+      </div>
+
+      <div class="endpoint-grid">
+        <article class="endpoint-card">
+          <span>POSTS</span>
+          <code>/posts</code>
+          <p>投稿データ。100件。</p>
+        </article>
+        <article class="endpoint-card">
+          <span>USERS</span>
+          <code>/users</code>
+          <p>ユーザーデータ。10件。</p>
+        </article>
+        <article class="endpoint-card">
+          <span>TODOS</span>
+          <code>/todos</code>
+          <p>ToDoデータ。200件。</p>
+        </article>
+        <article class="endpoint-card">
+          <span>COMMENTS</span>
+          <code>/comments</code>
+          <p>コメントデータ。500件。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section lesson" id="lesson-1">
+      <div class="section-heading">
+        <p class="section-number">01</p>
+        <div>
+          <p class="lesson-label">GET / 単一オブジェクト</p>
+          <h2>1件のデータを取得してConsoleに表示する</h2>
+          <p>
+            JSONPlaceholderの <code>/posts</code> には、架空の投稿データが100件用意されています。
+            各投稿には <code>userId</code>、<code>id</code>、<code>title</code>、<code>body</code> が入っています。
+            URLを <code>/posts/1</code> とすると、その中からIDが1の投稿を1件だけ取得できるため、
+            最初はこのURLを使って「APIから1つのオブジェクトを取得して中身を確認する」練習をします。
+          </p>
+        </div>
+      </div>
+
+      <div class="lesson-layout">
+        <div class="lesson-main">
+          <h3>コピーするコード</h3>
+          <div class="code-block">
+            <button class="copy-button" type="button">コピー</button>
+            <pre><code>// APIから投稿データを1件取得する関数
+async function getPost() {
+  try {
+    // fetch()でAPIへアクセスし、レスポンスを受け取る
+    const response = await fetch(
+      "https://jsonplaceholder.typicode.com/posts/1"
+    );
+
+    // 通信結果が正常でなければエラーを発生させる
+    if (!response.ok) {
+      throw new Error("データの取得に失敗しました");
+    }
+
+    // 受け取ったJSONをJavaScriptのオブジェクトに変換する
+    const post = await response.json();
+
+    // 取得したオブジェクトをConsoleに表示する
+    console.log(post);
+  } catch (error) {
+    // エラーが発生した場合はConsoleに表示する
+    console.error(error);
+  }
+}
+
+// 関数を実行する
+getPost();</code></pre>
+          </div>
+
+          <div class="task-box">
+            <h3>やってみよう</h3>
+            <p>
+              コードを <code>practice.js</code> に貼り付けてページを再読み込みし、
+              Consoleに <code>userId</code>、<code>id</code>、<code>title</code>、<code>body</code>
+              を持つオブジェクトが表示されるか確認します。
+            </p>
+          </div>
+
+          <div class="console-note">
+            <h3>try...catch で例外処理を行う</h3>
+            <p>
+              API通信では、ネットワークの問題やURLの間違いなどによって、
+              データを正しく取得できないことがあります。
+              そのため、この教材では最初から <code>try...catch</code> を使って、
+              エラーが起きた場合の処理も書いています。
+            </p>
+
+            <div class="exception-flow">
+              <div>
+                <span>try</span>
+                <p>エラーが起きる可能性のある処理を書く</p>
+              </div>
+              <span class="arrow">→</span>
+              <div>
+                <span>catch</span>
+                <p>エラーが発生したときの処理を書く</p>
+              </div>
+            </div>
+
+            <p>
+              <code>try</code> の中でエラーが発生すると、その時点で残りの処理は中断され、
+              <code>catch</code> に処理が移ります。
+            </p>
+          </div>
+
+          <div class="console-note">
+            <h3>throw new Error() とは</h3>
+            <p>
+              <code>throw</code> は、自分でエラーを発生させるための書き方です。
+              今回は <code>response.ok</code> が <code>false</code> の場合に、
+              通信が正常ではなかったと判断してエラーを発生させています。
+            </p>
+
+            <div class="code-mini">
+              <code>throw new Error("データの取得に失敗しました");</code>
+            </div>
+
+            <p>
+              <code>new Error()</code> でエラーを表すオブジェクトを作り、
+              <code>throw</code> でそのエラーを発生させます。
+              発生したエラーは <code>catch</code> が受け取ります。
+            </p>
+          </div>
+
+          <div class="console-note">
+            <h3>Error オブジェクトとは</h3>
+            <p>
+              <code>Error</code> オブジェクトは、エラーの内容を表すためのオブジェクトです。
+              <code>new Error("メッセージ")</code> のように作成すると、
+              エラーについての情報を持つオブジェクトが作られます。
+            </p>
+
+            <div class="exception-example">
+              <div>
+                <span>エラーを作る</span>
+                <code>new Error("取得に失敗しました")</code>
+              </div>
+              <span class="arrow">→</span>
+              <div>
+                <span>catchの引数で受け取る</span>
+                <code>catch (error)</code>
+              </div>
+              <span class="arrow">→</span>
+              <div>
+                <span>内容を確認する</span>
+                <code>error.message</code>
+              </div>
+            </div>
+
+            <p class="console-note-caption">
+              <code>catch (error)</code> の <code>error</code> は、<code>catch</code> が受け取る引数です。
+              今回のコードでは、<code>throw new Error(...)</code> で発生させた
+              <code>Error</code> オブジェクトが、この引数 <code>error</code> に渡されます。
+              そのため、catchの中では引数 <code>error</code> を使ってエラーの内容を調べられます。
+              <code>console.error(error)</code> ならErrorオブジェクト全体を確認でき、
+              <code>error.message</code> なら、そのオブジェクトが持つメッセージを取得できます。
+            </p>
+          </div>
+        </div>
+
+        <aside class="challenge-card">
+          <h3>改造課題</h3>
+          <p><code>/posts/1</code> の最後の数字を変更して、別の投稿を取得してください。</p>
+          <p class="hint">例：<code>/posts/5</code></p>
+          <p>次に <code>console.log(post.title)</code> に変えて、タイトルだけを表示してください。</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section lesson" id="lesson-2">
+      <div class="section-heading">
+        <p class="section-number">02</p>
+        <div>
+          <p class="lesson-label">Array / Object / map()</p>
+          <h2>複数データを取得して必要な形にまとめる</h2>
+          <p>
+            JSONPlaceholderの <code>/users</code> には、架空のユーザーデータが10件用意されています。
+            各ユーザーには <code>id</code>、<code>name</code>、<code>username</code>、<code>email</code>、
+            <code>address</code>、<code>phone</code>、<code>website</code>、<code>company</code> などの情報が入っています。
+            今回はまず <code>/users</code> をそのまま取得してConsoleで中身を確認し、
+            どんなプロパティがあるのかを見たうえで、<code>map()</code> を使って必要な情報だけを持つ新しい配列に整理します。
+          </p>
+        </div>
+      </div>
+
+      <div class="lesson-layout">
+        <div class="lesson-main">
+          <h3>コピーするコード</h3>
+          <div class="code-block">
+            <button class="copy-button" type="button">コピー</button>
+            <pre><code>// APIからユーザー一覧を取得する関数
+async function getUsers() {
+  try {
+    // fetch()でユーザー一覧を取得する
+    const response = await fetch(
+      "https://jsonplaceholder.typicode.com/users"
+    );
+
+    // 通信結果が正常でなければエラーを発生させる
+    if (!response.ok) {
+      throw new Error("ユーザーの取得に失敗しました");
+    }
+
+    // 受け取ったJSONをJavaScriptの配列に変換する
+    const users = await response.json();
+
+    // まず取得したデータをそのままConsoleで確認する
+    console.log(users);
+    console.table(users);
+
+    // 中身を確認したうえで、必要なデータだけを持つ新しい配列を作る
+    const userList = users.map((user) => {
+      return {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        city: user.address.city,
+      };
+    });
+
+    // map()で整理したあとの配列も確認する
+    console.log(userList);
+    console.table(userList);
+  } catch (error) {
+    // エラーが発生した場合はConsoleに表示する
+    console.error(error);
+  }
+}
+
+// 関数を実行する
+getUsers();</code></pre>
+          </div>
+
+          <div class="console-note">
+            <h3>console.table() とは</h3>
+            <p>
+              <code>console.table()</code> は、配列やオブジェクトの内容を
+              Console上にテーブル形式で表示するためのメソッドです。
+            </p>
+            <p>
+              <code>console.log()</code> でもデータを確認できますが、
+              複数のオブジェクトが入った配列を確認するときは、
+              <code>console.table()</code> を使うと、各プロパティが列ごとに整理されるため見やすくなります。
+            </p>
+            <div class="console-example">
+              <div>
+                <span>通常の確認</span>
+                <code>console.log(users);</code>
+              </div>
+              <span class="arrow">→</span>
+              <div>
+                <span>表形式で確認</span>
+                <code>console.table(users);</code>
+              </div>
+            </div>
+            <p class="console-note-caption">
+              今回は、APIから取得した直後の <code>users</code> を
+              <code>console.log(users)</code> と <code>console.table(users)</code> の両方で表示します。
+              まず取得したデータを確認して、「どんなプロパティがあるのか」「どの値を使えそうか」を調べるのが目的です。
+              そのあと <code>map()</code> で整理した <code>userList</code> も同じ2つの方法で表示し、
+              整理する前と後でデータがどう変わったかを比較します。
+            </p>
+          </div>
+
+          <div class="console-note">
+            <h3>map() とは</h3>
+            <p>
+              <code>map()</code> は、配列の中にある各要素を順番に取り出して処理し、
+              その結果から新しい配列を作るためのメソッドです。
+            </p>
+            <p>
+              <code>map()</code> の引数には、各要素に対して実行したい関数を渡します。
+              今回は <code>users.map((user) =&gt; { ... })</code> と書いているため、
+              <code>map()</code> の引数としてアロー関数を渡しています。
+              さらに、そのアロー関数の引数 <code>user</code> には、
+              <code>users</code> 配列の要素が1件ずつ順番に渡されます。
+            </p>
+            <p>
+              つまり、1回目の処理では1人目のユーザーが引数 <code>user</code> に入り、
+              2回目では2人目のユーザーが入る、という流れです。
+              今回は、先にConsoleで <code>users</code> の中身を確認し、
+              <code>id</code>、<code>name</code>、<code>email</code>、<code>address</code> などのプロパティがあることを確認してから、
+              引数 <code>user</code> を使って <code>id</code>、<code>name</code>、<code>email</code>、
+              <code>address.city</code> だけを取り出し、新しい配列 <code>userList</code> を作っています。
+            </p>
+
+            <div class="console-example">
+              <div>
+                <span>APIから取得した配列</span>
+                <code>users</code>
+              </div>
+              <span class="arrow">→</span>
+              <div>
+                <span>各要素が引数userに渡される</span>
+                <code>users.map((user) =&gt; ...)</code>
+              </div>
+              <span class="arrow">→</span>
+              <div>
+                <span>新しい配列</span>
+                <code>userList</code>
+              </div>
+            </div>
+
+            <p class="console-note-caption">
+              <code>map()</code> は元の <code>users</code> 配列を書き換えるのではなく、
+              加工した結果を別の新しい配列として作ります。
+              「APIから取得する → Consoleで中身を確認する → 使う値を決める → <code>map()</code> で使いやすい形に整える」
+              という順で考えると、初めて見るAPIでも処理を組み立てやすくなります。
+            </p>
+          </div>
+
+          <div class="data-shape">
+            <div>
+              <span>配列</span>
+              <code>users</code>
+            </div>
+            <span class="arrow">→</span>
+            <div>
+              <span>各要素</span>
+              <code>user</code>
+            </div>
+            <span class="arrow">→</span>
+            <div>
+              <span>入れ子の値</span>
+              <code>user.address.city</code>
+            </div>
+          </div>
+        </div>
+
+        <aside class="challenge-card">
+          <h3>改造課題</h3>
+          <p>
+            <code>city</code> の代わりに <code>phone</code> や <code>website</code> を取得してみてください。
+          </p>
+          <p>
+            慣れたら、<code>company</code> の中にある <code>name</code> も追加してみましょう。
+          </p>
+          <p class="hint"><code>user.company.name</code></p>
+        </aside>
+      </div>
+    </section>
+
+
+    <section class="section lesson" id="lesson-3">
+      <div class="section-heading">
+        <p class="section-number">03</p>
+        <div>
+          <p class="lesson-label">Array / find() / DOM</p>
+          <h2>IDを指定して1人を探し、HTMLを書き換える</h2>
+          <p>
+            02で確認した <code>/users</code> には10人分のユーザー情報が配列で入っています。
+            今回は、その中から <code>id</code> が3のユーザーを <code>find()</code> で1人だけ探します。
+            見つかったユーザーには名前、メールアドレス、住所、会社情報などが入っているため、
+            その値を使って、あらかじめHTMLに用意してあるプロフィールのテキストを書き換えてみましょう。
+          </p>
+        </div>
+      </div>
+
+      <div class="lesson-layout">
+        <div class="lesson-main">
+          <h3>コピーするコード</h3>
+          <div class="code-block">
+            <button class="copy-button" type="button">コピー</button>
+            <pre><code>// APIからユーザー一覧を取得し、指定したIDのユーザーを表示する関数
+async function showUser() {
+  // 書き換えるHTML要素を取得する
+  const userName = document.querySelector("#user-name");
+  const userEmail = document.querySelector("#user-email");
+  const userCity = document.querySelector("#user-city");
+  const userCompany = document.querySelector("#user-company");
+
+  try {
+    // fetch()でユーザー一覧を取得する
+    const response = await fetch(
+      "https://jsonplaceholder.typicode.com/users"
+    );
+
+    // 通信結果が正常でなければエラーを発生させる
+    if (!response.ok) {
+      throw new Error("ユーザーの取得に失敗しました");
+    }
+
+    // 受け取ったJSONをJavaScriptの配列に変換する
+    const users = await response.json();
+
+    // find()を使って、idが3のユーザーを1人だけ探す
+    const user = users.find((user) => {
+      return user.id === 3;
+    });
+
+    // 指定したユーザーが見つからなければエラーを発生させる
+    if (!user) {
+      throw new Error("指定したユーザーが見つかりません");
+    }
+
+    // 見つけたユーザーをConsoleで確認する
+    console.log(user);
+
+    // 取得した値を使ってHTMLのテキストを書き換える
+    userName.textContent = user.name;
+    userEmail.textContent = user.email;
+    userCity.textContent = user.address.city;
+    userCompany.textContent = user.company.name;
+  } catch (error) {
+    // エラーが発生した場合はConsoleに表示する
+    console.error(error);
+  }
+}
+
+// 関数を実行する
+showUser();</code></pre>
+          </div>
+
+          <div class="console-note">
+            <h3>find() とは</h3>
+            <p>
+              <code>find()</code> は、配列の中から条件に合う要素を探し、
+              最初に見つかった1件を返すメソッドです。
+            </p>
+            <p>
+              <code>find()</code> の引数にも、条件を確認するための関数を渡します。
+              今回は <code>users.find((user) =&gt; { ... })</code> と書いているため、
+              <code>find()</code> の引数としてアロー関数を渡しています。
+              そのアロー関数の引数 <code>user</code> には、
+              <code>users</code> 配列の要素が1件ずつ順番に渡されます。
+            </p>
+            <p>
+              受け取った引数 <code>user</code> に対して <code>user.id === 3</code> を確認し、
+              条件が <code>true</code> になった最初のユーザーを返します。
+              今回は <code>id === 3</code> のユーザーを探しています。
+              IDは1人のユーザーを特定するための値なので、1件を取り出す <code>find()</code> が適しています。
+            </p>
+
+            <div class="find-compare">
+              <div>
+                <span>find()</span>
+                <strong>1件を探す</strong>
+                <code>オブジェクトを返す</code>
+              </div>
+              <div>
+                <span>filter()</span>
+                <strong>条件に合うものをすべて残す</strong>
+                <code>配列を返す</code>
+              </div>
+            </div>
+
+            <p class="console-note-caption">
+              <code>filter()</code> でもIDが3のユーザーだけを残すことはできますが、
+              結果は1件だけでも配列になります。
+              今回のように「1人を探して、その人の情報を使う」場合は
+              <code>find()</code> のほうが扱いやすくなります。
+            </p>
+          </div>
+
+          <div class="result-panel user-result-panel">
+            <div class="result-header">
+              <div>
+                <p>RESULT</p>
+                <h3>ユーザープロフィール</h3>
+              </div>
+              <span>find() → DOM</span>
+            </div>
+
+            <div class="user-profile">
+              <div class="user-avatar" aria-hidden="true">USER</div>
+              <div class="user-profile-body">
+                <p class="profile-label">NAME</p>
+                <h3 id="user-name">ユーザー名</h3>
+
+                <dl class="profile-data">
+                  <div>
+                    <dt>EMAIL</dt>
+                    <dd id="user-email">メールアドレス</dd>
+                  </div>
+                  <div>
+                    <dt>CITY</dt>
+                    <dd id="user-city">都市名</dd>
+                  </div>
+                  <div>
+                    <dt>COMPANY</dt>
+                    <dd id="user-company">会社名</dd>
+                  </div>
+                </dl>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="challenge-card">
+          <h3>改造課題</h3>
+          <p>
+            <code>user.id === 3</code> の数字を変更して、
+            別のユーザーの情報を表示してください。
+          </p>
+          <p>
+            次にHTMLへ表示する内容を1つ追加して、
+            <code>username</code>、<code>phone</code>、<code>website</code> なども表示してみましょう。
+          </p>
+          <p class="hint">
+            住所の中の値は <code>user.address.city</code>、
+            会社名は <code>user.company.name</code> のように取得します。
+          </p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section lesson" id="lesson-4">
+      <div class="section-heading">
+        <p class="section-number">04</p>
+        <div>
+          <p class="lesson-label">Array / filter() / DOM</p>
+          <h2>条件に合うデータだけを残してHTMLに表示する</h2>
+          <p>
+            JSONPlaceholderの <code>/todos</code> へアクセスすると、
+            「やること」を表すToDoデータをまとめて取得できます。
+            それぞれのデータには <code>userId</code>、<code>id</code>、<code>title</code>、
+            <code>completed</code> というプロパティがあり、
+            <code>completed</code> には完了済みなら <code>true</code>、
+            未完了なら <code>false</code> が入っています。
+          </p>
+          <p>
+            今回はこのデータを使って、<code>filter()</code> で
+            「完了済みのToDoだけ」を取り出し、
+            その件数と内容の一部をHTMLへ表示してみましょう。
+          </p>
+        </div>
+      </div>
+
+      <div class="lesson-layout">
+        <div class="lesson-main">
+          <h3>コピーするコード</h3>
+          <div class="code-block">
+            <button class="copy-button" type="button">コピー</button>
+            <pre><code>// APIからToDo一覧を取得し、完了済みだけを画面に表示する関数
+async function showCompletedTodos() {
+  // 件数を表示するHTML要素を取得する
+  const todoCount = document.querySelector("#todo-count");
+
+  // ToDo一覧を表示するHTML要素を取得する
+  const todoList = document.querySelector("#todo-list");
+
+  try {
+    // fetch()でToDo一覧を取得する
+    const response = await fetch(
+      "https://jsonplaceholder.typicode.com/todos"
+    );
+
+    // 通信結果が正常でなければエラーを発生させる
+    if (!response.ok) {
+      throw new Error("ToDoの取得に失敗しました");
+    }
+
+    // 受け取ったJSONをJavaScriptの配列に変換する
+    const todos = await response.json();
+
+    // まず取得したデータをConsoleで確認する
+    console.log(todos);
+    console.table(todos);
+
+    // filter()を使って、completedがtrueのデータだけを残す
+    const completedTodos = todos.filter((todo) => {
+      return todo.completed === true;
+    });
+
+    // 完了済みToDoの件数をHTMLに表示する
+    todoCount.textContent = `${completedTodos.length}件`;
+
+    // 表示前に一覧エリアを空にする
+    todoList.innerHTML = "";
+
+    // 最初の5件をHTMLへ表示する
+    completedTodos.slice(0, 5).forEach((todo) => {
+      todoList.insertAdjacentHTML(
+        "beforeend",
+        `&lt;li&gt;${todo.title}&lt;/li&gt;`
+      );
+    });
+  } catch (error) {
+    // エラーが発生した場合はConsoleに表示する
+    console.error(error);
+
+    // HTMLにもエラーメッセージを表示する
+    todoCount.textContent = "取得失敗";
+    todoList.innerHTML = `&lt;li&gt;${error.message}&lt;/li&gt;`;
+  }
+}
+
+// 関数を実行する
+showCompletedTodos();</code></pre>
+          </div>
+
+          <div class="console-note">
+            <h3>filter() の引数は何をしているのか</h3>
+            <p>
+              <code>filter()</code> の引数には、条件を確認するための関数を渡します。
+              今回は <code>todos.filter((todo) =&gt; { ... })</code> と書いているため、
+              <code>filter()</code> の引数としてアロー関数を渡しています。
+              そのアロー関数の引数 <code>todo</code> には、
+              <code>todos</code> 配列の要素が1件ずつ順番に渡されます。
+            </p>
+            <p>
+              受け取った引数 <code>todo</code> に対して
+              <code>todo.completed === true</code> を確認し、
+              条件が <code>true</code> になった要素だけを残します。
+              <code>find()</code> が条件に合う最初の1件を返すのに対し、
+              <code>filter()</code> は条件に合うすべての要素を集めて、新しい配列を作ります。
+            </p>
+          </div>
+
+          <div class="compare-box">
+            <div>
+              <p>取得直後</p>
+              <strong>200件</strong>
+              <code>todos</code>
+            </div>
+            <div class="filter-mark">filter()</div>
+            <div>
+              <p>条件で絞り込み</p>
+              <strong>完了済みだけ</strong>
+              <code>completedTodos</code>
+            </div>
+          </div>
+
+          <div class="console-note">
+            <h3>slice() とは</h3>
+            <p>
+              <code>slice()</code> は、配列の中から指定した範囲だけを取り出して、
+              新しい配列を作るメソッドです。
+            </p>
+            <p>
+              今回は <code>completedTodos.slice(0, 5)</code> と書いているため、
+              完了済みToDoの配列 <code>completedTodos</code> の中から、
+              先頭から5件だけを取り出しています。
+            </p>
+
+            <div class="console-example">
+              <div>
+                <span>元の配列</span>
+                <code>completedTodos</code>
+              </div>
+              <span class="arrow">→</span>
+              <div>
+                <span>0番目から5番目の手前まで</span>
+                <code>slice(0, 5)</code>
+              </div>
+              <span class="arrow">→</span>
+              <div>
+                <span>最初の5件</span>
+                <code>新しい配列</code>
+              </div>
+            </div>
+
+            <p class="console-note-caption">
+              <code>slice(開始位置, 終了位置)</code> のように指定し、
+              終了位置の要素は含まれません。
+              そのため <code>slice(0, 5)</code> は、
+              インデックス0〜4までの5件を取り出します。
+              また、<code>slice()</code> は元の配列 <code>completedTodos</code> を変更しません。
+            </p>
+          </div>
+
+          <div class="result-panel result-panel-emphasis">
+            <div class="result-header">
+              <div>
+                <p>RESULT</p>
+                <h3>完了済みToDoの表示結果</h3>
+              </div>
+              <span>filter() → DOM</span>
+            </div>
+
+            <div class="todo-result">
+              <div class="todo-summary">
+                <p>完了済みToDo</p>
+                <strong id="todo-count">まだ取得していません</strong>
+              </div>
+
+              <div class="todo-list-wrap">
+                <p class="result-guide">ここに最初の5件が表示されます</p>
+                <ul id="todo-list" class="todo-list">
+                  <li>レッスン4のコードを実行すると、ここが書き換わります。</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="challenge-card">
+          <h3>改造課題</h3>
+          <p>
+            <code>todo.completed === true</code> を
+            <code>false</code> に変更して、未完了のToDoを表示してください。
+          </p>
+          <p>
+            次に <code>todo.userId === 1</code> という条件を使って、
+            ユーザーIDが1のToDoだけに絞り込んでみましょう。
+          </p>
+          <p class="hint">
+            複数条件にしたい場合は <code>&amp;&amp;</code> を使えます。
+          </p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section lesson" id="lesson-5">
+      <div class="section-heading">
+        <p class="section-number">05</p>
+        <div>
+          <p class="lesson-label">Fetch API → DOM</p>
+          <h2>取得したデータをWebページに表示する</h2>
+          <p>
+            01でも使った <code>/posts</code> には、<code>userId</code>、<code>id</code>、<code>title</code>、
+            <code>body</code> を持つ投稿データが100件入っています。
+            今回は <code>/posts</code> として投稿をまとめて取得し、最初の6件だけを <code>slice()</code> で取り出します。
+            その6件を <code>forEach()</code> で順番に処理し、タイトルや本文をHTMLのカードとして画面に追加してみましょう。
+          </p>
+        </div>
+      </div>
+
+      <div class="lesson-layout">
+        <div class="lesson-main">
+          <h3>コピーするコード</h3>
+          <div class="code-block">
+            <button class="copy-button" type="button">コピー</button>
+            <pre><code>// APIから投稿一覧を取得して画面に表示する関数
+async function showPosts() {
+  // 投稿を表示するHTML要素を取得する
+  const postList = document.querySelector("#post-list");
+
+  try {
+    // fetch()で投稿一覧を取得する
+    const response = await fetch(
+      "https://jsonplaceholder.typicode.com/posts"
+    );
+
+    // 通信結果が正常でなければエラーを発生させる
+    if (!response.ok) {
+      throw new Error("投稿の取得に失敗しました");
+    }
+
+    // 受け取ったJSONをJavaScriptの配列に変換する
+    const posts = await response.json();
+
+    // 最初の6件だけを新しい配列として取り出す
+    const displayPosts = posts.slice(0, 6);
+
+    // もともと表示されている内容を空にする
+    postList.innerHTML = "";
+
+    // 各投稿データを順番にHTMLとして追加する
+    displayPosts.forEach((post) => {
+      postList.insertAdjacentHTML(
+        "beforeend",
+        `&lt;article class="post-card"&gt;
+          &lt;p class="post-id"&gt;POST ${post.id}&lt;/p&gt;
+          &lt;h3&gt;${post.title}&lt;/h3&gt;
+          &lt;p&gt;${post.body}&lt;/p&gt;
+        &lt;/article&gt;`
+      );
+    });
+  } catch (error) {
+    // エラーが発生した場合は画面にメッセージを表示する
+    postList.innerHTML =
+      `&lt;p class="error-message"&gt;${error.message}&lt;/p&gt;`;
+  }
+}
+
+// 関数を実行する
+showPosts();</code></pre>
+          </div>
+
+          <div class="task-box">
+            <h3>表示先はすでに用意済みです</h3>
+            <p>
+              下の「APIデータ表示エリア」が <code>&lt;div id="post-list"&gt;</code> です。
+              コードを貼り付けると、この場所に投稿カードが表示されます。
+            </p>
+          </div>
+        </div>
+
+        <aside class="challenge-card">
+          <h3>改造課題</h3>
+          <p><code>slice(0, 6)</code> の数字を変更して表示件数を変えてください。</p>
+          <p>
+            次に <code>filter()</code> を追加して、<code>userId === 1</code> の投稿だけを表示してください。
+          </p>
+        </aside>
+      </div>
+
+      <div class="result-panel">
+        <div class="result-header">
+          <div>
+            <p>RESULT</p>
+            <h3>APIデータ表示エリア</h3>
+          </div>
+          <span>#post-list</span>
+        </div>
+        <div id="post-list" class="post-grid">
+          <p class="empty-message">
+            まだデータはありません。レッスン5のコードを <code>practice.js</code> に貼り付けてください。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section final-practice" id="final-practice">
+      <div class="section-heading">
+        <p class="section-number">06</p>
+        <div>
+          <p class="lesson-label">Practice</p>
+          <h2>仕上げ課題</h2>
+          <p>
+            ここまでに学習したAPI取得、配列メソッド、オブジェクトの値の取得、DOM操作を組み合わせて、
+            自分で処理を組み立てます。各課題には専用のRESULTエリアを用意しています。
+          </p>
+          <p>
+            01〜03ではHTML要素を新しく作る必要はありません。
+            すでに用意してある要素を <code>querySelector()</code> で取得し、
+            <code>textContent</code> を使って内容を書き換えてください。
+            04だけは <code>insertAdjacentHTML()</code> を使いますが、
+            追加するHTMLの形を問題内に指定しています。
+          </p>
+        </div>
+      </div>
+
+      <div class="practice-grid">
+        <!-- ==========================================================
+          仕上げ課題 01
+          HTML要素はすでに用意されています。
+          新しいHTMLは作りません。
+
+          書き換える場所:
+          #practice-user-1-name / #practice-user-1-email / #practice-user-1-city
+          #practice-user-2-name / #practice-user-2-email / #practice-user-2-city
+          #practice-user-3-name / #practice-user-3-email / #practice-user-3-city
+
+          js/practice.js から textContent で書き換えてください。
+        =========================================================== -->
+        <article class="practice-card">
+          <span class="practice-number">01</span>
+          <h3>3人のユーザー情報を表示する</h3>
+          <p>
+            JSONPlaceholderの <code>/users</code> を取得し、
+            配列の先頭3人の <code>name</code>、<code>email</code>、
+            <code>address.city</code> を下の3つのカードへ表示してください。
+          </p>
+          <p>
+            カードのHTMLはすでに用意してあります。
+            新しいタグを作ったり <code>insertAdjacentHTML()</code> を使ったりする必要はありません。
+            対象の要素を取得して <code>textContent</code> で書き換えます。
+          </p>
+
+          <div class="practice-targets">
+            <p>書き換え対象</p>
+            <dl>
+              <div>
+                <dt>1人目</dt>
+                <dd>
+                  <code>#practice-user-1-name</code><br>
+                  <code>#practice-user-1-email</code><br>
+                  <code>#practice-user-1-city</code>
+                </dd>
+              </div>
+              <div>
+                <dt>2人目</dt>
+                <dd>
+                  <code>#practice-user-2-name</code><br>
+                  <code>#practice-user-2-email</code><br>
+                  <code>#practice-user-2-city</code>
+                </dd>
+              </div>
+              <div>
+                <dt>3人目</dt>
+                <dd>
+                  <code>#practice-user-3-name</code><br>
+                  <code>#practice-user-3-email</code><br>
+                  <code>#practice-user-3-city</code>
+                </dd>
+              </div>
+            </dl>
+          </div>
+
+          <div class="practice-result">
+            <div class="practice-result-header">
+              <div>
+                <span>RESULT</span>
+                <strong>ユーザー3人</strong>
+              </div>
+              <code>textContent</code>
+            </div>
+
+            <div class="practice-user-list">
+              <article class="practice-user-item">
+                <p class="practice-card-label">USER 1</p>
+                <!-- ▼ 課題01：1人目のnameを書き換える -->
+                <h4 id="practice-user-1-name">ユーザー名</h4>
+                <!-- ▼ 課題01：1人目のemailを書き換える -->
+                <p id="practice-user-1-email">メールアドレス</p>
+                <!-- ▼ 課題01：1人目のaddress.cityを書き換える -->
+                <p id="practice-user-1-city">都市名</p>
+              </article>
+
+              <article class="practice-user-item">
+                <p class="practice-card-label">USER 2</p>
+                <!-- ▼ 課題01：2人目のnameを書き換える -->
+                <h4 id="practice-user-2-name">ユーザー名</h4>
+                <!-- ▼ 課題01：2人目のemailを書き換える -->
+                <p id="practice-user-2-email">メールアドレス</p>
+                <!-- ▼ 課題01：2人目のaddress.cityを書き換える -->
+                <p id="practice-user-2-city">都市名</p>
+              </article>
+
+              <article class="practice-user-item">
+                <p class="practice-card-label">USER 3</p>
+                <!-- ▼ 課題01：3人目のnameを書き換える -->
+                <h4 id="practice-user-3-name">ユーザー名</h4>
+                <!-- ▼ 課題01：3人目のemailを書き換える -->
+                <p id="practice-user-3-email">メールアドレス</p>
+                <!-- ▼ 課題01：3人目のaddress.cityを書き換える -->
+                <p id="practice-user-3-city">都市名</p>
+              </article>
+            </div>
+          </div>
+        </article>
+
+        <!-- ==========================================================
+          仕上げ課題 02
+          HTML要素はすでに用意されています。
+          新しいHTMLは作りません。
+
+          書き換える場所:
+          #practice-todo-count
+          #practice-todo-1
+          #practice-todo-2
+          #practice-todo-3
+
+          filter() で抽出した結果のうち先頭3件を
+          textContent で表示してください。
+        =========================================================== -->
+        <article class="practice-card">
+          <span class="practice-number">02</span>
+          <h3>未完了ToDoを抽出して表示する</h3>
+          <p>
+            JSONPlaceholderの <code>/todos</code> を取得し、
+            <code>filter()</code> を使って
+            「<code>userId</code> が3、なおかつ <code>completed</code> が
+            <code>false</code>」のToDoだけを抽出してください。
+          </p>
+          <p>
+            抽出した件数を <code>#practice-todo-count</code> へ表示し、
+            抽出結果の先頭3件の <code>title</code> を
+            <code>#practice-todo-1</code>〜<code>#practice-todo-3</code>
+            へ <code>textContent</code> で表示してください。
+          </p>
+
+          <div class="practice-targets">
+            <p>書き換え対象</p>
+            <dl>
+              <div>
+                <dt>該当件数</dt>
+                <dd><code>#practice-todo-count</code></dd>
+              </div>
+              <div>
+                <dt>1件目のtitle</dt>
+                <dd><code>#practice-todo-1</code></dd>
+              </div>
+              <div>
+                <dt>2件目のtitle</dt>
+                <dd><code>#practice-todo-2</code></dd>
+              </div>
+              <div>
+                <dt>3件目のtitle</dt>
+                <dd><code>#practice-todo-3</code></dd>
+              </div>
+            </dl>
+          </div>
+
+          <div class="practice-result">
+            <div class="practice-result-header">
+              <div>
+                <span>RESULT</span>
+                <strong>未完了ToDo</strong>
+              </div>
+              <code>filter() → textContent</code>
+            </div>
+
+            <div class="practice-todo-layout">
+              <div class="practice-count-box">
+                <span>該当件数</span>
+                <!-- ▼ 課題02：件数を書き換える -->
+                <strong id="practice-todo-count">--件</strong>
+              </div>
+
+              <ul class="practice-output-list">
+                <!-- ▼ 課題02：抽出結果の先頭3件を書き換える -->
+                <li id="practice-todo-1">1件目のToDo</li>
+                <li id="practice-todo-2">2件目のToDo</li>
+                <li id="practice-todo-3">3件目のToDo</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <!-- ==========================================================
+          仕上げ課題 03
+          HTMLカードは3枚すでに用意されています。
+          新しいHTMLは作りません。
+
+          userId === 4 の投稿を filter() で抽出し、
+          先頭3件を以下の要素へ textContent で表示します。
+
+          1枚目:
+          #practice-post-1-id / #practice-post-1-title / #practice-post-1-body
+
+          2枚目:
+          #practice-post-2-id / #practice-post-2-title / #practice-post-2-body
+
+          3枚目:
+          #practice-post-3-id / #practice-post-3-title / #practice-post-3-body
+        =========================================================== -->
+        <article class="practice-card">
+          <span class="practice-number">03</span>
+          <h3>指定ユーザーの投稿を3件表示する</h3>
+          <p>
+            JSONPlaceholderの <code>/posts</code> を取得し、
+            <code>filter()</code> で <code>userId === 4</code> の投稿だけを取り出してください。
+          </p>
+          <p>
+            投稿カードは3枚すでにHTMLに用意されています。
+            抽出した投稿の先頭3件について、<code>id</code>、<code>title</code>、
+            <code>body</code> をそれぞれ指定された要素へ
+            <code>textContent</code> で表示してください。
+          </p>
+
+          <div class="practice-targets">
+            <p>書き換え対象</p>
+            <dl>
+              <div>
+                <dt>1件目</dt>
+                <dd>
+                  <code>#practice-post-1-id</code><br>
+                  <code>#practice-post-1-title</code><br>
+                  <code>#practice-post-1-body</code>
+                </dd>
+              </div>
+              <div>
+                <dt>2件目</dt>
+                <dd>
+                  <code>#practice-post-2-id</code><br>
+                  <code>#practice-post-2-title</code><br>
+                  <code>#practice-post-2-body</code>
+                </dd>
+              </div>
+              <div>
+                <dt>3件目</dt>
+                <dd>
+                  <code>#practice-post-3-id</code><br>
+                  <code>#practice-post-3-title</code><br>
+                  <code>#practice-post-3-body</code>
+                </dd>
+              </div>
+            </dl>
+          </div>
+
+          <div class="practice-result">
+            <div class="practice-result-header">
+              <div>
+                <span>RESULT</span>
+                <strong>userId 4 の投稿3件</strong>
+              </div>
+              <code>filter() → textContent</code>
+            </div>
+
+            <div class="practice-post-list">
+              <article class="practice-post-item">
+                <!-- ▼ 課題03：1件目のid -->
+                <p id="practice-post-1-id" class="practice-card-label">POST --</p>
+                <!-- ▼ 課題03：1件目のtitle -->
+                <h4 id="practice-post-1-title">投稿タイトル</h4>
+                <!-- ▼ 課題03：1件目のbody -->
+                <p id="practice-post-1-body">投稿本文</p>
+              </article>
+
+              <article class="practice-post-item">
+                <!-- ▼ 課題03：2件目のid -->
+                <p id="practice-post-2-id" class="practice-card-label">POST --</p>
+                <!-- ▼ 課題03：2件目のtitle -->
+                <h4 id="practice-post-2-title">投稿タイトル</h4>
+                <!-- ▼ 課題03：2件目のbody -->
+                <p id="practice-post-2-body">投稿本文</p>
+              </article>
+
+              <article class="practice-post-item">
+                <!-- ▼ 課題03：3件目のid -->
+                <p id="practice-post-3-id" class="practice-card-label">POST --</p>
+                <!-- ▼ 課題03：3件目のtitle -->
+                <h4 id="practice-post-3-title">投稿タイトル</h4>
+                <!-- ▼ 課題03：3件目のbody -->
+                <p id="practice-post-3-body">投稿本文</p>
+              </article>
+            </div>
+          </div>
+        </article>
+
+        <!-- ==========================================================
+          仕上げ課題 04（最難関）
+          ここだけ insertAdjacentHTML() を使います。
+
+          書き換える場所:
+          #practice-profile-name
+          #practice-profile-email
+          #practice-profile-company
+          #practice-profile-post-count
+          #practice-profile-posts
+
+          #practice-profile-posts に追加するHTMLは、
+          問題文に掲載している構造をそのまま使用してください。
+        =========================================================== -->
+        <article class="practice-card practice-card-hard">
+          <span class="practice-number">04</span>
+          <div class="practice-hard-label">最難関</div>
+          <h3>ユーザー情報と、その人の投稿をまとめて表示する</h3>
+          <p>
+            <code>/users</code> と <code>/posts</code> の2つのAPIを取得してください。
+            今回はIDが <code>5</code> のユーザーを対象にします。
+          </p>
+          <p>
+            <code>/users</code> から <code>find()</code> で <code>id === 5</code> のユーザーを探し、
+            名前・メールアドレス・会社名をそれぞれ指定された要素へ
+            <code>textContent</code> で表示してください。
+          </p>
+          <p>
+            次に <code>/posts</code> から <code>filter()</code> で
+            <code>userId === 5</code> の投稿をすべて取り出し、
+            投稿件数を表示したあと、<code>#practice-profile-posts</code> へ
+            <code>insertAdjacentHTML()</code> で投稿を追加してください。
+          </p>
+
+          <div class="practice-targets practice-targets-hard">
+            <p>書き換え対象</p>
+            <dl>
+              <div>
+                <dt>名前</dt>
+                <dd><code>#practice-profile-name</code></dd>
+              </div>
+              <div>
+                <dt>メール</dt>
+                <dd><code>#practice-profile-email</code></dd>
+              </div>
+              <div>
+                <dt>会社名</dt>
+                <dd><code>#practice-profile-company</code></dd>
+              </div>
+              <div>
+                <dt>投稿件数</dt>
+                <dd><code>#practice-profile-post-count</code></dd>
+              </div>
+              <div>
+                <dt>投稿の追加先</dt>
+                <dd><code>#practice-profile-posts</code></dd>
+              </div>
+            </dl>
+          </div>
+
+          <div class="practice-html-spec">
+            <p>insertAdjacentHTML() で追加するHTML</p>
+            <p>
+              投稿1件につき、必ず次のHTML構造で追加してください。
+              <code>${post.title}</code> と <code>${post.body}</code> の部分へAPIの値を入れます。
+            </p>
+            <pre><code>&lt;article class="practice-post-item"&gt;
+  &lt;h4&gt;${post.title}&lt;/h4&gt;
+  &lt;p&gt;${post.body}&lt;/p&gt;
+&lt;/article&gt;</code></pre>
+          </div>
+
+          <div class="practice-result practice-result-hard">
+            <div class="practice-result-header">
+              <div>
+                <span>RESULT</span>
+                <strong>ユーザー＋投稿一覧</strong>
+              </div>
+              <code>2 APIs → find() → filter() → insertAdjacentHTML()</code>
+            </div>
+
+            <div class="practice-profile">
+              <div>
+                <span>NAME</span>
+                <!-- ▼ 課題04：ユーザー名を書き換える -->
+                <strong id="practice-profile-name">ユーザー名</strong>
+              </div>
+
+              <div>
+                <span>EMAIL</span>
+                <!-- ▼ 課題04：メールアドレスを書き換える -->
+                <p id="practice-profile-email">メールアドレス</p>
+              </div>
+
+              <div>
+                <span>COMPANY</span>
+                <!-- ▼ 課題04：会社名を書き換える -->
+                <p id="practice-profile-company">会社名</p>
+              </div>
+
+              <div>
+                <span>POSTS</span>
+                <!-- ▼ 課題04：投稿件数を書き換える -->
+                <p id="practice-profile-post-count">--件</p>
+              </div>
+            </div>
+
+            <!--
+              ▼ 課題04：投稿の追加先
+              insertAdjacentHTML() で、このdivの中へ次の形を追加します。
+
+              <article class="practice-post-item">
+                <h4>${post.title}</h4>
+                <p>${post.body}</p>
+              </article>
+            -->
+            <div id="practice-profile-posts" class="practice-post-list">
+              <p class="practice-placeholder">
+                ここにIDが5のユーザーが投稿した記事を追加してください。
+              </p>
+            </div>
+            <!-- ▲ 課題04：投稿の追加先ここまで -->
+          </div>
+        </article>
+      </div>
+
+      <!-- ==========================================================
+        06 仕上げ課題：回答コード
+        <details> を使ったアコーディオンです。
+        最初は閉じた状態で、必要な回答だけ開いて確認できます。
+      =========================================================== -->
+      <div class="answer-section">
+        <div class="answer-heading">
+          <p class="lesson-label">ANSWER</p>
+          <h3>仕上げ課題の回答コード</h3>
+          <p>
+            4問すべてに取り組んだあと、回答を確認したい方はこちらを開いてください。
+            各問題の回答は個別に開閉できます。
+          </p>
+        </div>
+
+        <div class="answer-list">
+
+          <details class="answer-accordion">
+            <summary>
+              <span>01：3人のユーザー情報を表示する</span>
+              <span class="answer-toggle" aria-hidden="true"></span>
+            </summary>
+            <div class="answer-content">
+              <div class="code-block answer-code">
+                <button class="copy-button" type="button">コピー</button>
+                <pre><code>// ユーザー情報を取得して表示する関数
+async function showUsers() {
+  try {
+    // ユーザー一覧を取得する
+    const response = await fetch(
+      &quot;https://jsonplaceholder.typicode.com/users&quot;
+    );
+
+    if (!response.ok) {
+      throw new Error(&quot;ユーザーの取得に失敗しました&quot;);
+    }
+
+    // JSONをJavaScriptの配列に変換する
+    const users = await response.json();
+
+    // 取得したデータを確認する
+    console.table(users);
+
+    // 最初の3人だけを取り出して順番に処理する
+    users.slice(0, 3).forEach((user, index) =&gt; {
+      // indexは0から始まるので、HTMLの番号に合わせて+1する
+      const number = index + 1;
+
+      // 各ユーザーの情報をHTMLに表示する
+      document.querySelector(
+        `#practice-user-${number}-name`
+      ).textContent = user.name;
+
+      document.querySelector(
+        `#practice-user-${number}-email`
+      ).textContent = user.email;
+
+      document.querySelector(
+        `#practice-user-${number}-city`
+      ).textContent = user.address.city;
+    });
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// 関数を実行する
+showUsers();</code></pre>
+              </div>
+            </div>
+          </details>
+          <details class="answer-accordion">
+            <summary>
+              <span>02：未完了ToDoを抽出して表示する</span>
+              <span class="answer-toggle" aria-hidden="true"></span>
+            </summary>
+            <div class="answer-content">
+              <div class="code-block answer-code">
+                <button class="copy-button" type="button">コピー</button>
+                <pre><code>// 未完了ToDoを取得して表示する関数
+async function showTodos() {
+  // 件数の表示先を取得する
+  const todoCount = document.querySelector(
+    &quot;#practice-todo-count&quot;
+  );
+
+  try {
+    // ToDo一覧を取得する
+    const response = await fetch(
+      &quot;https://jsonplaceholder.typicode.com/todos&quot;
+    );
+
+    if (!response.ok) {
+      throw new Error(&quot;ToDoの取得に失敗しました&quot;);
+    }
+
+    // JSONをJavaScriptの配列に変換する
+    const todos = await response.json();
+
+    // userIdが3、かつ未完了のToDoだけを抽出する
+    const filteredTodos = todos.filter((todo) =&gt; {
+      return todo.userId === 3 &amp;&amp; todo.completed === false;
+    });
+
+    // 抽出したデータを確認する
+    console.table(filteredTodos);
+
+    // 該当件数を表示する
+    todoCount.textContent = `${filteredTodos.length}件`;
+
+    // 抽出結果の先頭3件を順番に表示する
+    filteredTodos.slice(0, 3).forEach((todo, index) =&gt; {
+      const number = index + 1;
+
+      document.querySelector(
+        `#practice-todo-${number}`
+      ).textContent = todo.title;
+    });
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// 関数を実行する
+showTodos();</code></pre>
+              </div>
+            </div>
+          </details>
+          <details class="answer-accordion">
+            <summary>
+              <span>03：指定ユーザーの投稿を3件表示する</span>
+              <span class="answer-toggle" aria-hidden="true"></span>
+            </summary>
+            <div class="answer-content">
+              <div class="code-block answer-code">
+                <button class="copy-button" type="button">コピー</button>
+                <pre><code>// userIdが4の投稿を取得して表示する関数
+async function showPosts() {
+  try {
+    // 投稿一覧を取得する
+    const response = await fetch(
+      &quot;https://jsonplaceholder.typicode.com/posts&quot;
+    );
+
+    if (!response.ok) {
+      throw new Error(&quot;投稿の取得に失敗しました&quot;);
+    }
+
+    // JSONをJavaScriptの配列に変換する
+    const posts = await response.json();
+
+    // userIdが4の投稿だけを抽出する
+    const userPosts = posts.filter((post) =&gt; {
+      return post.userId === 4;
+    });
+
+    // 抽出したデータを確認する
+    console.table(userPosts);
+
+    // 抽出結果の先頭3件を順番に表示する
+    userPosts.slice(0, 3).forEach((post, index) =&gt; {
+      const number = index + 1;
+
+      document.querySelector(
+        `#practice-post-${number}-id`
+      ).textContent = `POST ${post.id}`;
+
+      document.querySelector(
+        `#practice-post-${number}-title`
+      ).textContent = post.title;
+
+      document.querySelector(
+        `#practice-post-${number}-body`
+      ).textContent = post.body;
+    });
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// 関数を実行する
+showPosts();</code></pre>
+              </div>
+            </div>
+          </details>
+          <details class="answer-accordion">
+            <summary>
+              <span>04：ユーザー情報と投稿をまとめて表示する</span>
+              <span class="answer-toggle" aria-hidden="true"></span>
+            </summary>
+            <div class="answer-content">
+              <div class="code-block answer-code">
+                <button class="copy-button" type="button">コピー</button>
+                <pre><code>// ユーザー情報と投稿をまとめて表示する関数
+async function showUserAndPosts() {
+  // ユーザー情報の表示先を取得する
+  const userName = document.querySelector(
+    &quot;#practice-profile-name&quot;
+  );
+
+  const userEmail = document.querySelector(
+    &quot;#practice-profile-email&quot;
+  );
+
+  const userCompany = document.querySelector(
+    &quot;#practice-profile-company&quot;
+  );
+
+  const postCount = document.querySelector(
+    &quot;#practice-profile-post-count&quot;
+  );
+
+  // 投稿の追加先を取得する
+  const postList = document.querySelector(
+    &quot;#practice-profile-posts&quot;
+  );
+
+  try {
+    // /usersからユーザー一覧を取得する
+    const usersResponse = await fetch(
+      &quot;https://jsonplaceholder.typicode.com/users&quot;
+    );
+
+    if (!usersResponse.ok) {
+      throw new Error(&quot;ユーザーの取得に失敗しました&quot;);
+    }
+
+    const users = await usersResponse.json();
+
+    // idが5のユーザーを1人探す
+    const user = users.find((user) =&gt; {
+      return user.id === 5;
+    });
+
+    if (!user) {
+      throw new Error(&quot;ユーザーが見つかりません&quot;);
+    }
+
+    // /postsから投稿一覧を取得する
+    const postsResponse = await fetch(
+      &quot;https://jsonplaceholder.typicode.com/posts&quot;
+    );
+
+    if (!postsResponse.ok) {
+      throw new Error(&quot;投稿の取得に失敗しました&quot;);
+    }
+
+    const posts = await postsResponse.json();
+
+    // userIdが5の投稿だけを抽出する
+    const userPosts = posts.filter((post) =&gt; {
+      return post.userId === 5;
+    });
+
+    // 取得結果を確認する
+    console.log(user);
+    console.table(userPosts);
+
+    // ユーザー情報をHTMLに表示する
+    userName.textContent = user.name;
+    userEmail.textContent = user.email;
+    userCompany.textContent = user.company.name;
+
+    // 投稿件数を表示する
+    postCount.textContent = `${userPosts.length}件`;
+
+    // 最初から入っている説明文を削除する
+    postList.innerHTML = &quot;&quot;;
+
+    // 投稿を指定されたHTML構造で追加する
+    userPosts.forEach((post) =&gt; {
+      postList.insertAdjacentHTML(
+        &quot;beforeend&quot;,
+        `
+          &lt;article class=&quot;practice-post-item&quot;&gt;
+            &lt;h4&gt;${post.title}&lt;/h4&gt;
+            &lt;p&gt;${post.body}&lt;/p&gt;
+          &lt;/article&gt;
+        `
+      );
+    });
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// 関数を実行する
+showUserAndPosts();</code></pre>
+              </div>
+            </div>
+          </details>
+        </div>
+      </div>
+
+    </section>
+
+    <section class="section reference-section">
+      <div class="section-heading">
+        <p class="section-number">REF</p>
+        <div>
+          <h2>今回使う主なJavaScript</h2>
+        </div>
+      </div>
+
+      <div class="reference-table-wrap">
+        <table class="reference-table">
+          <thead>
+            <tr>
+              <th>書き方</th>
+              <th>役割</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>fetch(url)</code></td>
+              <td>指定したURLへHTTPリクエストを送る</td>
+            </tr>
+            <tr>
+              <td><code>async</code></td>
+              <td>関数の中で <code>await</code> を使えるようにする</td>
+            </tr>
+            <tr>
+              <td><code>await</code></td>
+              <td>Promiseの結果が返るまで、その処理を待つ</td>
+            </tr>
+            <tr>
+              <td><code>response.json()</code></td>
+              <td>レスポンスのJSONをJavaScriptで扱える値へ変換する</td>
+            </tr>
+            <tr>
+              <td><code>map()</code></td>
+              <td>配列の各要素を処理し、新しい配列を作る</td>
+            </tr>
+            <tr>
+              <td><code>find()</code></td>
+              <td>条件に合う最初の1件を探して、その要素を返す</td>
+            </tr>
+            <tr>
+              <td><code>filter()</code></td>
+              <td>条件に合う要素だけを残した新しい配列を作る</td>
+            </tr>
+            <tr>
+              <td><code>forEach()</code></td>
+              <td>配列の各要素に対して順番に処理を行う</td>
+            </tr>
+            <tr>
+              <td><code>try...catch</code></td>
+              <td>エラーが起きる可能性のある処理と、失敗時の処理を分ける</td>
+            </tr>
+            <tr>
+              <td><code>response.ok</code></td>
+              <td>HTTPレスポンスが成功範囲かどうかを確認する</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>JavaScript API Practice — JSONPlaceholder</p>
+    <p>編集するファイル：<code>js/practice.js</code></p>
+  </footer>
+</body>
+
+</html>
