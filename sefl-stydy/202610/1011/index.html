@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="module" src="js/script.js"></script>/
+</head>
+
+<body>
+
+    <button id="toggleBtn">メニューを開く</button>
+
+    <nav id="menu" class="menu">
+        <ul>
+            <li><a href="/">ホーム</a></li>
+            <li><a href="/about">会社概要</a></li>
+        </ul>
+    </nav>
+
+    <form id="contactForm">
+        <label for="username">ユーザー名</label>
+        <input type="text" id="username">
+
+        <button type="submit">送信</button>
+    </form>
+
+    <p id="message"></p>
+
+    <div class="counter">
+        <button id="decrease">-1</button>
+        <span id="count">0</span>
+        <button id="increase">+1</button>
+        <button id="reset">リセット</button>
+    </div>
+
+    <button id="loadBtn">ユーザーを取得</button>
+    <p id="status"></p>
+    <ul id="userList"></ul>
+
+    <form id="taskForm">
+        <input
+            type="text"
+            id="taskInput"
+            placeholder="タスクを入力">
+        <button type="submit">追加</button>
+    </form>
+
+    <p id="errorMessage"></p>
+    <ul id="taskList"></ul>
+</body>
+
+</html>
