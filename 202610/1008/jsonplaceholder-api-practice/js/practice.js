@@ -44,7 +44,6 @@ async function getUsers() {
   } catch (err) {
     console.log(err);
   }
-
 }
 
 async function getTodos() {
@@ -105,32 +104,28 @@ async function getUsersAndPosts() {
     const responsePosts = await fetch('https://jsonplaceholder.typicode.com/posts');
     const responseUsers = await fetch('https://jsonplaceholder.typicode.com/users');
 
-    if (!responsePosts.ok || !responseUsers) {
+    if (!responsePosts.ok || !responseUsers.ok) {
       throw new Error('データ取得に失敗したワン🐶')
     }
 
     const posts = await responsePosts.json();
     const users = await responseUsers.json();
+    console.log(users);
+
 
     const user = users.find((user) => {
       return user.id === 5;
     })
 
-    for (const [key, value] of Object.entries(user)) {
-      const elements = document.querySelectorAll(`#practice-profile-${key}`);
+    const profile = {
+      name: user.name,
+      email: user.email,
+      company: user.company.name
+    };
 
-      if (elements.length === 0) continue;
+    for (const [key, value] of Object.entries(profile)) {
+      document.querySelector(`#practice-profile-${key}`).textContent = value;
 
-
-      elements.forEach((element, index) => {
-        if (typeof value === 'object') {
-          for (const [nestedKey, nestedValue] of Object.entries(value)) {
-            element.textContent = Object.entries(value)[index][1];
-          }
-        } else {
-          element.textContent = value;
-        }
-      })
     }
 
     const post = posts.filter((post) => {
