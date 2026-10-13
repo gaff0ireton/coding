@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="module" src="js/script.js"></script>
+</head>
+
+<body>
+    <form id="user-form">
+        <input type="text" id="username" />
+        <button type="submit">登録</button>
+    </form>
+
+    <ul id="user-list"></ul>
+
+    <ul id="task-list">
+        <li>
+            <span>JavaScriptを勉強する</span>
+            <button class="delete-btn">削除</button>
+        </li>
+        <li>
+            <span>課題を提出する</span>
+            <button class="delete-btn">削除</button>
+        </li>
+        <li>
+            <span>テストを受ける</span>
+            <button class="delete-btn">削除</button>
+        </li>
+    </ul>
+
+    <form id="login-form">
+        <input type="text" name="username" />
+        <input type="password" name="password" />
+        <button type="submit">ログイン</button>
+    </form>
+
+    <p id="message"></p>
+
+    <button id="toggle-btn">メニューを開く</button>
+
+    <nav id="menu">
+        <ul>
+            <li>ホーム</li>
+            <li>お知らせ</li>
+            <li>お問い合わせ</li>
+        </ul>
+    </nav>
+
+</body>
+
+</html>
