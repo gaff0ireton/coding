@@ -1,0 +1,31 @@
+@charset "UTF-8";
+
+img{
+    max-width: 100%;
+    height: auto;
+    vertical-align: bottom;
+}
+
+.container{
+    max-width: 1200px;
+    width: 90%;
+    margin: 0 auto;
+
+    .grid{
+        display: grid;
+        grid-template-columns: repeat(4,1fr);
+        gap: 1rem;
+        list-style: none;
+
+        .card{
+            padding: 1rem;
+            border: 1px solid #333;
+            border-radius: .5rem;
+        }
+
+        .card_image_wrap{
+            border-radius: .5rem;
+            overflow: hidden;
+        }
+    }
+}

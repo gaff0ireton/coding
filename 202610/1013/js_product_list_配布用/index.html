@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>商品一覧ビュー</title>
+    <meta name="description"
+        content="JavaScriptの講義で学んだ配列操作（filter・map・sort）、DOM操作、イベント処理を使って実装した商品一覧ページ。キーワード検索・カテゴリ絞り込み・価格の並び替えができます。">
+    <link rel="stylesheet" href="/css/ress.css">
+    <!-- <link rel="stylesheet" href="/css/style.css"> -->
+    <link rel="stylesheet" href="/css/style_sample.css">
+    <script type="module" src="/js/script.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1>商品一覧</h1>
+
+        <!-- review 検索・絞り込みコントロール -->
+        <div class="controls">
+            <input type="text" id="searchInput" placeholder="商品名で検索...">
+            <select id="categorySelect">
+                <option value="all">すべてのカテゴリ</option>
+                <option value="drink">ドリンク</option>
+                <option value="food">フード</option>
+                <option value="goods">グッズ</option>
+            </select>
+            <select id="sortSelect">
+                <option value="id_asc">標準（ID順）</option>
+                <option value="price_asc">価格が安い順</option>
+                <option value="price_desc">価格が高い順</option>
+            </select>
+            <button id="resetBtn" type="button">条件をリセット</button>
+        </div>
+
+        <!-- review 件数表示 -->
+        <p id="resultCount" class="ressult_count"></p>
+
+        <!-- review カード一覧エリア -->
+        <div id="productGrid" class="grid">
+            <!-- <div class="card">
+                <figure class="card_image_wrap">
+                    <img src="images/01_drip_coffee.webp" alt="ドリップコーヒー">
+                </figure>
+                <div class="card_content">
+                    <span class="category">drink</span>
+                    <h3>ドリップコーヒー</h3>
+                    <p class="price">¥420</p>
+                </div>
+            </div> -->
+        </div>
+    </div>
+
+</body>
+
+</html>
