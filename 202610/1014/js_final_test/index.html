@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>JavaScript Skill Test</title>
+  <link href="./css/style.css" rel="stylesheet" />
+</head>
+
+<body>
+  <button aria-controls="question-drawer" aria-expanded="false" aria-label="問題一覧を開く" class="drawer-toggle"
+    id="drawer-toggle" type="button">
+    <span aria-hidden="true"></span>
+    <span aria-hidden="true"></span>
+    <span aria-hidden="true"></span>
+  </button>
+  <div aria-hidden="true" class="drawer-backdrop" id="drawer-backdrop"></div>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div>
+        <p class="eyebrow">JavaScript Skill Test</p>
+        <h1>JavaScript 総合テスト</h1>
+        <p class="lead">HTMLとCSSは完成しています。各問題の指示に従い、JavaScriptだけを編集してください。</p>
+      </div>
+      <div aria-label="テスト情報" class="test-meta">
+        <span>全15問</span>
+        <span>100点</span>
+      </div>
+    </div>
+  </header>
+  <main class="container test-layout">
+    <nav aria-label="問題一覧" class="question-nav" id="question-drawer">
+      <p class="nav-title">問題一覧</p>
+      <a class="guide-link" href="#q00">00 解答前の確認</a>
+      <a href="#q01">01 変数</a>
+      <a href="#q02">02 関数</a>
+      <a href="#q03">03 繰り返し</a>
+      <a href="#q04">04 比較・論理演算子</a>
+      <a href="#q05">05 配列 + オブジェクト</a>
+      <a href="#q06">06 配列処理</a>
+      <a href="#q07">07 配列処理</a>
+      <a href="#q08">08 Object.values + forEach</a>
+      <a href="#q09">09 モジュール</a>
+      <a href="#q10">10 モジュール</a>
+      <a href="#q11">11 DOM操作</a>
+      <a href="#q12">12 DOM操作</a>
+      <a href="#q13">13 form操作</a>
+      <a href="#q14">14 API操作</a>
+      <a href="#q15">15 API操作</a>
+    </nav>
+    <div class="questions">
+      <section class="question-card test-guide" id="q00">
+        <div class="question-heading guide-heading">
+          <span class="number">00</span>
+          <div>
+            <p class="category">はじめに</p>
+            <h2>解答前の確認</h2>
+          </div>
+        </div>
+        <p><code>main.js</code> の先頭には、HTMLへ文字を表示するための <code>showText(id, value)</code> 関数が用意されています。問題文で
+          <code>showText()</code> の使用を指定している場合は、自分で表示用のDOM操作を書く必要はありません。
+        </p>
+        <p>たとえば <code>showText("q03-output", total)</code> とすると、<code>id="q03-output"</code> の要素に <code>total</code>
+          の値が表示されます。問題文はJavaScriptファイル内には記載していないため、このWebページを見ながら解答してください。</p>
+      </section>
+      <section class="question-card" id="q01">
+        <div class="question-heading"><span class="number">01</span>
+          <div>
+            <p class="category">変数 / 7点</p>
+            <h2>変数を宣言して値を変更する</h2>
+          </div>
+        </div>
+        <p><code>const</code> と <code>let</code> を使って変数を宣言し、値を代入・変更してコンソールへ表示してください。</p>
+        <p>次の手順を、必ず上から順番に作業してください。</p>
+        <ol>
+          <li>変数 <code>studentName</code> を <code>const</code> で宣言し、文字列 <code>"山田"</code> を代入する</li>
+          <li>変数 <code>score</code> を <code>let</code> で宣言し、数値 <code>70</code> を代入する</li>
+          <li><code>score</code> の値を <code>85</code> に変更する</li>
+          <li><code>console.log(studentName)</code> で名前を表示する</li>
+          <li><code>console.log(score)</code> で変更後の点数を表示する</li>
+        </ol>
+        <div class="console-example"><span>コンソールに表示される内容</span>
+          <pre>山田
+85</pre>
+        </div>
+      </section>
+      <section class="question-card" id="q02">
+        <div class="question-heading"><span class="number">02</span>
+          <div>
+            <p class="category">関数 / 7点</p>
+            <h2>変数の値を関数へ渡して合計金額を求める</h2>
+          </div>
+        </div>
+        <p>商品の単価と個数を変数として用意し、その変数を関数の引数として渡して合計金額を計算してください。計算結果は関数内でそのまま <code>return</code>
+          し、<code>console.log()</code> の中で関数を実行して結果を確認します。</p>
+        <ul>
+          <li>関数の外で変数 <code>unitPrice</code> を <code>const</code> で宣言し、数値 <code>1800</code> を代入する</li>
+          <li>関数の外で変数 <code>quantity</code> を <code>const</code> で宣言し、数値 <code>3</code> を代入する</li>
+          <li><code>function</code> 宣言で <code>calculateTotal</code> 関数を作成する</li>
+          <li>仮引数名は <code>price</code> と <code>count</code> にする</li>
+          <li><code>price</code> のデフォルト値は <code>0</code>、<code>count</code> のデフォルト値は <code>1</code> にする</li>
+          <li>関数内では <code>price * count</code> の計算結果を <code>return</code> する</li>
+          <li><code>console.log()</code> の中で <code>calculateTotal(unitPrice, quantity)</code> を実行する</li>
+        </ul>
+        <div class="result-box"><span>コンソールに表示される値</span><strong>5400</strong></div>
+      </section>
+      <section class="question-card" id="q03">
+        <div class="question-heading"><span class="number">03</span>
+          <div>
+            <p class="category">繰り返し / 7点</p>
+            <h2>for...of で配列の数値を合計する</h2>
+          </div>
+        </div>
+        <p>配列の中に入っている数値を <code>for...of</code> で1つずつ取り出し、すべての値を合計してください。合計した値はHTMLへ表示します。</p>
+        <ul>
+          <li>変数 <code>numbers</code> を <code>const</code> で宣言し、配列 <code>[12, 8, 15, 6, 9]</code> を代入する</li>
+          <li>合計値を入れる変数 <code>total</code> を <code>let</code> で宣言し、数値 <code>0</code> を代入する</li>
+          <li><code>for...of</code> を使用し、取り出した1つの値は <code>number</code> という変数で受け取る</li>
+          <li>繰り返しの中で <code>total</code> に <code>number</code> を加算する</li>
+          <li>繰り返しが終わったあと、<code>showText("q03-output", total)</code> で合計値を表示する</li>
+        </ul>
+        <div class="result-box"><span>合計</span><strong id="q03-output">未実行</strong></div>
+      </section>
+      <section class="question-card" id="q04">
+        <div class="question-heading"><span class="number">04</span>
+          <div>
+            <p class="category">条件分岐 / 7点</p>
+            <h2>比較・論理演算子を使って数字の条件式を組み立てる</h2>
+          </div>
+        </div>
+        <p>年齢によって割引対象かどうかを判定する関数を作成してください。<strong>12歳以下、または65歳以上</strong>であれば割引対象です。</p>
+        <ul>
+          <li><code>function</code> 宣言で <code>checkDiscount</code> 関数を作成する</li>
+          <li>仮引数名は <code>age</code>、デフォルト値は <code>0</code> にする</li>
+          <li><code>if...else</code> を使用し、「12歳以下」または「65歳以上」を判定する条件式を記述する</li>
+          <li>割引対象の場合は <code>"割引対象です"</code> を <code>return</code> する</li>
+          <li>それ以外の場合は <code>"通常料金です"</code> を <code>return</code> する</li>
+          <li>変数 <code>discountResult</code> を <code>const</code> で宣言し、<code>checkDiscount(70)</code> の戻り値を代入する</li>
+          <li><code>showText("q04-output", discountResult)</code> でHTMLへ表示する</li>
+        </ul>
+        <div class="result-box"><span>判定結果</span><strong id="q04-output">未実行</strong></div>
+      </section>
+      <section class="question-card" id="q05">
+        <div class="question-heading"><span class="number">05</span>
+          <div>
+            <p class="category">二次元配列 + オブジェクト / 7点</p>
+            <h2>二次元配列とオブジェクトから値を取得する</h2>
+          </div>
+        </div>
+        <p><code>main.js</code> に用意されている <code>learningData</code>
+          には、複数の値を持つ二次元配列とオブジェクトが含まれています。配列の添字を2回使う方法と、オブジェクトのプロパティを使う方法で、それぞれ1つずつ値を取得してください。</p>
+        <ul>
+          <li>変数 <code>subject</code> を <code>const</code> で宣言し、<code>learningData[0][4]</code> で取得した値を代入する</li>
+          <li>変数 <code>learnerName</code> を <code>const</code> で宣言し、<code>learningData[1].name</code> で取得した値を代入する</li>
+          <li>変数 <code>message</code> を <code>const</code> で宣言し、テンプレートリテラルを使って、取得した2つの値を
+            <code>「佐藤さんはReactを学習しています」</code> の形式で1つの文章にして代入する
+          </li>
+          <li><code>showText("q05-output", message)</code> でHTMLへ表示する</li>
+        </ul>
+        <div class="result-box"><span>表示結果</span><strong id="q05-output">未実行</strong></div>
+      </section>
+      <section class="question-card" id="q06">
+        <div class="question-heading"><span class="number">06</span>
+          <div>
+            <p class="category">配列処理 / 7点</p>
+            <h2>toSpliced() で不要な値を取り除いた新しい配列を作る</h2>
+          </div>
+        </div>
+        <p><code>main.js</code> に用意されている <code>skills</code> 配列から、不要な値を削除した新しい配列を作成してください。</p>
+        <ul>
+          <li><code>skills</code> 配列は <code>["HTML", "CSS", "不要1", "不要2", "JavaScript", "Git"]</code> です</li>
+          <li>変数 <code>usefulSkills</code> を <code>const</code> で宣言し、<code>toSpliced()</code> を使って <code>skills</code>
+            配列から <code>"不要1"</code> と <code>"不要2"</code> を削除した配列を代入する</li>
+          <li><code>showText("q06-output", usefulSkills)</code> で新しい配列をHTMLへ表示する</li>
+        </ul>
+        <div class="result-box"><span>新しい配列</span><strong id="q06-output">未実行</strong></div>
+      </section>
+      <section class="question-card" id="q07">
+        <div class="question-heading"><span class="number">07</span>
+          <div>
+            <p class="category">配列処理 / 7点</p>
+            <h2>map() ですべての名前を表示用の文字列へ変換する</h2>
+          </div>
+        </div>
+        <p><code>main.js</code> に用意されている <code>names</code> 配列のすべての名前に <code>「さん」</code> を付け、新しい配列を作成してください。元の
+          <code>names</code> 配列は変更しません。
+        </p>
+        <ul>
+          <li><code>map()</code> を使用する</li>
+          <li>コールバック関数の仮引数名は <code>name</code> にする</li>
+          <li>テンプレートリテラルを使い、各要素を <code>「佐藤さん」</code> のような文字列へ変換する</li>
+          <li>変数 <code>displayNames</code> を <code>const</code> で宣言し、<code>map()</code> で作成した新しい配列を代入する</li>
+          <li><code>showText("q07-output", displayNames)</code> で新しい配列をHTMLへ表示する</li>
+        </ul>
+        <div class="result-box"><span>変換結果</span><strong id="q07-output">未実行</strong></div>
+      </section>
+      <section class="question-card" id="q08">
+        <div class="question-heading"><span class="number">08</span>
+          <div>
+            <p class="category">オブジェクト + 配列処理 / 7点</p>
+            <h2>Object.values() と forEach() で値とインデックス番号を使う</h2>
+          </div>
+        </div>
+        <p><code>main.js</code> に用意されている <code>subjectScores</code> オブジェクトを配列へ変換し、各点数を科目名と組み合わせてコンソールへ表示してください。</p>
+        <ul>
+          <li>変数 <code>scoreList</code> を <code>const</code> で宣言し、<code>Object.values(subjectScores)</code> の戻り値を代入する
+          </li>
+          <li><code>scoreList</code> に <code>forEach()</code> を使用する</li>
+          <li>コールバック関数の仮引数名は、値を <code>score</code>、インデックス番号を <code>index</code> にする</li>
+          <li>インデックス番号を使って、<code>subjectNames</code> 配列から対応する科目名を取得する</li>
+          <li>テンプレートリテラルを使い、<code>「1. HTML：80点」</code> の形式で <code>console.log()</code> に表示する</li>
+        </ul>
+        <p>表示は <code>1. HTML：80点</code>、<code>2. CSS：75点</code>、<code>3. JavaScript：90点</code> の順になります。</p>
+      </section>
+      <section class="question-card" id="q09">
+        <div class="question-heading"><span class="number">09</span>
+          <div>
+            <p class="category">モジュール化 / 7点</p>
+            <h2>名前付き export / import を使って税込価格を計算する</h2>
+          </div>
+        </div>
+        <p>税込価格を計算する関数を別ファイルに作成し、<code>main.js</code> から読み込んで使用してください。この問題では名前付きエクスポートと名前付きインポートを使用します。</p>
+        <ul>
+          <li><code>js/utils/price.js</code> に <code>addTax</code> 関数を作成する</li>
+          <li>仮引数名は <code>price</code> と <code>taxRate</code> にし、<code>taxRate</code> のデフォルト値は <code>0.1</code> にする</li>
+          <li><code>Math.round(price * (1 + taxRate))</code> の計算結果を <code>return</code> する</li>
+          <li><code>addTax</code> を名前付きエクスポートする</li>
+          <li><code>main.js</code> で <code>addTax</code> を名前付きインポートする</li>
+          <li>変数 <code>basePrice</code> を <code>const</code> で宣言し、数値 <code>2000</code> を代入する。続けて変数
+            <code>taxedPrice</code> を <code>const</code> で宣言し、<code>addTax(basePrice)</code> の戻り値を代入する
+          </li>
+          <li><code>showText("q09-output", taxedPrice)</code> でHTMLへ表示する</li>
+        </ul>
+        <div class="result-box"><span>計算結果</span><strong id="q09-output">未実行</strong></div>
+      </section>
+      <section class="question-card" id="q10">
+        <div class="question-heading"><span class="number">10</span>
+          <div>
+            <p class="category">モジュール化 / 7点</p>
+            <h2>default export / import を使ってユーザー情報を整形する</h2>
+          </div>
+        </div>
+        <p>ユーザーオブジェクトを受け取り、表示用の文字列へ整形する関数を別ファイルに作成してください。この問題ではデフォルトエクスポートとデフォルトインポートを使用します。</p>
+        <ul>
+          <li><code>js/utils/user.js</code> に <code>formatUser</code> 関数を作成する</li>
+          <li>仮引数名は <code>user</code> にする</li>
+          <li><code>user.name</code> と <code>user.city</code> を使い、<code>「山田（Osaka）」</code> の形式の文字列を <code>return</code>
+            する</li>
+          <li><code>formatUser</code> をデフォルトエクスポートする</li>
+          <li><code>main.js</code> で <code>formatUser</code> をデフォルトインポートする</li>
+          <li><code>main.js</code> に用意されている <code>moduleUser</code> を <code>formatUser()</code> へ渡す</li>
+          <li>変数 <code>formattedUser</code> を <code>const</code> で宣言し、<code>formatUser()</code>
+            の戻り値を代入する。<code>showText("q10-output", formattedUser)</code> でHTMLへ表示する</li>
+        </ul>
+        <div class="result-box"><span>ユーザー表示</span><strong id="q10-output">未実行</strong></div>
+      </section>
+      <section class="question-card" id="q11">
+        <div class="question-heading"><span class="number">11</span>
+          <div>
+            <p class="category">DOM操作 / 6点</p>
+            <h2>クラス属性を切り替え、状態に合わせて表示を変更する</h2>
+          </div>
+        </div>
+        <p>ボタンをクリックするたびにカードの <code>is-active</code> クラスを付け外ししてください。さらに、クラスが付いているかどうかを判定し、ボタンの文字と状態表示も切り替えます。</p>
+        <ul>
+          <li>変数 <code>q11Button</code> を <code>const</code> で宣言し、<code>id="q11-button"</code> から取得した要素を代入する</li>
+          <li>変数 <code>q11Target</code> を <code>const</code> で宣言し、<code>id="q11-target"</code> から取得した要素を代入する</li>
+          <li>変数 <code>q11Status</code> を <code>const</code> で宣言し、<code>id="q11-status"</code> から取得した要素を代入する</li>
+          <li><code>q11Button</code> に <code>click</code> イベントを設定する</li>
+          <li>クリックされたら <code>q11Target.classList.toggle("is-active")</code> を実行する</li>
+          <li><code>q11Target.classList.contains("is-active")</code> を条件式にした <code>if...else</code> を作成する</li>
+          <li><code>is-active</code> が付いている場合は、<code>q11Status.textContent</code> を
+            <code>"表示中"</code>、<code>q11Button.textContent</code> を <code>"閉じる"</code> にする
+          </li>
+          <li>付いていない場合は、<code>q11Status.textContent</code> を <code>"非表示"</code>、<code>q11Button.textContent</code> を
+            <code>"表示する"</code> にする
+          </li>
+        </ul>
+        <div class="button-row q11-controls">
+          <button class="button" id="q11-button" type="button">表示する</button>
+          <p class="status-text">状態：<strong id="q11-status">非表示</strong></p>
+        </div>
+        <div class="toggle-card" id="q11-target">このカードの表示状態を切り替えます。</div>
+      </section>
+      <section class="question-card" id="q12">
+        <div class="question-heading"><span class="number">12</span>
+          <div>
+            <p class="category">DOM操作 / 6点</p>
+            <h2>src・altを書き換えて猫と犬の画像を切り替える</h2>
+          </div>
+        </div>
+        <p>猫と犬のボタンをクリックしたとき、画像の <code>src</code> と <code>alt</code>、説明文の <code>textContent</code> を書き換えて表示を切り替えてください。
+        </p>
+        <ul>
+          <li>変数 <code>q12Image</code> を <code>const</code> で宣言し、<code>id="q12-image"</code> から取得した画像要素を代入する</li>
+          <li>変数 <code>q12Caption</code> を <code>const</code> で宣言し、<code>id="q12-caption"</code> から取得した要素を代入する</li>
+          <li>変数 <code>q12CatButton</code> を <code>const</code> で宣言し、<code>id="q12-cat-button"</code> から取得したボタン要素を代入する
+          </li>
+          <li>変数 <code>q12DogButton</code> を <code>const</code> で宣言し、<code>id="q12-dog-button"</code> から取得したボタン要素を代入する
+          </li>
+          <li><code>q12CatButton</code> のクリック時は、<code>q12Image.src</code> に
+            <code>"./images/cat.jpg"</code>、<code>q12Image.alt</code> に <code>"猫の写真"</code> を代入する
+          </li>
+          <li>猫へ切り替えたときは、<code>q12Caption.textContent</code> に <code>"猫"</code> を代入する</li>
+          <li><code>q12DogButton</code> のクリック時は、<code>q12Image.src</code> に
+            <code>"./images/dog.jpg"</code>、<code>q12Image.alt</code> に <code>"犬の写真"</code> を代入する
+          </li>
+          <li>犬へ切り替えたときは、<code>q12Caption.textContent</code> に <code>"犬"</code> を代入する</li>
+        </ul>
+        <div class="image-switcher">
+          <img alt="猫の写真" id="q12-image" src="./images/cat.jpg" />
+          <p id="q12-caption">猫</p>
+          <div class="button-row">
+            <button class="button small" id="q12-cat-button" type="button">猫を表示</button>
+            <button class="button small secondary" id="q12-dog-button" type="button">犬を表示</button>
+          </div>
+        </div>
+      </section>
+      <section class="question-card" id="q13">
+        <div class="question-heading"><span class="number">13</span>
+          <div>
+            <p class="category">form操作 / 6点</p>
+            <h2>フォームの入力内容を取得して表示する</h2>
+          </div>
+        </div>
+        <p>フォームを送信したとき、名前とメールアドレスを取得してHTMLへ表示してください。</p>
+        <ul>
+          <li>フォーム、名前の入力欄、メールアドレスの入力欄をそれぞれ取得する</li>
+          <li>フォームに <code>submit</code> イベントを設定し、Eventオブジェクトは <code>e</code> で受け取って <code>e.preventDefault()</code>
+            を実行する</li>
+          <li>名前とメールアドレスの <code>value</code> を取得し、<code>trim()</code> で前後の空白を取り除く</li>
+          <li>どちらかが未入力の場合は <code>「入力内容を確認してください」</code> と表示する</li>
+          <li>両方入力されている場合は、<code>「山本さん（sample@example.com）」</code> の形式で表示する</li>
+        </ul>
+        <form class="test-form" id="q13-form">
+          <label>名前<input id="q13-name" type="text" value="山本" /></label>
+          <label>メールアドレス<input id="q13-email" type="email" value="sample@example.com" /></label>
+          <button class="button" type="submit">送信する</button>
+        </form>
+        <div class="result-box"><span>送信結果</span><strong id="q13-output">未送信</strong></div>
+      </section>
+      <section class="question-card" id="q14">
+        <div class="question-heading"><span class="number">14</span>
+          <div>
+            <p class="category">API操作・例外処理 / 6点</p>
+            <h2>取得したユーザーデータを画面に表示する</h2>
+          </div>
+        </div>
+        <p>「ユーザーを取得」ボタンを押したとき、JSONPlaceholderのユーザーAPIからデータを取得し、取得した配列の<strong>先頭3件</strong>を画面に一覧表示してください。</p>
+        <p>表示には、それぞれのユーザーが持つ <code>name</code>、<code>email</code>、<code>address.city</code>
+          の値を使用します。取得した3件のデータを、あらかじめ用意されている3つの表示欄へ順番に表示してください。</p>
+        <p>APIの取得とJSONへの変換までは、次のコードを使用します。<code>const users = await response.json();</code> の続きから処理を作成してください。</p>
+        <pre class="starter-code"><code>const q14Button = document.getElementById("q14-button");
+const q14User1 = document.getElementById("q14-user-1");
+const q14User2 = document.getElementById("q14-user-2");
+const q14User3 = document.getElementById("q14-user-3");
+
+async function fetchUsers() {
+  try {
+    const response = await fetch(
+      "https://jsonplaceholder.typicode.com/users"
+    );
+
+    if (!response.ok) {
+      throw new Error("ユーザー情報の取得に失敗しました");
+    }
+
+    const users = await response.json();
+
+    // ここから解答
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+q14Button.addEventListener("click", fetchUsers);</code></pre>
+        <button class="button" id="q14-button" type="button">ユーザーを取得</button>
+        <div class="api-list" id="q14-output">
+          <p class="muted" id="q14-user-1">1人目のユーザー情報</p>
+          <p class="muted" id="q14-user-2">2人目のユーザー情報</p>
+          <p class="muted" id="q14-user-3">3人目のユーザー情報</p>
+        </div>
+      </section>
+      <section class="question-card" id="q15">
+        <div class="question-heading"><span class="number">15</span>
+          <div>
+            <p class="category">API操作・例外処理 / 6点</p>
+            <h2>条件に合う投稿データを画面に表示する</h2>
+          </div>
+        </div>
+        <p>「投稿データを取得」ボタンを押したとき、JSONPlaceholderの投稿APIからデータを取得し、<code>userId</code> が <code>3</code> の投稿だけを対象にしてください。</p>
+        <p>対象となる投稿の<strong>先頭3件</strong>について、<code>id</code> と <code>title</code> を使い、<code>「POST 21：タイトル」</code>
+          の形式で、あらかじめ用意されている3つの表示欄へ順番に表示してください。</p>
+        <p>APIの取得とJSONへの変換までは、次のコードを使用します。<code>const posts = await response.json();</code> の続きから処理を作成してください。</p>
+        <pre class="starter-code"><code>const q15Button = document.getElementById("q15-button");
+const q15Post1 = document.getElementById("q15-post-1");
+const q15Post2 = document.getElementById("q15-post-2");
+const q15Post3 = document.getElementById("q15-post-3");
+
+async function fetchPosts() {
+  try {
+    const response = await fetch(
+      "https://jsonplaceholder.typicode.com/posts"
+    );
+
+    if (!response.ok) {
+      throw new Error("投稿データの取得に失敗しました");
+    }
+
+    const posts = await response.json();
+
+    // ここから解答
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+q15Button.addEventListener("click", fetchPosts);</code></pre>
+        <button class="button" id="q15-button" type="button">投稿データを取得</button>
+        <div class="api-list" id="q15-output">
+          <p class="muted" id="q15-post-1">1件目の投稿データ</p>
+          <p class="muted" id="q15-post-2">2件目の投稿データ</p>
+          <p class="muted" id="q15-post-3">3件目の投稿データ</p>
+        </div>
+      </section>
+      <section class="question-card finish-card" id="finish">
+        <div class="finish-content">
+          <p class="eyebrow">JavaScript Skill Test</p>
+          <h2>テストお疲れ様でした！</h2>
+          <p>全15問の解答が終わったら、画面の表示とブラウザのコンソールを確認して、エラーが出ていないか最後にチェックしてください。</p>
+        </div>
+      </section>
+    </div>
+  </main>
+  <script defer="" src="./js/ui.js"></script>
+  <script src="./js/main.js" type="module"></script>
+  <!-- <script src="./js/refact/practice.js" type="module"></script> -->
+</body>
+
+</html>
